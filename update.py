@@ -800,6 +800,17 @@ def headliner(c):
     return re.sub(r"\(.*?\)", " ", head).strip()
 
 
+def dance_night(c, cache, budget):
+    """Serata da ballo, anche se la fonte scrive "rock". Resta solo se la band in testa e' rock: "Party Cannon".
+    Torna anche quello che si sa della band, per non cercarla due volte."""
+    title = norm(c["title"])
+    if not PARTY_TITLE.search(title) or ROCK_TITLE.search(title):
+        return False, None
+    head = headliner(c)
+    info = artist_info(head, cache, budget) if name_keys(head) else None
+    return not (info and buckets(info["tags"]) & {"rock", "metal", "punk"}), info
+
+
 def classify(concerts, cache, budget):
     kept = []
     for c in concerts:
@@ -809,13 +820,9 @@ def classify(concerts, cache, budget):
         lookup = (lambda: artist_info(head, cache, budget)) if name_keys(head) else (lambda: None)
         strong = [t for t in c["genres"] if is_music_tag(t)]
         found = buckets(strong)
-        info = None
-        title = norm(c["title"])
-        if PARTY_TITLE.search(title) and not ROCK_TITLE.search(title):
-            # Serata da ballo, anche se la fonte scrive "rock". Resta solo se la band in testa e' rock: "Party Cannon".
-            info = lookup()
-            if not (info and buckets(info["tags"]) & {"rock", "metal", "punk"}):
-                continue
+        dance, info = dance_night(c, cache, budget)
+        if dance:
+            continue
         if not strong and c["house"]:
             found = buckets(c["house"])
         elif not strong:
@@ -1063,8 +1070,8 @@ def main():
         report.append({"key": key, "name": label, "count": len(got), "ok": ok, "error": error})
 
     cache = load_json(ARTISTS_FILE, {})
-    concerts = classify(drop_ghosts(merge(events)), cache, {"left": args.max_lookups})
-    save_json(ARTISTS_FILE, cache)
+    budget = {"left": args.max_lookups}
+    concerts = classify(drop_ghosts(merge(events)), cache, budget)
 
     # Una fonte giu' non deve svuotare la pagina: restano i concerti che solo lei conosceva.
     previous = load_json(CONCERTS_FILE, [])
@@ -1078,6 +1085,8 @@ def main():
         keys = name_keys(old["title"])
         if any(c["date"] == old["date"] and (old["id"] in c["ids"] or keys_overlap(keys, c["keys"])) for c in concerts):
             continue
+        if dance_night({"title": old["title"], "names": []}, cache, budget)[0]:  # il filtro vale anche per i concerti di ieri
+            continue
         concerts.append({
             "ids": old["ids"], "title": old["title"], "names": [], "date": old["date"], "end": old.get("end"), "time": old.get("time"),
             "venue": old.get("venue", ""), "price": old.get("price", ""), "status": old.get("status", ""), "genres": [], "weak": [], "house": [],
@@ -1085,6 +1094,7 @@ def main():
             "buckets": old.get("buckets", old["genres"]), "styles": old["genres"], "big": old.get("big", False),
         })
         carried += 1
+    save_json(ARTISTS_FILE, cache)
 
     new = find_new(concerts, state, today_iso)
     concerts.sort(key=lambda c: (c["date"], c["time"] or "99", norm(c["title"])))
