@@ -52,6 +52,8 @@ LOOKUP_AGENT = {"User-Agent": AGENT, "Accept": "application/json"}
 
 WARN_AFTER_FAILS = 8  # con un giro ogni 3 ore: un giorno intero di fonte rotta prima di avvisare
 MAX_TELEGRAM_CONCERTS = 40
+REMIND_DAYS = (10, 7, 3)  # promemoria dei BIG, giorni prima del concerto
+REMIND_FROM_HOUR = 9
 
 
 def log(*a):
@@ -557,11 +559,28 @@ def venue_default(title, sub):
     return [] if NOT_ROCK_NIGHT.search(norm(f"{title} {sub}")) else ["rock"]
 
 
+ELECTRONIC = re.compile(r"\b(techno|trance|house|dubstep|edm|uk garage|hip hop|rap)\b")
+
+# Generi fini in pagina: un concerto puo' averne piu' d'uno. "rock" resta per chi non ha altro.
+STYLES = [(key, re.compile(rx)) for key, rx in (
+    ("hard", r"\b(hard rock|classic rock|heavy rock|glam|blues rock|arena rock|southern rock|aor|boogie)\b"),
+    ("stoner", r"\b(stoner|psych\w*|desert rock|space rock|krautrock|fuzz|acid rock)\b"),
+    ("prog", r"\b(prog\w*|post rock|math rock|art rock|experimental rock)\b"),
+    ("garage", r"\b(garage|rock n roll|rock and roll|rockabilly|psychobilly|surf|r n r)\b"),
+    ("alt", r"\b(indie|alternative|grunge|shoegaze|noise rock|new wave|post punk|britpop|dream pop)\b"),
+)]
+STYLE_ORDER = ["hard", "stoner", "prog", "garage", "metal", "punk", "alt", "rock"]
+
+# BIG: band con molti fan su Deezer, oppure locale da grandi nomi.
+BIG_FANS = 20000
+BIG_VENUES = {"O2 arena", "O2 universum", "Forum Karlín", "Sportovní hala Fortuna"}
+
+
 def buckets(tags):
     out = set()
     for tag in tags:
         t = norm(tag.replace("_", " "))
-        if not t or "party" in t or re.search(r"\b(techno|trance|house|dubstep|edm|uk garage|hip hop|rap)\b", t):
+        if not t or "party" in t or ELECTRONIC.search(t):
             continue
         if "metal" in t or re.search(r"\b(deathcore|grindcore|goregrind|djent|thrash|doom|sludge|black n roll)\b", t):
             out.add("metal")
@@ -605,30 +624,48 @@ def lookup_musicbrainz(name):
     return best
 
 
-def artist_genres(name, cache, budget):
-    """Generi di una band da Apple Music o MusicBrainz, una volta sola: poi restano in cache."""
+def lookup_deezer(name):
+    """Fan su Deezer: misura grezza ma gratuita di quanto e' famosa una band."""
+    r = requests.get("https://api.deezer.com/search/artist", params={"q": name, "limit": 5}, headers=LOOKUP_AGENT, timeout=20)
+    r.raise_for_status()
+    data = r.json()
+    if "error" in data:  # quota superata: Deezer risponde 200 con l'errore dentro
+        raise ValueError(data["error"].get("message", "errore Deezer"))
+    return max((a.get("nb_fan") or 0 for a in data.get("data", []) if norm(a.get("name")) == norm(name)), default=0)
+
+
+def artist_info(name, cache, budget):
+    """Generi (MusicBrainz, Apple Music) e fan (Deezer) di una band, una volta sola: poi restano in cache.
+    Torna None se non si sa nulla. Senza "fans" la ricerca su Deezer e' fallita e si riprova al giro dopo."""
     key = norm(name)
     hit = cache.get(key)
     today = date.today().isoformat()
-    if hit and (hit["tags"] or hit["at"] > (date.today() - timedelta(days=30)).isoformat()):
-        return hit["tags"]
-    if budget["left"] <= 0:
-        return None
-    budget["left"] -= 1
-    tags, answered = [], False
-    for lookup, pause in ((lookup_musicbrainz, 1.5), (lookup_itunes, 3.2)):
-        try:
-            tags += lookup(name)
-            answered = True
-        except (requests.RequestException, ValueError) as e:
-            log("  ricerca genere fallita:", name, lookup.__name__, type(e).__name__)
-        time.sleep(pause)
-    if not answered:
-        return None
-    cache[key] = {"tags": tags, "at": today}
-    if budget["left"] % 20 == 0:  # un giro interrotto non deve rifare tutte le ricerche
+    known = bool(hit and (hit["tags"] or hit["at"] > (date.today() - timedelta(days=30)).isoformat()))
+    if known and "fans" in hit:
+        return hit
+    if not known:
+        if budget["left"] <= 0:
+            return None
+        budget["left"] -= 1
+        tags, answered = [], False
+        for lookup, pause in ((lookup_musicbrainz, 1.5), (lookup_itunes, 3.2)):
+            try:
+                tags += lookup(name)
+                answered = True
+            except (requests.RequestException, ValueError) as e:
+                log("  ricerca genere fallita:", name, lookup.__name__, type(e).__name__)
+            time.sleep(pause)
+        if not answered:
+            return None
+        hit = cache[key] = {"tags": tags, "at": today}
+    try:  # Deezer e' veloce e non conta nel budget
+        hit["fans"] = lookup_deezer(name)
+    except (requests.RequestException, ValueError) as e:
+        log("  ricerca fan fallita:", name, type(e).__name__)
+    time.sleep(0.3)
+    if not known and budget["left"] % 20 == 0:  # un giro interrotto non deve rifare tutte le ricerche
         save_json(ARTISTS_FILE, cache)
-    return tags
+    return hit
 
 
 # ---------------------------------------------------------------- unione dei doppioni
@@ -742,24 +779,47 @@ def drop_ghosts(concerts):
     return kept
 
 
+def styles(tags, coarse):
+    """Generi fini per la pagina. Se i tag non dicono nulla di piu', restano quelli grossi."""
+    out = set()
+    for tag in tags:
+        t = norm(tag.replace("_", " "))
+        if not t or "party" in t or ELECTRONIC.search(t):
+            continue
+        out |= {key for key, rx in STYLES if rx.search(t)}
+    out |= buckets(tags) & {"metal", "punk"}
+    out |= set(coarse) & {"metal", "punk", "alt"}
+    return sorted(out or set(coarse), key=STYLE_ORDER.index)
+
+
+def headliner(c):
+    head = c["names"][0] if c["names"] else (SPLITTER.split(c["title"])[0] or c["title"])
+    return re.sub(r"\(.*?\)", " ", head).strip()
+
+
 def classify(concerts, cache, budget):
     kept = []
     for c in concerts:
         if NOT_A_GIG_PLACE.search(norm(c["venue"])) or NOT_A_GIG_TITLE.search(norm(c["title"])):
             continue
+        head = headliner(c)
+        lookup = (lambda: artist_info(head, cache, budget)) if name_keys(head) else (lambda: None)
         strong = [t for t in c["genres"] if is_music_tag(t)]
         found = buckets(strong)
+        info = None
         if not strong and c["house"]:
             found = buckets(c["house"])
         elif not strong:
-            head = c["names"][0] if c["names"] else (SPLITTER.split(c["title"])[0] or c["title"])
-            head = re.sub(r"\(.*?\)", " ", head).strip()
-            looked = artist_genres(head, cache, budget) if name_keys(head) else None
+            info = lookup()
+            looked = info["tags"] if info else None
             found = buckets(looked or [])
             if not found and not looked:  # la ricerca non sa nulla: restano locale e lista Songkick
                 found = buckets(c["weak"])
         if found:
+            info = info or lookup()  # solo per i concerti che restano: fan e generi fini
             c["buckets"] = sorted(found, key=["rock", "metal", "punk", "alt"].index)
+            c["styles"] = styles(strong + (c["house"] if not strong else []) + (info["tags"] if info else []), c["buckets"])
+            c["big"] = c["venue"] in BIG_VENUES or "tipsport" in norm(c["venue"]) or bool(info and (info.get("fans") or 0) >= BIG_FANS)
             kept.append(c)
     return kept
 
@@ -808,7 +868,7 @@ def find_new(concerts, state, today_iso):
         if fp in prints:
             known.append(prints[fp])
         c["first_seen"] = min(known) if known else today_iso
-        if known or c["status"] == "cancelled" or c["date"] < today_iso:
+        if known or c["status"] == "cancelled" or c["date"] < today_iso or not c["big"]:  # su Telegram solo i BIG
             continue
         if not any(i.split(":")[0] in baselined for i in c["ids"]):  # fonte al primo giro: niente valanghe
             continue
@@ -876,6 +936,35 @@ def concert_block(c):
     return "\n".join(lines)
 
 
+def due_reminders(concerts, state, today):
+    """BIG in arrivo tra 10, 7 o 3 giorni, non ancora ricordati e non appena annunciati."""
+    due = []
+    for c in concerts:
+        days = (date.fromisoformat(c["date"]) - today).days
+        key = f"{fingerprint(c)}|{days}"
+        if c["big"] and days in REMIND_DAYS and c["status"] != "cancelled" and c.get("first_seen") != today.isoformat() and key not in state["reminded"]:
+            due.append((days, key, c))
+    return sorted(due, key=lambda x: (x[0], x[2]["time"] or ""))
+
+
+def reminder_messages(due):
+    messages, current = [], ""
+    for days in sorted({d for d, _, _ in due}):
+        group = [c for d, _, c in due if d == days]
+        head = f"⏰ <b>Tra {days} giorni</b>"
+        current = (current + "\n\n" if current else "") + head
+        for c in group:
+            block = concert_block(c)
+            if len(current) + len(block) + 2 > 3800:
+                messages.append(current)
+                current = block
+            else:
+                current += "\n\n" + block
+    if current:
+        messages.append(current)
+    return messages
+
+
 def telegram_messages(new, page_url):
     shown = new[:MAX_TELEGRAM_CONCERTS]
     head = "🤘 <b>Nuovo concerto rock a Praga</b>" if len(new) == 1 else f"🤘 <b>{len(new)} nuovi concerti rock a Praga</b>"
@@ -909,7 +998,7 @@ def public_concert(c):
             links.append({"name": SOURCE_LABEL[l["source"]], "url": l["url"]})
     return {
         "id": c["ids"][0], "date": c["date"], "end": c["end"], "time": c["time"], "title": c["title"], "venue": c["venue"],
-        "genres": c["buckets"], "status": c["status"], "price": c["price"], "links": links, "first_seen": c["first_seen"],
+        "genres": c["styles"], "buckets": c["buckets"], "big": c["big"], "status": c["status"], "price": c["price"], "links": links, "first_seen": c["first_seen"],
     }
 
 
@@ -983,7 +1072,8 @@ def main():
         concerts.append({
             "ids": old["ids"], "title": old["title"], "names": [], "date": old["date"], "end": old.get("end"), "time": old.get("time"),
             "venue": old.get("venue", ""), "price": old.get("price", ""), "status": old.get("status", ""), "genres": [], "weak": [], "house": [],
-            "links": [{"source": k, "url": u} for k, u in old.get("source_links", [])], "keys": keys, "buckets": old["genres"],
+            "links": [{"source": k, "url": u} for k, u in old.get("source_links", [])], "keys": keys,
+            "buckets": old.get("buckets", old["genres"]), "styles": old["genres"], "big": old.get("big", False),
         })
         carried += 1
 
@@ -1028,6 +1118,21 @@ def main():
             log("Telegram:", failure)
     elif new:
         log("Telegram non configurato: nessun messaggio, i nuovi restano da mandare.")
+
+    # Promemoria dei BIG: al primo giro dopo le 9, cosi' non arrivano di notte.
+    state.setdefault("reminded", {})
+    state["reminded"] = {k: v for k, v in state["reminded"].items() if v >= today_iso}
+    due = due_reminders(rock, state, today) if sendable and not first_run and not failure and now.hour >= REMIND_FROM_HOUR else []
+    if due:
+        try:
+            for text in reminder_messages(due):
+                telegram_send(token, chat, text)
+            for _, key, c in due:
+                state["reminded"][key] = c["date"]
+            log(f"Telegram: {len(due)} promemoria.")
+        except RuntimeError as e:
+            failure = str(e)
+            log("Telegram:", failure)
 
     if delivered:
         remember(rock, state, today_iso)

@@ -26,6 +26,10 @@
   --metal: #b4c2cf;
   --punk: #f0c419;
   --alt: #45c4b0;
+  --hard: #ff9a3c;
+  --stoner: #b48cff;
+  --prog: #5aa9ff;
+  --garage: #8fd14f;
   --bad: #ff6b60;
   --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
   --body: "Barlow", "Segoe UI", Arial, sans-serif;
@@ -89,6 +93,20 @@ h1 span { color: var(--spot); }
 .chip[data-g="metal"] { --c: var(--metal); }
 .chip[data-g="punk"] { --c: var(--punk); }
 .chip[data-g="alt"] { --c: var(--alt); }
+.chip[data-g="hard"] { --c: var(--hard); }
+.chip[data-g="stoner"] { --c: var(--stoner); }
+.chip[data-g="prog"] { --c: var(--prog); }
+.chip[data-g="garage"] { --c: var(--garage); }
+.sizes { display: flex; flex: 1 0 100%; border: 2px solid var(--ink); }
+.size {
+  flex: 1 1 0; height: 46px; cursor: pointer; border: 0; border-radius: 0;
+  font: 900 24px/1 var(--display); text-transform: uppercase; letter-spacing: .02em;
+  background: transparent; color: var(--soft);
+}
+.size + .size { border-left: 2px solid var(--ink); }
+.size[aria-pressed="true"] { background: var(--spot); color: var(--spot-ink); }
+.size small { font: 600 14px/1 var(--tight); letter-spacing: .04em; margin-left: 6px; }
+.size:focus-visible { outline: 2px solid var(--spot); outline-offset: 2px; }
 .chip.newonly[aria-pressed="true"] { background: var(--mark); border-color: var(--mark); color: var(--mark-ink); }
 .count { flex: 1 0 100%; margin: 0; font-size: 14px; color: var(--soft); }
 
@@ -115,6 +133,10 @@ ol.gigs { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--i
 .g-metal { color: var(--metal); }
 .g-punk { color: var(--punk); }
 .g-alt { color: var(--alt); }
+.g-hard { color: var(--hard); }
+.g-stoner { color: var(--stoner); }
+.g-prog { color: var(--prog); }
+.g-garage { color: var(--garage); }
 .flag { font: 600 12px/1 var(--tight); letter-spacing: .07em; text-transform: uppercase; padding: 3px 5px; }
 .flag.new { background: var(--mark); color: var(--mark-ink); }
 .flag.sold { background: var(--ink); color: var(--paper); }
@@ -137,6 +159,7 @@ footer .down { color: var(--bad); }
   .bar .wrap { padding-block: 8px; }
   .venue { flex: 1 1 100%; }
   .chip { height: 36px; padding: 0 10px; font-size: 15px; }
+  .size { height: 42px; font-size: 21px; }
   .search, .venue { height: 36px; }
   .count { display: none; }
 }
@@ -152,12 +175,20 @@ footer .down { color: var(--bad); }
 
 <div class="bar">
   <div class="wrap">
+    <div class="sizes" role="group" aria-label="Grandi nomi o nicchia">
+      <button class="size" id="s-big" data-s="big" type="button" aria-pressed="true">Big<small id="n-big"></small></button>
+      <button class="size" id="s-niche" data-s="niche" type="button" aria-pressed="false">Nicchia<small id="n-niche"></small></button>
+    </div>
     <input class="search" id="q" type="search" placeholder="Cerca band o locale" aria-label="Cerca band o locale">
     <div class="chips" role="group" aria-label="Generi">
-      <button class="chip" id="g-rock" data-g="rock" type="button" aria-pressed="true">Rock</button>
+      <button class="chip" id="g-hard" data-g="hard" type="button" aria-pressed="true">Hard/Classic</button>
+      <button class="chip" id="g-stoner" data-g="stoner" type="button" aria-pressed="true">Stoner/Psych</button>
+      <button class="chip" id="g-prog" data-g="prog" type="button" aria-pressed="true">Prog/Post</button>
+      <button class="chip" id="g-garage" data-g="garage" type="button" aria-pressed="true">Garage/R'n'R</button>
       <button class="chip" id="g-metal" data-g="metal" type="button" aria-pressed="true">Metal</button>
-      <button class="chip" id="g-punk" data-g="punk" type="button" aria-pressed="true">Punk</button>
-      <button class="chip" id="g-alt" data-g="alt" type="button" aria-pressed="false">Indie/Alt</button>
+      <button class="chip" id="g-punk" data-g="punk" type="button" aria-pressed="true">Punk/HC</button>
+      <button class="chip" id="g-alt" data-g="alt" type="button" aria-pressed="true">Indie/Alt</button>
+      <button class="chip" id="g-rock" data-g="rock" type="button" aria-pressed="true">Rock</button>
       <button class="chip newonly" id="only-new" type="button" aria-pressed="false">Solo nuovi</button>
     </div>
     <select class="venue" id="venue" aria-label="Locale"><option value="">Tutti i locali</option></select>
@@ -174,16 +205,17 @@ footer .down { color: var(--bad); }
   var MONTHS = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
   var SHORT = ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic"];
   var DAYS = ["dom", "lun", "mar", "mer", "gio", "ven", "sab"];
-  var LABEL = { rock: "Rock", metal: "Metal", punk: "Punk", alt: "Indie/Alt" };
+  var LABEL = { hard: "Hard/Classic", stoner: "Stoner/Psych", prog: "Prog/Post", garage: "Garage/R'n'R", metal: "Metal", punk: "Punk/HC", alt: "Indie/Alt", rock: "Rock" };
   var NEW_DAYS = 7;
   var $ = function (id) { return document.getElementById(id); };
-  var state = { q: "", venue: "", onlyNew: false, g: { rock: true, metal: true, punk: true, alt: false } };
+  var state = { q: "", venue: "", onlyNew: false, size: "big",
+    g: { hard: true, stoner: true, prog: true, garage: true, metal: true, punk: true, alt: true, rock: true } };
 
-  function remember() { try { localStorage.setItem("pragarock", JSON.stringify({ g: state.g, venue: state.venue })); } catch (e) {} }
+  function remember() { try { localStorage.setItem("pragarock2", JSON.stringify({ g: state.g, venue: state.venue, size: state.size })); } catch (e) {} }
   function recall() {
     try {
-      var s = JSON.parse(localStorage.getItem("pragarock") || "null");
-      if (s && s.g) { state.g = Object.assign(state.g, s.g); state.venue = s.venue || ""; }
+      var s = JSON.parse(localStorage.getItem("pragarock2") || "null");
+      if (s && s.g) { state.g = Object.assign(state.g, s.g); state.venue = s.venue || ""; state.size = s.size === "niche" ? "niche" : "big"; }
     } catch (e) {}
   }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
@@ -215,7 +247,7 @@ footer .down { color: var(--bad); }
     if (c.status === "cancelled") flags += '<span class="flag off">Annullato</span>';
     if (c.status === "soldout") flags += '<span class="flag sold">Sold out</span>';
     if (isNew(c)) flags += '<span class="flag new">Nuovo</span>';
-    var genres = c.genres.map(function (g) { return '<span class="g g-' + g + '">' + LABEL[g] + "</span>"; }).join("");
+    var genres = c.genres.filter(function (g) { return LABEL[g]; }).map(function (g) { return '<span class="g g-' + g + '">' + LABEL[g] + "</span>"; }).join("");
     var extra = [];
     if (c.time) extra.push(c.time);
     if (c.price) extra.push(esc(c.price));
@@ -231,6 +263,7 @@ footer .down { color: var(--bad); }
   }
 
   function matches(c) {
+    if (!!c.big !== (state.size === "big")) return false;
     if (!c.genres.some(function (g) { return state.g[g]; })) return false;
     if (state.venue && c.venue !== state.venue) return false;
     if (state.onlyNew && !isNew(c)) return false;
@@ -272,13 +305,15 @@ footer .down { color: var(--bad); }
     all = concerts.filter(function (c) { return (c.end || c.date) >= today && c.genres && c.genres.length; });
     baseline = (status && status.baseline) || today;  // quello che c'era al primo giro non e' "nuovo"
 
-    var rock = all.filter(function (c) { return c.genres.some(function (g) { return g !== "alt"; }); });
-    var last = rock.length ? rock[rock.length - 1].date : "";
-    if (rock.length) {
+    var big = all.filter(function (c) { return c.big; });
+    $("n-big").textContent = big.length;
+    $("n-niche").textContent = all.length - big.length;
+    var last = all.length ? all[all.length - 1].date : "";
+    if (all.length) {
       var e = parse(last);
-      $("lede").innerHTML = "<b>" + rock.length + " concerti</b> rock, metal e punk a Praga da oggi a " + MONTHS[e.getMonth()].toLowerCase() + " " + e.getFullYear() + ".";
+      $("lede").innerHTML = "<b>" + big.length + " grandi nomi</b> e " + (all.length - big.length) + " concerti di nicchia, rock, metal e punk a Praga da oggi a " + MONTHS[e.getMonth()].toLowerCase() + " " + e.getFullYear() + ".";
     }
-    var upcoming = rock.filter(function (c) { return c.status !== "cancelled" && c.date >= today; })[0];
+    var upcoming = big.filter(function (c) { return c.status !== "cancelled" && c.date >= today; })[0];
     if (upcoming) {
       var n = $("next");
       n.hidden = false;
@@ -306,13 +341,21 @@ footer .down { color: var(--bad); }
       }).join(" · ") + ".</p>";
     }
     if (status && status.updated) foot += "<p>Ultimo controllo: " + ago(status.updated) + "." + (status.preview ? " Questa è un'anteprima: i dati restano fermi a questo controllo." : " La pagina si aggiorna da sola ogni 3 ore.") + "</p>";
-    foot += "<p>Il genere arriva dalle fonti e a volte sbaglia. Prima di comprare, controlla data e biglietti sul sito del locale.</p>";
+    foot += "<p>Big vuol dire band con almeno 20.000 fan su Deezer, oppure concerto in un'arena (O2 arena, O2 universum, Forum Karlín, Fortuna, Tipsport). Il genere arriva dalle fonti e a volte sbaglia. Prima di comprare, controlla data e biglietti sul sito del locale.</p>";
     $("foot").innerHTML = foot;
     render();
   }
 
   recall();
   Object.keys(state.g).forEach(function (g) { $("g-" + g).setAttribute("aria-pressed", state.g[g] ? "true" : "false"); });
+  document.querySelectorAll(".size").forEach(function (b) {
+    b.setAttribute("aria-pressed", b.getAttribute("data-s") === state.size ? "true" : "false");
+    b.addEventListener("click", function () {
+      state.size = b.getAttribute("data-s");
+      document.querySelectorAll(".size").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      remember(); render();
+    });
+  });
   document.querySelectorAll(".chip[data-g]").forEach(function (b) {
     b.addEventListener("click", function () {
       var g = b.getAttribute("data-g");
