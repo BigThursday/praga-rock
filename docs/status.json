@@ -7,12 +7,12 @@
    "ok": true
   },
   {
-   "count": 359,
+   "count": 0,
    "name": "festivaly.eu",
-   "ok": true
+   "ok": false
   },
   {
-   "count": 338,
+   "count": 44,
    "name": "Songkick",
    "ok": false
   },
@@ -52,5 +52,5 @@
    "ok": true
   }
  ],
- "updated": "2026-11-02T02:38+01:00"
+ "updated": "2026-11-02T03:32+01:00"
 }
