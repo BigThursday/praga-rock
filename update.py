@@ -552,6 +552,9 @@ NOT_ROCK_NIGHT = re.compile(r"\b(reggae|dub|dj|jazz|stand ?up|divadlo|workshop|p
 # Concerti "rock" che rock non sono: quartetti d'archi a lume di candela, tributi in chiesa, festival jazz.
 NOT_A_GIG_PLACE = re.compile(r"\b(kostel\w*|church|chapel|kaple|synagog\w*|bazilika|basilica|klaster\w*|monastery|convent|rudolfinum|planetarium|planetarij)\b")
 NOT_A_GIG_TITLE = re.compile(r"\b(jazz|jazzfest|candlelight|gospely?|hodina zpivani|pro deti)\b")
+# "Retro Dance Party" fuori, "Rock Party" e "Metal Disco" dentro.
+PARTY_TITLE = re.compile(r"\b(party|parties|disco|diskoteka|dance)\b")
+ROCK_TITLE = re.compile(r"\b(rock\w*|metal\w*|punk\w*)\b")
 
 
 def venue_default(title, sub):
@@ -807,10 +810,16 @@ def classify(concerts, cache, budget):
         strong = [t for t in c["genres"] if is_music_tag(t)]
         found = buckets(strong)
         info = None
+        title = norm(c["title"])
+        if PARTY_TITLE.search(title) and not ROCK_TITLE.search(title):
+            # Serata da ballo, anche se la fonte scrive "rock". Resta solo se la band in testa e' rock: "Party Cannon".
+            info = lookup()
+            if not (info and buckets(info["tags"]) & {"rock", "metal", "punk"}):
+                continue
         if not strong and c["house"]:
             found = buckets(c["house"])
         elif not strong:
-            info = lookup()
+            info = info or lookup()
             looked = info["tags"] if info else None
             found = buckets(looked or [])
             if not found and not looked:  # la ricerca non sa nulla: restano locale e lista Songkick
