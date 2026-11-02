@@ -46,16 +46,9 @@ STATE_FILE = ROOT / "data" / "state.json"
 ARTISTS_FILE = ROOT / "data" / "artist_genres.json"
 
 PRAGUE = ZoneInfo("Europe/Prague")
-BROWSER = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-    "Accept-Language": "en-US,en;q=0.9,cs;q=0.8",
-    "Upgrade-Insecure-Requests": "1",
-    "Sec-Fetch-Dest": "document",
-    "Sec-Fetch-Mode": "navigate",
-    "Sec-Fetch-Site": "same-origin",
-}
-LOOKUP_AGENT = {"User-Agent": "PragaRock/1.0 (https://github.com/BigThursday/praga-rock)", "Accept": "application/json"}
+AGENT = "PragaRock/1.0 (+https://github.com/BigThursday/praga-rock)"
+HEADERS = {"User-Agent": AGENT, "Accept": "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8", "Accept-Language": "en-US,en;q=0.9,cs;q=0.8"}
+LOOKUP_AGENT = {"User-Agent": AGENT, "Accept": "application/json"}
 
 WARN_AFTER_FAILS = 8  # con un giro ogni 3 ore: un giorno intero di fonte rotta prima di avvisare
 MAX_TELEGRAM_CONCERTS = 40
@@ -88,11 +81,9 @@ def get(session, url, *, params=None, tries=3, wait=8, timeout=40):
     raise RuntimeError(f"{urlparse(url).netloc}: {last}")
 
 
-def browser_session(referer=None):
+def web_session():
     s = requests.Session()
-    s.headers.update(BROWSER)
-    if referer:
-        s.headers["Referer"] = referer
+    s.headers.update(HEADERS)
     return s
 
 
@@ -202,7 +193,7 @@ def canon_venue(name):
 
 def fetch_goout(today):
     session = requests.Session()
-    session.headers.update({"User-Agent": BROWSER["User-Agent"], "Accept": "application/json"})
+    session.headers.update({"User-Agent": AGENT, "Accept": "application/json"})
     before = (today + timedelta(days=1100)).isoformat()
     params = [
         ("languages[]", "en"), ("categories[]", "concerts"), ("categories[]", "festivals"),
@@ -259,7 +250,7 @@ def fetch_goout(today):
 
 def fetch_songkick(today):
     base = "https://www.songkick.com/metro-areas/28425-czech-republic-prague"
-    session = browser_session("https://www.songkick.com/")
+    session = web_session()
     out, complete = {}, True
 
     def parse(soup, weak=()):
@@ -316,7 +307,7 @@ def next_cursor(soup):
 
 
 def fetch_festivaly(today):
-    session = browser_session("https://festivaly.eu/")
+    session = web_session()
     base = [("tag[]", t) for t in ("rock", "metal", "punk", "hardcore", "ska", "alternative", "indie")]
     out, cursor, complete = {}, None, False
     for _ in range(90):
@@ -359,7 +350,7 @@ def fetch_festivaly(today):
 
 
 def fetch_kdykam(today):
-    session = browser_session("https://kdykam.com/")
+    session = web_session()
     out, complete = {}, True
     for genre in ("rock", "metal"):
         try:
@@ -403,7 +394,7 @@ def fetch_kdykam(today):
 
 def fetch_eventon(source, url, venue):
     """Klub 007 e Modra Vopice usano lo stesso plugin WordPress: tutto quello che serve e' nella pagina."""
-    session = browser_session(url)
+    session = web_session()
     soup = BeautifulSoup(get(session, url, timeout=60).text, "lxml")
     out = {}
     for ev in soup.select(".eventon_list_event"):
@@ -447,7 +438,7 @@ def fetch_modravopice(today):
 
 
 def fetch_rockcafe(today):
-    session = browser_session("https://rockcafe.cz/")
+    session = web_session()
     soup = BeautifulSoup(get(session, "https://rockcafe.cz/cs/program/").text, "lxml")
     out = []
     for item in soup.select("a.list-item"):
@@ -465,7 +456,7 @@ def fetch_rockcafe(today):
 
 def fetch_lucerna(today):
     """Lucerna Music Bar suona di tutto: il genere lo decidono le altre fonti o la ricerca sulla band."""
-    session = browser_session("https://musicbar.cz/")
+    session = web_session()
     soup = BeautifulSoup(get(session, "https://musicbar.cz/cs/program/").text, "lxml")
     out = []
     for item in soup.select("a.program-item"):
@@ -483,7 +474,7 @@ def fetch_lucerna(today):
 
 
 def fetch_futurum(today):
-    session = browser_session("https://futurum.musicbar.cz/")
+    session = web_session()
     soup = BeautifulSoup(get(session, "https://futurum.musicbar.cz/program/").text, "lxml")
     out = []
     for post in soup.select("div.post.type-post"):
@@ -504,7 +495,7 @@ def fetch_futurum(today):
 
 def fetch_obscure(today):
     """Obscure Promotion: il grosso del metal che passa da Praga, spesso prima che compaia altrove."""
-    session = browser_session("https://obscure.cz/")
+    session = web_session()
     soup = BeautifulSoup(get(session, "https://obscure.cz/cs").text, "lxml")
     months = {m: i + 1 for i, m in enumerate(("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))}
     out, year, last = {}, today.year, (today.month, 1)
