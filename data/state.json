@@ -577,7 +577,7 @@
  },
  "health": {
   "festivaly": {
-   "fails": 2,
+   "fails": 3,
    "warned": false
   },
   "futurum": {
@@ -617,6 +617,7 @@
    "warned": false
   }
  },
+ "reminded": {},
  "seen": {
   "festivaly:black-marble-cafe-v-lese-praha-2027": {
    "date": "2027-04-17",

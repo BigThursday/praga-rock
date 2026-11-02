@@ -371,6 +371,13 @@
    "Metal"
   ]
  },
+ "august ocean": {
+  "at": "2026-11-02",
+  "fans": 14,
+  "tags": [
+   "R&B/Soul"
+  ]
+ },
  "avatar": {
   "at": "2026-11-02",
   "fans": 80788,
@@ -1163,6 +1170,7 @@
  },
  "diana arbenina": {
   "at": "2026-11-02",
+  "fans": 0,
   "tags": []
  },
  "digital carbs": {
@@ -1755,6 +1763,7 @@
  },
  "gregorian": {
   "at": "2026-11-02",
+  "fans": 31102,
   "tags": [
    "cover",
    "ambient",
@@ -2429,6 +2438,11 @@
   "tags": [
    "Pop"
   ]
+ },
+ "karel kahovec 80": {
+  "at": "2026-11-02",
+  "fans": 0,
+  "tags": []
  },
  "karin park": {
   "at": "2026-11-02",
@@ -3560,6 +3574,7 @@
  },
  "oskar petr 75": {
   "at": "2026-11-02",
+  "fans": 0,
   "tags": []
  },
  "pagan siege tour": {
@@ -4206,6 +4221,15 @@
    "Hip-Hop/Rap"
   ]
  },
+ "separ": {
+  "at": "2026-11-02",
+  "fans": 39357,
+  "tags": [
+   "hip hop",
+   "rap",
+   "Hip-Hop/Rap"
+  ]
+ },
  "sergeant jammer": {
   "at": "2026-11-02",
   "fans": 5,
@@ -4823,6 +4847,14 @@
    "Pop"
   ]
  },
+ "the heretic order": {
+  "at": "2026-11-02",
+  "fans": 165,
+  "tags": [
+   "heavy metal",
+   "Metal"
+  ]
+ },
  "the howlers": {
   "at": "2026-11-02",
   "fans": 289,
@@ -4984,6 +5016,13 @@
   "at": "2026-11-02",
   "fans": 0,
   "tags": []
+ },
+ "the switch": {
+  "at": "2026-11-02",
+  "fans": 1959,
+  "tags": [
+   "Metal"
+  ]
  },
  "the veils": {
   "at": "2026-11-02",
@@ -5388,6 +5427,11 @@
    "Rock"
   ]
  },
+ "vilem cok bypass seven": {
+  "at": "2026-11-02",
+  "fans": 0,
+  "tags": []
+ },
  "visaci zamek": {
   "at": "2026-11-02",
   "fans": 5578,
@@ -5429,6 +5473,14 @@
    "new wave",
    "future pop",
    "Pop"
+  ]
+ },
+ "volant": {
+  "at": "2026-11-02",
+  "fans": 810,
+  "tags": [
+   "punk",
+   "Dance"
   ]
  },
  "vrata hosek": {
@@ -5632,6 +5684,15 @@
    "experimental",
    "idm",
    "Alternative"
+  ]
+ },
+ "святослав вакарчук": {
+  "at": "2026-11-02",
+  "fans": 5048,
+  "tags": [
+   "rock",
+   "ukraine",
+   "Rock"
   ]
  }
 }
