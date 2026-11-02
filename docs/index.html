@@ -1,12 +1,11 @@
 <!doctype html>
-<html lang="it">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Praga Rock</title>
+<title>Prague Rock</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Tutti i concerti rock, metal e punk a Praga, aggiornati ogni 3 ore.">
-<meta name="robots" content="noindex">
+<meta name="description" id="meta-desc" content="Every rock, metal and punk gig in Prague, updated every 3 hours.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600&family=Big+Shoulders+Display:wght@800;900&display=swap">
@@ -51,9 +50,21 @@ a { color: inherit; }
 }
 
 header.top { padding-block: 28px 18px; }
+/* Le tre lingue stanno in alto a destra: si vedono, non rubano la scena al titolo. */
+.crown { display: flex; justify-content: flex-end; }
+.langs { display: flex; border: 1px solid var(--line); }
+.lang {
+  font: 600 14px/1 var(--tight); letter-spacing: .1em; text-transform: uppercase;
+  height: 30px; padding: 0 11px; cursor: pointer; border: 0; border-radius: 0;
+  background: transparent; color: var(--soft);
+}
+.lang + .lang { border-left: 1px solid var(--line); }
+.lang[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.lang:focus-visible { outline: 2px solid var(--spot); outline-offset: 2px; }
+
 h1 {
   font: 900 clamp(64px, 17vw, 168px)/.82 var(--display);
-  letter-spacing: -.01em; text-transform: uppercase; margin: 0;
+  letter-spacing: -.01em; text-transform: uppercase; margin: 6px 0 0;
 }
 h1 span { color: var(--spot); }
 @media (min-width: 640px) { h1 br { display: none; } h1 { font-size: clamp(96px, 13vw, 150px); } }
@@ -150,6 +161,9 @@ ol.gigs { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--i
 footer { border-top: 2px solid var(--ink); padding-block: 16px 34px; font-size: 14px; color: var(--soft); }
 footer p { margin: 0 0 6px; max-width: 72ch; }
 footer .down { color: var(--bad); }
+footer a { text-underline-offset: 2px; }
+footer a:hover { color: var(--spot); }
+#hits { font-variant-numeric: tabular-nums; }
 
 @media (max-width: 640px) {
   .gig { grid-template-columns: 56px minmax(0, 1fr); }
@@ -163,25 +177,32 @@ footer .down { color: var(--bad); }
   .search, .venue { height: 36px; }
   .count { display: none; }
 }
-@media (prefers-reduced-motion: no-preference) { .next, .chip { transition: background-color .12s, color .12s; } }
+@media (prefers-reduced-motion: no-preference) { .next, .chip, .lang { transition: background-color .12s, color .12s; } }
 </style>
 </head>
 <body>
 <header class="top wrap">
-  <h1>Praga<br><span>Rock</span></h1>
-  <p class="lede" id="lede">Tutti i concerti rock, metal e punk a Praga.</p>
+  <div class="crown">
+    <div class="langs" role="group" id="langs" aria-label="Language">
+      <button class="lang" type="button" data-l="en" aria-pressed="true">EN</button>
+      <button class="lang" type="button" data-l="cs" aria-pressed="false">CZ</button>
+      <button class="lang" type="button" data-l="it" aria-pressed="false">IT</button>
+    </div>
+  </div>
+  <h1>Prague<br><span>Rock</span></h1>
+  <p class="lede" id="lede"></p>
   <a class="next" id="next" hidden></a>
 </header>
 
 <div class="bar">
   <div class="wrap">
-    <div class="sizes" role="group" aria-label="Grandi nomi o nicchia">
-      <button class="size" id="s-big" data-s="big" type="button" aria-pressed="true">Big<small id="n-big"></small></button>
-      <button class="size" id="s-niche" data-s="niche" type="button" aria-pressed="false">Nicchia<small id="n-niche"></small></button>
+    <div class="sizes" role="group" id="sizes">
+      <button class="size" id="s-big" data-s="big" type="button" aria-pressed="true"><span id="t-big"></span><small id="n-big"></small></button>
+      <button class="size" id="s-niche" data-s="niche" type="button" aria-pressed="false"><span id="t-niche"></span><small id="n-niche"></small></button>
     </div>
-    <input class="search" id="q" type="search" placeholder="Cerca band o locale" aria-label="Cerca band o locale">
-    <div class="chips" role="group" aria-label="Generi">
-      <button class="chip" data-g="" type="button" aria-pressed="true">Tutti</button>
+    <input class="search" id="q" type="search">
+    <div class="chips" role="group" id="chips">
+      <button class="chip" data-g="" type="button" aria-pressed="true"></button>
       <button class="chip" data-g="hard" type="button" aria-pressed="false">Hard/Classic</button>
       <button class="chip" data-g="stoner" type="button" aria-pressed="false">Stoner/Psych</button>
       <button class="chip" data-g="prog" type="button" aria-pressed="false">Prog/Post</button>
@@ -190,33 +211,126 @@ footer .down { color: var(--bad); }
       <button class="chip" data-g="punk" type="button" aria-pressed="false">Punk/HC</button>
       <button class="chip" data-g="alt" type="button" aria-pressed="false">Indie/Alt</button>
       <button class="chip" data-g="rock" type="button" aria-pressed="false">Rock</button>
-      <button class="chip newonly" id="only-new" type="button" aria-pressed="false">Solo nuovi</button>
+      <button class="chip newonly" id="only-new" type="button" aria-pressed="false"></button>
     </div>
-    <select class="venue" id="venue" aria-label="Locale"><option value="">Tutti i locali</option></select>
+    <select class="venue" id="venue"><option value=""></option></select>
     <p class="count" id="count" aria-live="polite"></p>
   </div>
 </div>
 
-<main class="wrap" id="list"><p class="empty">Carico i concerti…</p></main>
+<main class="wrap" id="list"><p class="empty" id="loading"></p></main>
 <footer class="wrap" id="foot"></footer>
 
 <!--DATA-->
 <script>
 (function () {
-  var MONTHS = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
-  var SHORT = ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic"];
-  var DAYS = ["dom", "lun", "mar", "mer", "gio", "ven", "sab"];
+  // Due stringhe da riempire quando i servizi sono pronti. Vuote, la pagina le salta e basta.
+  var GOATCOUNTER = "https://praguerock.goatcounter.com/count";
+  var CONTACT = "";              // es. "info@praguerock.cz"
+
+  var LANGS = ["en", "cs", "it"];
+  var I18N = {
+    en: {
+      title: "Prague Rock",
+      desc: "Every rock, metal and punk gig in Prague, updated every 3 hours.",
+      months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+      monthsIn: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+      short: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      days: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+      big: "Big", niche: "Niche", all: "All", onlyNew: "New only",
+      search: "Search band or venue", allVenues: "All venues",
+      today: "Today", tomorrow: "Tomorrow", ongoing: "Ongoing", tonight: "Tonight",
+      cancelled: "Cancelled", soldout: "Sold out", isNew: "New",
+      until: "until", tba: "Venue TBA",
+      loading: "Loading the gigs…",
+      failed: "Cannot load the gigs. Reload the page in a few minutes.",
+      noNew: function (d) { return "No new gigs in the last " + d + " days."; },
+      noMatch: "No gigs with these filters. Try clearing the search or choosing All.",
+      sources: "Sources", down: "not responding",
+      lastCheck: "Last check", atToday: "today at", atWord: "at",
+      preview: "This is a preview: the data stays frozen at this check.",
+      auto: "The page updates itself every 3 hours.",
+      note: "Big means a band with at least 20,000 fans on Deezer, or a gig in an arena (O2 arena, O2 universum, Forum Karlín, Fortuna, Tipsport). Genres come from the sources and are sometimes wrong. Check the date and the tickets on the venue site before you buy.",
+      visits: "Visits", writeTo: "Something missing? Write to",
+      count: function (n) { return n + (n === 1 ? " gig" : " gigs"); },
+      lede: function (b, n, m, y) { return "<b>" + b + " big names</b> and " + n + " niche gigs. Rock, metal and punk in Prague from today to " + m + " " + y + "."; }
+    },
+    cs: {
+      title: "Prague Rock",
+      desc: "Všechny rockové, metalové a punkové koncerty v Praze, aktualizováno každé 3 hodiny.",
+      months: ["Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec"],
+      monthsIn: ["ledna", "února", "března", "dubna", "května", "června", "července", "srpna", "září", "října", "listopadu", "prosince"],
+      short: ["led", "úno", "bře", "dub", "kvě", "čvn", "čvc", "srp", "zář", "říj", "lis", "pro"],
+      days: ["ne", "po", "út", "st", "čt", "pá", "so"],
+      big: "Velké", niche: "Okrajové", all: "Vše", onlyNew: "Jen nové",
+      search: "Hledat kapelu nebo klub", allVenues: "Všechny kluby",
+      today: "Dnes", tomorrow: "Zítra", ongoing: "Probíhá", tonight: "Dnes večer",
+      cancelled: "Zrušeno", soldout: "Vyprodáno", isNew: "Nové",
+      until: "do", tba: "Místo bude upřesněno",
+      loading: "Načítám koncerty…",
+      failed: "Koncerty se nepodařilo načíst. Zkuste stránku za pár minut znovu.",
+      noNew: function (d) { return "Za posledních " + d + " dní žádné nové koncerty."; },
+      noMatch: "Žádné koncerty s těmito filtry. Zkuste zrušit hledání nebo zvolit Vše.",
+      sources: "Zdroje", down: "neodpovídá",
+      lastCheck: "Poslední kontrola", atToday: "dnes v", atWord: "v",
+      preview: "Toto je náhled: data zůstávají u této kontroly.",
+      auto: "Stránka se sama aktualizuje každé 3 hodiny.",
+      note: "Velké znamená kapela s nejméně 20 000 fanoušky na Deezeru nebo koncert v aréně (O2 arena, O2 universum, Forum Karlín, Fortuna, Tipsport). Žánry pocházejí ze zdrojů a občas se pletou. Před nákupem si ověřte datum a vstupenky na webu klubu.",
+      visits: "Návštěvy", writeTo: "Něco chybí? Napište na",
+      count: function (n) { return n + " " + (n === 1 ? "koncert" : (n >= 2 && n <= 4 ? "koncerty" : "koncertů")); },
+      lede: function (b, n, m, y) { return "<b>Velká jména: " + b + "</b> · Okrajové: " + n + ". Rock, metal a punk v Praze ode dneška do " + m + " " + y + "."; }
+    },
+    it: {
+      title: "Prague Rock",
+      desc: "Tutti i concerti rock, metal e punk a Praga, aggiornati ogni 3 ore.",
+      months: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
+      monthsIn: ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"],
+      short: ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic"],
+      days: ["dom", "lun", "mar", "mer", "gio", "ven", "sab"],
+      big: "Big", niche: "Nicchia", all: "Tutti", onlyNew: "Solo nuovi",
+      search: "Cerca band o locale", allVenues: "Tutti i locali",
+      today: "Oggi", tomorrow: "Domani", ongoing: "In corso", tonight: "Stasera",
+      cancelled: "Annullato", soldout: "Sold out", isNew: "Nuovo",
+      until: "fino al", tba: "Locale da definire",
+      loading: "Carico i concerti…",
+      failed: "Non riesco a caricare i concerti. Ricarica la pagina tra qualche minuto.",
+      noNew: function (d) { return "Nessun concerto nuovo negli ultimi " + d + " giorni."; },
+      noMatch: "Nessun concerto con questi filtri. Prova a togliere la ricerca o a scegliere Tutti.",
+      sources: "Fonti", down: "non risponde",
+      lastCheck: "Ultimo controllo", atToday: "oggi alle", atWord: "alle",
+      preview: "Questa è un'anteprima: i dati restano fermi a questo controllo.",
+      auto: "La pagina si aggiorna da sola ogni 3 ore.",
+      note: "Big vuol dire band con almeno 20.000 fan su Deezer, oppure concerto in un'arena (O2 arena, O2 universum, Forum Karlín, Fortuna, Tipsport). Il genere arriva dalle fonti e a volte sbaglia. Prima di comprare, controlla data e biglietti sul sito del locale.",
+      visits: "Visite", writeTo: "Manca qualcosa? Scrivi a",
+      count: function (n) { return n + (n === 1 ? " concerto" : " concerti"); },
+      lede: function (b, n, m, y) { return "<b>" + b + " grandi nomi</b> e " + n + " concerti di nicchia. Rock, metal e punk a Praga da oggi a " + m + " " + y + "."; }
+    }
+  };
+
   var LABEL = { hard: "Hard/Classic", stoner: "Stoner/Psych", prog: "Prog/Post", garage: "Garage/R'n'R", metal: "Metal", punk: "Punk/HC", alt: "Indie/Alt", rock: "Rock" };
   var NEW_DAYS = 7;
   var $ = function (id) { return document.getElementById(id); };
-  var state = { q: "", venue: "", onlyNew: false, size: "big", genre: "" };  // genre "" = tutti
+  var state = { q: "", venue: "", onlyNew: false, size: "big", genre: "", lang: "en" };  // genre "" = tutti
+  var T = I18N.en;
 
-  function remember() { try { localStorage.setItem("pragarock3", JSON.stringify({ genre: state.genre, venue: state.venue, size: state.size })); } catch (e) {} }
+  function remember() { try { localStorage.setItem("pragarock3", JSON.stringify({ genre: state.genre, venue: state.venue, size: state.size, lang: state.lang })); } catch (e) {} }
   function recall() {
     try {
       var s = JSON.parse(localStorage.getItem("pragarock3") || "null");
-      if (s) { state.genre = LABEL[s.genre] ? s.genre : ""; state.venue = s.venue || ""; state.size = s.size === "niche" ? "niche" : "big"; }
-    } catch (e) {}
+      if (s) {
+        state.genre = LABEL[s.genre] ? s.genre : "";
+        state.venue = s.venue || "";
+        state.size = s.size === "niche" ? "niche" : "big";
+        if (LANGS.indexOf(s.lang) >= 0) state.lang = s.lang;
+        else state.lang = guessLang();
+      } else state.lang = guessLang();
+    } catch (e) { state.lang = guessLang(); }
+    T = I18N[state.lang];
+  }
+  // Chi non ha mai scelto parte dalla lingua del browser, ceco o italiano se e' una di quelle.
+  function guessLang() {
+    var l = (navigator.language || "en").slice(0, 2).toLowerCase();
+    return LANGS.indexOf(l) >= 0 ? l : "en";
   }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function fold(s) { return String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase(); }
@@ -229,35 +343,36 @@ footer .down { color: var(--bad); }
   var tomorrow = iso(new Date(Date.now() + 864e5));
   var fresh = iso(new Date(Date.now() - NEW_DAYS * 864e5));
   var all = [];
+  var status = null;
   var baseline = "9999";
 
   function isNew(c) { return c.first_seen >= fresh && c.first_seen > baseline; }
   function when(c) {
-    if (c.date < today) return "In corso";
-    if (c.date === today) return "Oggi";
-    if (c.date === tomorrow) return "Domani";
-    return DAYS[parse(c.date).getDay()];
+    if (c.date < today) return T.ongoing;
+    if (c.date === today) return T.today;
+    if (c.date === tomorrow) return T.tomorrow;
+    return T.days[parse(c.date).getDay()];
   }
-  function rangeEnd(c) { if (!c.end) return ""; var e = parse(c.end); return " · fino al " + e.getDate() + " " + SHORT[e.getMonth()]; }
+  function rangeEnd(c) { if (!c.end) return ""; var e = parse(c.end); return " · " + T.until + " " + e.getDate() + " " + T.short[e.getMonth()]; }
 
   function row(c) {
     var d = parse(c.date < today && c.end ? today : c.date);
     var soon = c.date === today || c.date === tomorrow;
     var flags = "";
-    if (c.status === "cancelled") flags += '<span class="flag off">Annullato</span>';
-    if (c.status === "soldout") flags += '<span class="flag sold">Sold out</span>';
-    if (isNew(c)) flags += '<span class="flag new">Nuovo</span>';
+    if (c.status === "cancelled") flags += '<span class="flag off">' + T.cancelled + "</span>";
+    if (c.status === "soldout") flags += '<span class="flag sold">' + T.soldout + "</span>";
+    if (isNew(c)) flags += '<span class="flag new">' + T.isNew + "</span>";
     var genres = c.genres.filter(function (g) { return LABEL[g]; }).map(function (g) { return '<span class="g g-' + g + '">' + LABEL[g] + "</span>"; }).join("");
     var extra = [];
     if (c.time) extra.push(c.time);
     if (c.price) extra.push(esc(c.price));
-    var links = c.links.map(function (l, i) {
+    var links = c.links.map(function (l) {
       return '<a href="' + esc(safeUrl(l.url)) + '" target="_blank" rel="noopener">' + esc(l.name) + "</a>";
     }).join("");
     return '<li class="gig' + (soon ? " soon" : "") + (c.status === "cancelled" ? " off" : "") + '">' +
       '<div class="day"><b>' + pad(d.getDate()) + "</b><i>" + when(c) + "</i></div>" +
       '<div class="what"><h3><a href="' + esc(safeUrl((c.links[0] || {}).url)) + '" target="_blank" rel="noopener">' + esc(c.title) + "</a></h3>" +
-      '<p class="where"><b>' + esc(c.venue || "Locale da definire") + "</b>" + (extra.length ? " · " + extra.join(" · ") : "") + rangeEnd(c) + "</p>" +
+      '<p class="where"><b>' + esc(c.venue || T.tba) + "</b>" + (extra.length ? " · " + extra.join(" · ") : "") + rangeEnd(c) + "</p>" +
       '<div class="tags">' + flags + genres + "</div></div>" +
       '<div class="go">' + links + "</div></li>";
   }
@@ -281,16 +396,14 @@ footer .down { color: var(--bad); }
       if (k !== month) {
         if (open) out += "</ol>";
         var p = k.split("-");
-        out += '<div class="month"><h2>' + MONTHS[+p[1] - 1] + " " + p[0] + "</h2><span>" + perMonth[k] + (perMonth[k] === 1 ? " concerto" : " concerti") + '</span></div><ol class="gigs">';
+        out += '<div class="month"><h2>' + T.months[+p[1] - 1] + " " + p[0] + "</h2><span>" + T.count(perMonth[k]) + '</span></div><ol class="gigs">';
         month = k; open = true;
       }
       out += row(c);
     }
     if (open) out += "</ol>";
-    $("list").innerHTML = out || (state.onlyNew
-      ? '<p class="empty">Nessun concerto nuovo negli ultimi ' + NEW_DAYS + " giorni.</p>"
-      : '<p class="empty">Nessun concerto con questi filtri. Prova a togliere la ricerca o a scegliere Tutti.</p>');
-    $("count").textContent = shown.length === 1 ? "1 concerto" : shown.length + " concerti";
+    $("list").innerHTML = out || '<p class="empty">' + (state.onlyNew ? T.noNew(NEW_DAYS) : T.noMatch) + "</p>";
+    $("count").textContent = T.count(shown.length);
   }
 
   function ago(isoStamp) {
@@ -298,31 +411,74 @@ footer .down { color: var(--bad); }
     if (isNaN(d)) return "";
     var same = iso(d) === today;
     var hhmm = pad(d.getHours()) + ":" + pad(d.getMinutes());
-    return same ? "oggi alle " + hhmm : d.getDate() + " " + SHORT[d.getMonth()] + " alle " + hhmm;
+    return same ? T.atToday + " " + hhmm : d.getDate() + " " + T.short[d.getMonth()] + " " + T.atWord + " " + hhmm;
   }
 
-  function start(concerts, status) {
-    all = concerts.filter(function (c) { return (c.end || c.date) >= today && c.genres && c.genres.length; });
-    baseline = (status && status.baseline) || today;  // quello che c'era al primo giro non e' "nuovo"
-
+  function paintHeader() {
     var big = all.filter(function (c) { return c.big; });
     $("n-big").textContent = big.length;
     $("n-niche").textContent = all.length - big.length;
-    var last = all.length ? all[all.length - 1].date : "";
     if (all.length) {
-      var e = parse(last);
-      $("lede").innerHTML = "<b>" + big.length + " grandi nomi</b> e " + (all.length - big.length) + " concerti di nicchia, rock, metal e punk a Praga da oggi a " + MONTHS[e.getMonth()].toLowerCase() + " " + e.getFullYear() + ".";
+      var e = parse(all[all.length - 1].date);
+      $("lede").innerHTML = T.lede(big.length, all.length - big.length, T.monthsIn[e.getMonth()], e.getFullYear());
+    } else {
+      $("lede").textContent = T.desc;
     }
     var upcoming = big.filter(function (c) { return c.status !== "cancelled" && c.date >= today; })[0];
+    var n = $("next");
     if (upcoming) {
-      var n = $("next");
       n.hidden = false;
       n.href = safeUrl((upcoming.links[0] || {}).url);
       n.target = "_blank"; n.rel = "noopener";
       var d = parse(upcoming.date);
-      var label = upcoming.date === today ? "Stasera" : upcoming.date === tomorrow ? "Domani" : DAYS[d.getDay()] + " " + d.getDate() + " " + SHORT[d.getMonth()];
+      var label = upcoming.date === today ? T.tonight : upcoming.date === tomorrow ? T.tomorrow : T.days[d.getDay()] + " " + d.getDate() + " " + T.short[d.getMonth()];
       n.innerHTML = "<small>" + label + "</small><strong>" + esc(upcoming.title) + "</strong><em>" + esc(upcoming.venue) + (upcoming.time ? " · " + upcoming.time : "") + "</em>";
+    } else { n.hidden = true; }
+  }
+
+  function paintFoot() {
+    var foot = "";
+    if (status && status.sources) {
+      foot += "<p>" + T.sources + ": " + status.sources.map(function (s) {
+        return s.ok ? esc(s.name) + " " + s.count : '<span class="down">' + esc(s.name) + " " + T.down + "</span>";
+      }).join(" · ") + ".</p>";
     }
+    if (status && status.updated) foot += "<p>" + T.lastCheck + ": " + ago(status.updated) + ". " + (status.preview ? T.preview : T.auto) + "</p>";
+    foot += "<p>" + T.note + "</p>";
+    if (CONTACT) foot += '<p>' + T.writeTo + ' <a href="mailto:' + esc(CONTACT) + '">' + esc(CONTACT) + "</a>.</p>";
+    if (GOATCOUNTER) foot += "<p>" + T.visits + ": <span id=\"hits\"></span></p>";
+    $("foot").innerHTML = foot;
+    if (GOATCOUNTER && window.goatcounter && window.goatcounter.visit_count) {
+      try { window.goatcounter.visit_count({ append: "#hits", type: "html", no_branding: true }); } catch (e) {}
+    }
+  }
+
+  // Tutto il testo fisso passa di qui: un giro solo a ogni cambio di lingua.
+  function applyLang() {
+    T = I18N[state.lang];
+    document.documentElement.lang = state.lang;
+    document.title = T.title;
+    var md = $("meta-desc"); if (md) md.setAttribute("content", T.desc);
+    $("t-big").textContent = T.big;
+    $("t-niche").textContent = T.niche;
+    $("q").placeholder = T.search;
+    $("q").setAttribute("aria-label", T.search);
+    $("only-new").textContent = T.onlyNew;
+    document.querySelector('.chip[data-g=""]').textContent = T.all;
+    $("venue").options[0].textContent = T.allVenues;
+    $("venue").setAttribute("aria-label", T.allVenues);
+    $("sizes").setAttribute("aria-label", T.big + " / " + T.niche);
+    var load = $("loading"); if (load) load.textContent = T.loading;
+    document.querySelectorAll(".lang").forEach(function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-l") === state.lang ? "true" : "false");
+    });
+    if (all.length) { paintHeader(); paintFoot(); render(); }
+  }
+
+  function start(concerts, st) {
+    all = concerts.filter(function (c) { return (c.end || c.date) >= today && c.genres && c.genres.length; });
+    status = st;
+    baseline = (st && st.baseline) || today;  // quello che c'era al primo giro non e' "nuovo"
 
     var venues = {};
     all.forEach(function (c) { if (c.venue) venues[c.venue] = (venues[c.venue] || 0) + 1; });
@@ -334,19 +490,14 @@ footer .down { color: var(--bad); }
     if (state.venue && !venues[state.venue]) state.venue = "";
     $("venue").value = state.venue;
 
-    var foot = "";
-    if (status && status.sources) {
-      foot += "<p>Fonti: " + status.sources.map(function (s) {
-        return s.ok ? esc(s.name) + " " + s.count : '<span class="down">' + esc(s.name) + " non risponde</span>";
-      }).join(" · ") + ".</p>";
-    }
-    if (status && status.updated) foot += "<p>Ultimo controllo: " + ago(status.updated) + "." + (status.preview ? " Questa è un'anteprima: i dati restano fermi a questo controllo." : " La pagina si aggiorna da sola ogni 3 ore.") + "</p>";
-    foot += "<p>Big vuol dire band con almeno 20.000 fan su Deezer, oppure concerto in un'arena (O2 arena, O2 universum, Forum Karlín, Fortuna, Tipsport). Il genere arriva dalle fonti e a volte sbaglia. Prima di comprare, controlla data e biglietti sul sito del locale.</p>";
-    $("foot").innerHTML = foot;
+    paintHeader();
+    paintFoot();
     render();
   }
 
   recall();
+  applyLang();
+
   var chips = document.querySelectorAll(".chip[data-g]");
   function paintChips() { chips.forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-g") === state.genre ? "true" : "false"); }); }
   paintChips();
@@ -365,6 +516,12 @@ footer .down { color: var(--bad); }
       paintChips(); remember(); render();
     });
   });
+  document.querySelectorAll(".lang").forEach(function (b) {
+    b.addEventListener("click", function () {
+      state.lang = b.getAttribute("data-l");
+      applyLang(); remember();
+    });
+  });
   $("only-new").addEventListener("click", function () {
     state.onlyNew = !state.onlyNew;
     this.setAttribute("aria-pressed", state.onlyNew ? "true" : "false");
@@ -373,12 +530,21 @@ footer .down { color: var(--bad); }
   $("q").addEventListener("input", function () { state.q = this.value.trim(); render(); });
   $("venue").addEventListener("change", function () { state.venue = this.value; remember(); render(); });
 
+  if (GOATCOUNTER) {
+    var gc = document.createElement("script");
+    gc.async = true;
+    gc.src = "//gc.zgo.at/count.js";
+    gc.setAttribute("data-goatcounter", GOATCOUNTER);
+    gc.addEventListener("load", paintFoot);
+    document.body.appendChild(gc);
+  }
+
   if (window.__DATA__) { start(window.__DATA__.concerts, window.__DATA__.status); return; }
   Promise.all([
     fetch("concerts.json", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw 0; return r.json(); }),
     fetch("status.json", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
   ]).then(function (r) { start(r[0], r[1]); }).catch(function () {
-    $("list").innerHTML = '<p class="empty">Non riesco a caricare i concerti. Ricarica la pagina tra qualche minuto.</p>';
+    $("list").innerHTML = '<p class="empty">' + T.failed + "</p>";
   });
 })();
 </script>
