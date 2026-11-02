@@ -3036,6 +3036,16 @@
    "Rock"
   ]
  },
+ "meltt": {
+  "at": "2026-11-02",
+  "fans": 3337,
+  "tags": [
+   "alternative",
+   "folk",
+   "groovy",
+   "Alternative"
+  ]
+ },
  "meluzina": {
   "at": "2026-11-02",
   "fans": 7,
@@ -4584,6 +4594,16 @@
    "Dance"
   ]
  },
+ "suicide silence": {
+  "at": "2026-11-02",
+  "fans": 326477,
+  "tags": [
+   "deathcore",
+   "american",
+   "metalcore",
+   "Metal"
+  ]
+ },
  "suzi quatro": {
   "at": "2026-11-02",
   "fans": 43761,
@@ -5255,6 +5275,11 @@
    "punk",
    "Rock"
   ]
+ },
+ "transmission the sound of joy division": {
+  "at": "2026-11-02",
+  "fans": 0,
+  "tags": []
  },
  "traskava smes": {
   "at": "2026-11-02",

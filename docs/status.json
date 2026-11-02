@@ -2,7 +2,7 @@
  "baseline": "2026-11-02",
  "sources": [
   {
-   "count": 1627,
+   "count": 1639,
    "name": "GoOut",
    "ok": true
   },
@@ -12,12 +12,12 @@
    "ok": false
   },
   {
-   "count": 346,
+   "count": 347,
    "name": "Songkick",
    "ok": true
   },
   {
-   "count": 54,
+   "count": 55,
    "name": "Obscure Promotion",
    "ok": true
   },
@@ -42,9 +42,9 @@
    "ok": true
   },
   {
-   "count": 11,
+   "count": 0,
    "name": "Modrá Vopice",
-   "ok": true
+   "ok": false
   },
   {
    "count": 147,
@@ -52,5 +52,5 @@
    "ok": true
   }
  ],
- "updated": "2026-11-02T09:16+01:00"
+ "updated": "2026-11-02T12:06+01:00"
 }
