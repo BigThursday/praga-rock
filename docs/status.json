@@ -1,0 +1,56 @@
+{
+ "baseline": "2026-11-02",
+ "sources": [
+  {
+   "count": 1627,
+   "name": "GoOut",
+   "ok": true
+  },
+  {
+   "count": 359,
+   "name": "festivaly.eu",
+   "ok": true
+  },
+  {
+   "count": 338,
+   "name": "Songkick",
+   "ok": false
+  },
+  {
+   "count": 54,
+   "name": "Obscure Promotion",
+   "ok": true
+  },
+  {
+   "count": 35,
+   "name": "Futurum",
+   "ok": true
+  },
+  {
+   "count": 70,
+   "name": "Lucerna Music Bar",
+   "ok": true
+  },
+  {
+   "count": 43,
+   "name": "Rock Café",
+   "ok": true
+  },
+  {
+   "count": 40,
+   "name": "Klub 007",
+   "ok": true
+  },
+  {
+   "count": 11,
+   "name": "Modrá Vopice",
+   "ok": true
+  },
+  {
+   "count": 147,
+   "name": "kdykam",
+   "ok": true
+  }
+ ],
+ "updated": "2026-11-02T02:38+01:00"
+}
