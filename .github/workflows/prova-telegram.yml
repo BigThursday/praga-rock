@@ -1,0 +1,20 @@
+name: Prova Telegram
+
+on:
+  workflow_dispatch:
+
+jobs:
+  prova:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Manda il link della pagina
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          test -n "$TELEGRAM_BOT_TOKEN" && test -n "$TELEGRAM_CHAT_ID" || { echo "Segreti Telegram mancanti"; exit 1; }
+          curl -sf -o /dev/null "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+            --data-urlencode "text=🤘 Prova Praga Rock: https://bigthursday.github.io/praga-rock/" \
+            || { echo "Telegram ha rifiutato il messaggio"; exit 1; }
+          echo "Messaggio mandato."
