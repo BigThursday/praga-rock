@@ -181,14 +181,15 @@ footer .down { color: var(--bad); }
     </div>
     <input class="search" id="q" type="search" placeholder="Cerca band o locale" aria-label="Cerca band o locale">
     <div class="chips" role="group" aria-label="Generi">
-      <button class="chip" id="g-hard" data-g="hard" type="button" aria-pressed="true">Hard/Classic</button>
-      <button class="chip" id="g-stoner" data-g="stoner" type="button" aria-pressed="true">Stoner/Psych</button>
-      <button class="chip" id="g-prog" data-g="prog" type="button" aria-pressed="true">Prog/Post</button>
-      <button class="chip" id="g-garage" data-g="garage" type="button" aria-pressed="true">Garage/R'n'R</button>
-      <button class="chip" id="g-metal" data-g="metal" type="button" aria-pressed="true">Metal</button>
-      <button class="chip" id="g-punk" data-g="punk" type="button" aria-pressed="true">Punk/HC</button>
-      <button class="chip" id="g-alt" data-g="alt" type="button" aria-pressed="true">Indie/Alt</button>
-      <button class="chip" id="g-rock" data-g="rock" type="button" aria-pressed="true">Rock</button>
+      <button class="chip" data-g="" type="button" aria-pressed="true">Tutti</button>
+      <button class="chip" data-g="hard" type="button" aria-pressed="false">Hard/Classic</button>
+      <button class="chip" data-g="stoner" type="button" aria-pressed="false">Stoner/Psych</button>
+      <button class="chip" data-g="prog" type="button" aria-pressed="false">Prog/Post</button>
+      <button class="chip" data-g="garage" type="button" aria-pressed="false">Garage/R'n'R</button>
+      <button class="chip" data-g="metal" type="button" aria-pressed="false">Metal</button>
+      <button class="chip" data-g="punk" type="button" aria-pressed="false">Punk/HC</button>
+      <button class="chip" data-g="alt" type="button" aria-pressed="false">Indie/Alt</button>
+      <button class="chip" data-g="rock" type="button" aria-pressed="false">Rock</button>
       <button class="chip newonly" id="only-new" type="button" aria-pressed="false">Solo nuovi</button>
     </div>
     <select class="venue" id="venue" aria-label="Locale"><option value="">Tutti i locali</option></select>
@@ -208,14 +209,13 @@ footer .down { color: var(--bad); }
   var LABEL = { hard: "Hard/Classic", stoner: "Stoner/Psych", prog: "Prog/Post", garage: "Garage/R'n'R", metal: "Metal", punk: "Punk/HC", alt: "Indie/Alt", rock: "Rock" };
   var NEW_DAYS = 7;
   var $ = function (id) { return document.getElementById(id); };
-  var state = { q: "", venue: "", onlyNew: false, size: "big",
-    g: { hard: true, stoner: true, prog: true, garage: true, metal: true, punk: true, alt: true, rock: true } };
+  var state = { q: "", venue: "", onlyNew: false, size: "big", genre: "" };  // genre "" = tutti
 
-  function remember() { try { localStorage.setItem("pragarock2", JSON.stringify({ g: state.g, venue: state.venue, size: state.size })); } catch (e) {} }
+  function remember() { try { localStorage.setItem("pragarock3", JSON.stringify({ genre: state.genre, venue: state.venue, size: state.size })); } catch (e) {} }
   function recall() {
     try {
-      var s = JSON.parse(localStorage.getItem("pragarock2") || "null");
-      if (s && s.g) { state.g = Object.assign(state.g, s.g); state.venue = s.venue || ""; state.size = s.size === "niche" ? "niche" : "big"; }
+      var s = JSON.parse(localStorage.getItem("pragarock3") || "null");
+      if (s) { state.genre = LABEL[s.genre] ? s.genre : ""; state.venue = s.venue || ""; state.size = s.size === "niche" ? "niche" : "big"; }
     } catch (e) {}
   }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
@@ -264,7 +264,7 @@ footer .down { color: var(--bad); }
 
   function matches(c) {
     if (!!c.big !== (state.size === "big")) return false;
-    if (!c.genres.some(function (g) { return state.g[g]; })) return false;
+    if (state.genre && c.genres.indexOf(state.genre) < 0) return false;
     if (state.venue && c.venue !== state.venue) return false;
     if (state.onlyNew && !isNew(c)) return false;
     if (state.q && (fold(c.title) + " " + fold(c.venue)).indexOf(fold(state.q)) < 0) return false;
@@ -289,7 +289,7 @@ footer .down { color: var(--bad); }
     if (open) out += "</ol>";
     $("list").innerHTML = out || (state.onlyNew
       ? '<p class="empty">Nessun concerto nuovo negli ultimi ' + NEW_DAYS + " giorni.</p>"
-      : '<p class="empty">Nessun concerto con questi filtri. Prova a togliere la ricerca o ad accendere un altro genere.</p>');
+      : '<p class="empty">Nessun concerto con questi filtri. Prova a togliere la ricerca o a scegliere Tutti.</p>');
     $("count").textContent = shown.length === 1 ? "1 concerto" : shown.length + " concerti";
   }
 
@@ -347,7 +347,9 @@ footer .down { color: var(--bad); }
   }
 
   recall();
-  Object.keys(state.g).forEach(function (g) { $("g-" + g).setAttribute("aria-pressed", state.g[g] ? "true" : "false"); });
+  var chips = document.querySelectorAll(".chip[data-g]");
+  function paintChips() { chips.forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-g") === state.genre ? "true" : "false"); }); }
+  paintChips();
   document.querySelectorAll(".size").forEach(function (b) {
     b.setAttribute("aria-pressed", b.getAttribute("data-s") === state.size ? "true" : "false");
     b.addEventListener("click", function () {
@@ -356,12 +358,11 @@ footer .down { color: var(--bad); }
       remember(); render();
     });
   });
-  document.querySelectorAll(".chip[data-g]").forEach(function (b) {
+  chips.forEach(function (b) {
     b.addEventListener("click", function () {
       var g = b.getAttribute("data-g");
-      state.g[g] = !state.g[g];
-      b.setAttribute("aria-pressed", state.g[g] ? "true" : "false");
-      remember(); render();
+      state.genre = g === state.genre ? "" : g;  // ripremere lo stesso genere torna a tutti
+      paintChips(); remember(); render();
     });
   });
   $("only-new").addEventListener("click", function () {
