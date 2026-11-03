@@ -812,7 +812,10 @@ footer p.sign {
   $("genre").addEventListener("change", function () { state.genre = this.value; paintChips(); remember(); render(); });
   $("venue").addEventListener("change", function () { state.venue = this.value; remember(); render(); });
 
-  if (GOATCOUNTER) {
+  // Visite uniche: si conta solo la prima volta che questo browser apre la pagina.
+  var seen = false;
+  try { seen = !!localStorage.getItem("pragarock_seen"); localStorage.setItem("pragarock_seen", "1"); } catch (e) {}
+  if (GOATCOUNTER && !seen) {
     var gc = document.createElement("script");
     gc.async = true;
     gc.src = "//gc.zgo.at/count.js";
