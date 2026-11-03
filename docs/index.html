@@ -16,6 +16,7 @@
   --panel: #1a1c1e;
   --ink: #f2f2ed;
   --soft: #a0a3a4;
+  --faint: #707476;
   --line: #303337;
   --spot: #f0261c;
   --spot-ink: #0e0f10;
@@ -49,13 +50,13 @@ a { color: inherit; }
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
 
-header.top { padding-block: 28px 18px; }
+header.top { padding-block: 24px 18px; }
 /* Le tre lingue stanno in alto a destra: si vedono, non rubano la scena al titolo. */
 .crown { display: flex; justify-content: flex-end; }
 .langs { display: flex; border: 1px solid var(--line); }
 .lang {
   font: 600 14px/1 var(--tight); letter-spacing: .1em; text-transform: uppercase;
-  height: 30px; padding: 0 11px; cursor: pointer; border: 0; border-radius: 0;
+  height: 34px; padding: 0 13px; cursor: pointer; border: 0; border-radius: 0;
   background: transparent; color: var(--soft);
 }
 .lang + .lang { border-left: 1px solid var(--line); }
@@ -63,7 +64,7 @@ header.top { padding-block: 28px 18px; }
 .lang:focus-visible { outline: 2px solid var(--spot); outline-offset: 2px; }
 
 h1 {
-  font: 900 clamp(64px, 17vw, 168px)/.82 var(--display);
+  font: 900 clamp(60px, 16vw, 168px)/.82 var(--display);
   letter-spacing: -.01em; text-transform: uppercase; margin: 6px 0 0;
 }
 h1 span { color: var(--spot); }
@@ -87,16 +88,16 @@ h1 span { color: var(--spot); }
 .bar .wrap { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; padding-block: 10px; }
 .search, .venue {
   font: 500 16px/1 var(--body); color: var(--ink); background: var(--panel);
-  border: 1px solid var(--line); border-radius: 0; height: 40px; padding: 0 10px; min-width: 0;
+  border: 1px solid var(--line); border-radius: 0; height: 44px; padding: 0 12px; min-width: 0;
 }
 .search { flex: 1 1 200px; }
 .venue { flex: 0 1 190px; }
-.search:focus-visible, .venue:focus-visible, .chip:focus-visible, a:focus-visible { outline: 2px solid var(--spot); outline-offset: 2px; }
+.search:focus-visible, .venue:focus-visible, .chip:focus-visible, a:focus-visible, button:focus-visible, select:focus-visible, textarea:focus-visible, input:focus-visible { outline: 2px solid var(--spot); outline-offset: 2px; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip {
   --c: var(--ink);
   font: 600 16px/1 var(--tight); letter-spacing: .03em; text-transform: uppercase;
-  height: 40px; padding: 0 12px; cursor: pointer; border-radius: 0;
+  height: 40px; padding: 0 13px; cursor: pointer; border-radius: 0;
   background: transparent; color: var(--soft); border: 1px solid var(--line);
 }
 .chip[aria-pressed="true"] { background: var(--c); border-color: var(--c); color: var(--paper); }
@@ -110,20 +111,27 @@ h1 span { color: var(--spot); }
 .chip[data-g="garage"] { --c: var(--garage); }
 .sizes { display: flex; flex: 1 0 100%; border: 2px solid var(--ink); }
 .size {
-  flex: 1 1 0; height: 46px; cursor: pointer; border: 0; border-radius: 0;
-  font: 900 24px/1 var(--display); text-transform: uppercase; letter-spacing: .02em;
+  flex: 1 1 0; height: 50px; cursor: pointer; border: 0; border-radius: 0;
+  font: 900 clamp(17px, 4.6vw, 24px)/1 var(--display); text-transform: uppercase; letter-spacing: .02em;
   background: transparent; color: var(--soft);
+  display: flex; align-items: center; justify-content: center; gap: 7px;
 }
 .size + .size { border-left: 2px solid var(--ink); }
 .size[aria-pressed="true"] { background: var(--spot); color: var(--spot-ink); }
-.size small { font: 600 14px/1 var(--tight); letter-spacing: .04em; margin-left: 6px; }
-.size:focus-visible { outline: 2px solid var(--spot); outline-offset: 2px; }
+.size small { font: 600 14px/1 var(--tight); letter-spacing: .04em; }
+.jump { display: flex; gap: 6px; margin-left: auto; }
+.jump button {
+  font: 600 16px/1 var(--tight); letter-spacing: .03em; text-transform: uppercase;
+  height: 40px; padding: 0 13px; cursor: pointer; border-radius: 0;
+  background: transparent; color: var(--ink); border: 1px solid var(--soft);
+}
+.jump button:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .chip.newonly[aria-pressed="true"] { background: var(--mark); border-color: var(--mark); color: var(--mark-ink); }
 .count { flex: 1 0 100%; margin: 0; font-size: 14px; color: var(--soft); }
 
 main { padding-block: 8px 40px; }
 .month { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 34px 0 4px; }
-.month h2 { font: 900 clamp(40px, 9vw, 76px)/.95 var(--display); text-transform: uppercase; margin: 0; letter-spacing: 0; text-wrap: balance; }
+.month h2 { font: 900 clamp(38px, 9vw, 76px)/.95 var(--display); text-transform: uppercase; margin: 0; letter-spacing: 0; text-wrap: balance; }
 .month span { font: 600 15px/1 var(--tight); letter-spacing: .06em; text-transform: uppercase; color: var(--soft); white-space: nowrap; }
 
 ol.gigs { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
@@ -138,6 +146,7 @@ ol.gigs { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--i
 .what h3 a:hover { color: var(--spot); text-decoration: underline; text-decoration-thickness: 2px; }
 .where { margin: 3px 0 0; color: var(--soft); font-size: 15px; }
 .where b { color: var(--ink); font-weight: 600; }
+.where .guess { color: var(--faint); font-style: italic; }
 .tags { display: flex; flex-wrap: wrap; gap: 4px 8px; margin-top: 6px; align-items: center; }
 .g { font: 600 13px/1 var(--tight); letter-spacing: .06em; text-transform: uppercase; }
 .g-rock { color: var(--rock); }
@@ -153,31 +162,81 @@ ol.gigs { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--i
 .flag.sold { background: var(--ink); color: var(--paper); }
 .flag.off { background: var(--bad); color: var(--paper); }
 .gig.off h3 { text-decoration: line-through; color: var(--soft); }
-.go { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; font-size: 13px; color: var(--soft); text-align: right; padding-top: 3px; }
+/* A destra solo chi vende il biglietto. Gli elenchi, quando sono l'unica cosa che c'e', stanno in grigio come "info". */
+.go { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; font-size: 13px; color: var(--soft); text-align: right; padding-top: 3px; }
 .go a { white-space: nowrap; text-underline-offset: 2px; }
 .go a:hover { color: var(--spot); }
+.go .info { color: var(--faint); font-style: italic; }
 
 .empty { padding: 40px 0; font-size: 18px; color: var(--soft); }
-footer { border-top: 2px solid var(--ink); padding-block: 16px 34px; font-size: 14px; color: var(--soft); }
+
+/* Piede: voto, contatto, fonti, firma. */
+.ending { border-top: 2px solid var(--ink); padding-block: 26px 0; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 40px; }
+.block h2 { font: 900 30px/1 var(--display); text-transform: uppercase; margin: 0 0 12px; letter-spacing: .01em; }
+.stars { display: flex; gap: 2px; }
+.star {
+  background: none; border: 0; padding: 0 3px 0 0; cursor: pointer; line-height: 1;
+  font-size: 34px; color: var(--line); transition: color .1s;
+}
+.star.on { color: var(--mark); }
+.star[disabled] { cursor: default; }
+.score { margin: 8px 0 0; font-size: 15px; color: var(--soft); }
+.score b { color: var(--ink); font-weight: 600; font-size: 17px; }
+form.say { display: flex; flex-direction: column; gap: 9px; max-width: 460px; }
+form.say select, form.say input, form.say textarea {
+  font: 400 16px/1.3 var(--body); color: var(--ink); background: var(--panel);
+  border: 1px solid var(--line); border-radius: 0; padding: 11px 12px; width: 100%;
+}
+form.say textarea { min-height: 110px; resize: vertical; }
+form.say button {
+  align-self: flex-start; cursor: pointer; border: 0; border-radius: 0;
+  background: var(--ink); color: var(--paper); padding: 0 20px; height: 46px;
+  font: 900 21px/1 var(--display); text-transform: uppercase; letter-spacing: .02em;
+}
+form.say button:hover { background: var(--spot); color: var(--spot-ink); }
+form.say button[disabled] { background: var(--line); color: var(--soft); cursor: default; }
+.said { margin: 0; font-size: 15px; color: var(--alt); }
+.said.bad { color: var(--bad); }
+
+footer { padding-block: 24px 34px; font-size: 14px; color: var(--soft); }
 footer p { margin: 0 0 6px; max-width: 72ch; }
 footer .down { color: var(--bad); }
 footer a { text-underline-offset: 2px; }
 footer a:hover { color: var(--spot); }
+.sign {
+  margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line);
+  font: 600 13px/1.5 var(--tight); letter-spacing: .1em; text-transform: uppercase; color: var(--faint);
+}
+.sign a { color: var(--soft); }
+.sign a:hover { color: var(--spot); }
 #hits { font-variant-numeric: tabular-nums; }
 
+/* Telefoni veri: A52, A16, Pixel, iPhone Pro Max. 412px e' il riferimento. */
+@media (max-width: 760px) {
+  .two { grid-template-columns: 1fr; gap: 26px; }
+}
 @media (max-width: 640px) {
-  .gig { grid-template-columns: 56px minmax(0, 1fr); }
-  .day b { font-size: 36px; }
-  .what h3 { font-size: 23px; }
-  .go { grid-column: 2; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; gap: 2px 12px; text-align: left; padding-top: 6px; }
+  header.top { padding-block: 18px 14px; }
+  .gig { grid-template-columns: 54px minmax(0, 1fr); gap: 2px 12px; }
+  .day b { font-size: 34px; }
+  .day i { font-size: 13px; }
+  .what h3 { font-size: 22px; }
+  .where { font-size: 14px; }
+  .go { grid-column: 2; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; gap: 2px 14px; text-align: left; padding-top: 7px; }
   .bar .wrap { padding-block: 8px; }
   .venue { flex: 1 1 100%; }
-  .chip { height: 36px; padding: 0 10px; font-size: 15px; }
-  .size { height: 42px; font-size: 21px; }
-  .search, .venue { height: 36px; }
+  .chips { gap: 5px; }
+  .chip { height: 38px; padding: 0 11px; font-size: 15px; }
+  .size { height: 46px; }
+  .search, .venue { height: 42px; }
   .count { display: none; }
+  .lede { font-size: 17px; }
+  .month { margin-top: 28px; }
+  .star { font-size: 38px; padding-right: 5px; }
+  .block h2 { font-size: 27px; }
 }
-@media (prefers-reduced-motion: no-preference) { .next, .chip, .lang { transition: background-color .12s, color .12s; } }
+@media (prefers-reduced-motion: no-preference) { .next, .chip, .lang, form.say button { transition: background-color .12s, color .12s; } }
 </style>
 </head>
 <body>
@@ -214,19 +273,49 @@ footer a:hover { color: var(--spot); }
       <button class="chip newonly" id="only-new" type="button" aria-pressed="false"></button>
     </div>
     <select class="venue" id="venue"><option value=""></option></select>
+    <div class="jump">
+      <button type="button" id="go-rate"></button>
+      <button type="button" id="go-say"></button>
+    </div>
     <p class="count" id="count" aria-live="polite"></p>
   </div>
 </div>
 
 <main class="wrap" id="list"><p class="empty" id="loading"></p></main>
+
+<section class="ending wrap">
+  <div class="two">
+    <div class="block">
+      <h2 id="rate-title"></h2>
+      <div class="stars" id="stars" role="group"></div>
+      <p class="score" id="score"></p>
+    </div>
+    <div class="block">
+      <h2 id="say-title"></h2>
+      <form class="say" id="say">
+        <select id="say-subject" required></select>
+        <input id="say-from" type="email" autocomplete="email">
+        <textarea id="say-text" required maxlength="4000"></textarea>
+        <button type="submit" id="say-send"></button>
+        <p class="said" id="said" hidden></p>
+      </form>
+    </div>
+  </div>
+</section>
+
 <footer class="wrap" id="foot"></footer>
 
 <!--DATA-->
 <script>
 (function () {
-  // Due stringhe da riempire quando i servizi sono pronti. Vuote, la pagina le salta e basta.
+  // Tre indirizzi da riempire quando i servizi sono pronti. Vuoti, la pagina salta quel pezzo.
   var GOATCOUNTER = "https://praguerock.goatcounter.com/count";
   var CONTACT = "";              // es. "info@praguerock.cz"
+  var API = "https://praguerock-api.adm-production.workers.dev";                  // Worker Cloudflare, es. "https://praguerock-api.adm-production.workers.dev"
+
+  var GAME = "https://play.google.com/store/apps/details?id=com.thecitycenter.dotsandboxes";
+  // Chi vende davvero il biglietto. Gli altri sono elenchi: compaiono solo se non c'e' altro, marcati come info.
+  var SELLERS = { "GoOut": 1, "Obscure Promotion": 1, "Lucerna Music Bar": 1, "Klub 007": 1, "Futurum": 1, "Rock Café": 1, "Modrá Vopice": 1 };
 
   var LANGS = ["en", "cs", "it"];
   var I18N = {
@@ -237,11 +326,11 @@ footer a:hover { color: var(--spot); }
       monthsIn: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
       short: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
       days: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-      big: "Big", niche: "Niche", all: "All", onlyNew: "New only",
+      big: "Headliners", niche: "Underground", all: "All", onlyNew: "Just added",
       search: "Search band or venue", allVenues: "All venues",
       today: "Today", tomorrow: "Tomorrow", ongoing: "Ongoing", tonight: "Tonight",
       cancelled: "Cancelled", soldout: "Sold out", isNew: "New",
-      until: "until", tba: "Venue TBA",
+      until: "until", tba: "Venue TBA", usually: "usually", info: "info",
       loading: "Loading the gigs…",
       failed: "Cannot load the gigs. Reload the page in a few minutes.",
       noNew: function (d) { return "No new gigs in the last " + d + " days."; },
@@ -250,10 +339,21 @@ footer a:hover { color: var(--spot); }
       lastCheck: "Last check", atToday: "today at", atWord: "at",
       preview: "This is a preview: the data stays frozen at this check.",
       auto: "The page updates itself every 3 hours.",
-      note: "Big means a band with at least 20,000 fans on Deezer, or a gig in an arena (O2 arena, O2 universum, Forum Karlín, Fortuna, Tipsport). Genres come from the sources and are sometimes wrong. Check the date and the tickets on the venue site before you buy.",
-      visits: "Visits", writeTo: "Something missing? Write to",
+      note: "Headliners are bands with at least 20,000 fans on Deezer, or any gig in an arena (O2 arena, O2 universum, Forum Karlín, Fortuna, Tipsport). Everything else is Underground. Genres come from the sources and are sometimes wrong, and links go to whoever sells the ticket. Check the date and the price on the venue site before you buy.",
+      visits: "Visits", writeTo: "Write to",
+      jumpRate: "Rate", jumpSay: "Write",
+      rateTitle: "Rate this page", rateHint: "Tap a star",
+      score: function (avg, n) { return "<b>" + avg + "</b> out of 5, " + n + (n === 1 ? " vote" : " votes"); },
+      noScore: "No votes yet", rateThanks: "Thanks for the vote",
+      sayTitle: "Write to us",
+      subjects: ["Report a missing gig", "Something is wrong on the page", "Suggestion", "Contact EL LOCO", "Other"],
+      sayFrom: "Your email, if you want an answer",
+      sayText: "Your message",
+      saySend: "Send", saySending: "Sending…",
+      sayOk: "Sent. Thanks.", sayBad: "It did not go through. Try again in a minute.",
       count: function (n) { return n + (n === 1 ? " gig" : " gigs"); },
-      lede: function (b, n, m, y) { return "<b>" + b + " big names</b> and " + n + " niche gigs. Rock, metal and punk in Prague from today to " + m + " " + y + "."; }
+      lede: function (b, n, m, y) { return "<b>" + b + " headliners</b> and " + n + " underground gigs. Rock, metal and punk in Prague from today to " + m + " " + y + "."; },
+      play: "Play Dots and Boxes, our Android game"
     },
     cs: {
       title: "Prague Rock",
@@ -262,11 +362,11 @@ footer a:hover { color: var(--spot); }
       monthsIn: ["ledna", "února", "března", "dubna", "května", "června", "července", "srpna", "září", "října", "listopadu", "prosince"],
       short: ["led", "úno", "bře", "dub", "kvě", "čvn", "čvc", "srp", "zář", "říj", "lis", "pro"],
       days: ["ne", "po", "út", "st", "čt", "pá", "so"],
-      big: "Velké", niche: "Okrajové", all: "Vše", onlyNew: "Jen nové",
+      big: "Headliners", niche: "Underground", all: "Vše", onlyNew: "Nově přidané",
       search: "Hledat kapelu nebo klub", allVenues: "Všechny kluby",
       today: "Dnes", tomorrow: "Zítra", ongoing: "Probíhá", tonight: "Dnes večer",
       cancelled: "Zrušeno", soldout: "Vyprodáno", isNew: "Nové",
-      until: "do", tba: "Místo bude upřesněno",
+      until: "do", tba: "Místo bude upřesněno", usually: "obvykle", info: "info",
       loading: "Načítám koncerty…",
       failed: "Koncerty se nepodařilo načíst. Zkuste stránku za pár minut znovu.",
       noNew: function (d) { return "Za posledních " + d + " dní žádné nové koncerty."; },
@@ -275,10 +375,21 @@ footer a:hover { color: var(--spot); }
       lastCheck: "Poslední kontrola", atToday: "dnes v", atWord: "v",
       preview: "Toto je náhled: data zůstávají u této kontroly.",
       auto: "Stránka se sama aktualizuje každé 3 hodiny.",
-      note: "Velké znamená kapela s nejméně 20 000 fanoušky na Deezeru nebo koncert v aréně (O2 arena, O2 universum, Forum Karlín, Fortuna, Tipsport). Žánry pocházejí ze zdrojů a občas se pletou. Před nákupem si ověřte datum a vstupenky na webu klubu.",
-      visits: "Návštěvy", writeTo: "Něco chybí? Napište na",
+      note: "Headliners jsou kapely s nejméně 20 000 fanoušky na Deezeru nebo koncerty v aréně (O2 arena, O2 universum, Forum Karlín, Fortuna, Tipsport). Všechno ostatní je Underground. Žánry pocházejí ze zdrojů a občas se pletou, odkazy vedou na toho, kdo prodává vstupenky. Před nákupem si ověřte datum a cenu na webu klubu.",
+      visits: "Návštěvy", writeTo: "Napište na",
+      jumpRate: "Hodnotit", jumpSay: "Napsat",
+      rateTitle: "Ohodnoťte stránku", rateHint: "Klepněte na hvězdu",
+      score: function (avg, n) { return "<b>" + avg + "</b> z 5, " + n + " " + (n === 1 ? "hlas" : (n >= 2 && n <= 4 ? "hlasy" : "hlasů")); },
+      noScore: "Zatím žádné hlasy", rateThanks: "Díky za hlas",
+      sayTitle: "Napište nám",
+      subjects: ["Chybějící koncert", "Něco na stránce nesedí", "Návrh", "Kontaktovat EL LOCO", "Jiné"],
+      sayFrom: "Váš e-mail, pokud chcete odpověď",
+      sayText: "Vaše zpráva",
+      saySend: "Odeslat", saySending: "Odesílám…",
+      sayOk: "Odesláno. Díky.", sayBad: "Nepodařilo se odeslat. Zkuste to za chvilku znovu.",
       count: function (n) { return n + " " + (n === 1 ? "koncert" : (n >= 2 && n <= 4 ? "koncerty" : "koncertů")); },
-      lede: function (b, n, m, y) { return "<b>Velká jména: " + b + "</b> · Okrajové: " + n + ". Rock, metal a punk v Praze ode dneška do " + m + " " + y + "."; }
+      lede: function (b, n, m, y) { return "<b>Headliners: " + b + "</b> · Underground: " + n + ". Rock, metal a punk v Praze ode dneška do " + m + " " + y + "."; },
+      play: "Hraj Dots and Boxes, naši hru pro Android"
     },
     it: {
       title: "Prague Rock",
@@ -287,11 +398,11 @@ footer a:hover { color: var(--spot); }
       monthsIn: ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"],
       short: ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic"],
       days: ["dom", "lun", "mar", "mer", "gio", "ven", "sab"],
-      big: "Big", niche: "Nicchia", all: "Tutti", onlyNew: "Solo nuovi",
+      big: "Headliners", niche: "Underground", all: "Tutti", onlyNew: "Appena aggiunti",
       search: "Cerca band o locale", allVenues: "Tutti i locali",
       today: "Oggi", tomorrow: "Domani", ongoing: "In corso", tonight: "Stasera",
       cancelled: "Annullato", soldout: "Sold out", isNew: "Nuovo",
-      until: "fino al", tba: "Locale da definire",
+      until: "fino al", tba: "Locale da definire", usually: "di solito", info: "info",
       loading: "Carico i concerti…",
       failed: "Non riesco a caricare i concerti. Ricarica la pagina tra qualche minuto.",
       noNew: function (d) { return "Nessun concerto nuovo negli ultimi " + d + " giorni."; },
@@ -300,10 +411,21 @@ footer a:hover { color: var(--spot); }
       lastCheck: "Ultimo controllo", atToday: "oggi alle", atWord: "alle",
       preview: "Questa è un'anteprima: i dati restano fermi a questo controllo.",
       auto: "La pagina si aggiorna da sola ogni 3 ore.",
-      note: "Big vuol dire band con almeno 20.000 fan su Deezer, oppure concerto in un'arena (O2 arena, O2 universum, Forum Karlín, Fortuna, Tipsport). Il genere arriva dalle fonti e a volte sbaglia. Prima di comprare, controlla data e biglietti sul sito del locale.",
-      visits: "Visite", writeTo: "Manca qualcosa? Scrivi a",
+      note: "Headliners sono le band con almeno 20.000 fan su Deezer, o i concerti in arena (O2 arena, O2 universum, Forum Karlín, Fortuna, Tipsport). Tutto il resto è Underground. Il genere arriva dalle fonti e a volte sbaglia, e i link portano a chi vende il biglietto. Prima di comprare controlla data e prezzo sul sito del locale.",
+      visits: "Visite", writeTo: "Scrivi a",
+      jumpRate: "Vota", jumpSay: "Scrivi",
+      rateTitle: "Vota la pagina", rateHint: "Tocca una stella",
+      score: function (avg, n) { return "<b>" + avg + "</b> su 5, " + n + (n === 1 ? " voto" : " voti"); },
+      noScore: "Ancora nessun voto", rateThanks: "Grazie del voto",
+      sayTitle: "Scrivici",
+      subjects: ["Segnala un concerto mancante", "Qualcosa non torna sulla pagina", "Suggerimento", "Contatta EL LOCO", "Altro"],
+      sayFrom: "La tua email, se vuoi una risposta",
+      sayText: "Il tuo messaggio",
+      saySend: "Invia", saySending: "Invio…",
+      sayOk: "Inviato. Grazie.", sayBad: "Non è partito. Riprova tra un minuto.",
       count: function (n) { return n + (n === 1 ? " concerto" : " concerti"); },
-      lede: function (b, n, m, y) { return "<b>" + b + " grandi nomi</b> e " + n + " concerti di nicchia. Rock, metal e punk a Praga da oggi a " + m + " " + y + "."; }
+      lede: function (b, n, m, y) { return "<b>" + b + " headliners</b> e " + n + " concerti underground. Rock, metal e punk a Praga da oggi a " + m + " " + y + "."; },
+      play: "Gioca a Dots and Boxes, il nostro gioco per Android"
     }
   };
 
@@ -321,8 +443,7 @@ footer a:hover { color: var(--spot); }
         state.genre = LABEL[s.genre] ? s.genre : "";
         state.venue = s.venue || "";
         state.size = s.size === "niche" ? "niche" : "big";
-        if (LANGS.indexOf(s.lang) >= 0) state.lang = s.lang;
-        else state.lang = guessLang();
+        state.lang = LANGS.indexOf(s.lang) >= 0 ? s.lang : guessLang();
       } else state.lang = guessLang();
     } catch (e) { state.lang = guessLang(); }
     T = I18N[state.lang];
@@ -337,7 +458,7 @@ footer a:hover { color: var(--spot); }
   function pad(n) { return (n < 10 ? "0" : "") + n; }
   function iso(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
   function parse(s) { var p = s.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
-  function safeUrl(u) { return /^https?:\/\//i.test(u || "") ? u : "#"; }
+  function safeUrl(u) { return /^https?:\/\//i.test(u || "") ? u : ""; }
 
   var today = iso(new Date());
   var tomorrow = iso(new Date(Date.now() + 864e5));
@@ -345,6 +466,7 @@ footer a:hover { color: var(--spot); }
   var all = [];
   var status = null;
   var baseline = "9999";
+  var bands = {};   // locale -> fascia di prezzo tipica, calcolata dai concerti che il prezzo ce l'hanno
 
   function isNew(c) { return c.first_seen >= fresh && c.first_seen > baseline; }
   function when(c) {
@@ -355,6 +477,24 @@ footer a:hover { color: var(--spot); }
   }
   function rangeEnd(c) { if (!c.end) return ""; var e = parse(c.end); return " · " + T.until + " " + e.getDate() + " " + T.short[e.getMonth()]; }
 
+  // Dai prezzi noti di un locale ricavo il primo e il terzo quartile, cosi' una serata fuori scala non sposta la fascia.
+  function buildBands() {
+    var byVenue = {};
+    all.forEach(function (c) {
+      if (!c.venue || !c.price) return;
+      var nums = String(c.price).match(/\d[\d\s]*/g);
+      if (!nums) return;
+      (byVenue[c.venue] = byVenue[c.venue] || []).push.apply(byVenue[c.venue], nums.map(function (n) { return parseInt(n.replace(/\s/g, ""), 10); }).filter(function (n) { return n > 0 && n < 100000; }));
+    });
+    Object.keys(byVenue).forEach(function (v) {
+      var a = byVenue[v].sort(function (x, y) { return x - y; });
+      if (a.length < 3) return;
+      var lo = Math.round(a[Math.floor(a.length * 0.25)] / 10) * 10;
+      var hi = Math.round(a[Math.floor(a.length * 0.75)] / 10) * 10;
+      bands[v] = lo === hi ? lo + " Kč" : lo + "–" + hi + " Kč";
+    });
+  }
+
   function row(c) {
     var d = parse(c.date < today && c.end ? today : c.date);
     var soon = c.date === today || c.date === tomorrow;
@@ -363,15 +503,28 @@ footer a:hover { color: var(--spot); }
     if (c.status === "soldout") flags += '<span class="flag sold">' + T.soldout + "</span>";
     if (isNew(c)) flags += '<span class="flag new">' + T.isNew + "</span>";
     var genres = c.genres.filter(function (g) { return LABEL[g]; }).map(function (g) { return '<span class="g g-' + g + '">' + LABEL[g] + "</span>"; }).join("");
+
+    var sellers = (c.links || []).filter(function (l) { return SELLERS[l.name] && safeUrl(l.url); });
+    var fallback = sellers.length ? [] : (c.links || []).filter(function (l) { return safeUrl(l.url); }).slice(0, 1);
+    var links = sellers.map(function (l) {
+      return '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.name) + "</a>";
+    }).concat(fallback.map(function (l) {
+      return '<a class="info" href="' + esc(l.url) + '" target="_blank" rel="noopener">' + T.info + "</a>";
+    })).join("");
+
     var extra = [];
     if (c.time) extra.push(c.time);
     if (c.price) extra.push(esc(c.price));
-    var links = c.links.map(function (l) {
-      return '<a href="' + esc(safeUrl(l.url)) + '" target="_blank" rel="noopener">' + esc(l.name) + "</a>";
-    }).join("");
+    else if (bands[c.venue]) extra.push('<span class="guess">' + T.usually + " " + bands[c.venue] + "</span>");
+
+    var href = (sellers[0] || fallback[0] || {}).url;
+    var title = href
+      ? '<a href="' + esc(href) + '" target="_blank" rel="noopener">' + esc(c.title) + "</a>"
+      : esc(c.title);
+
     return '<li class="gig' + (soon ? " soon" : "") + (c.status === "cancelled" ? " off" : "") + '">' +
       '<div class="day"><b>' + pad(d.getDate()) + "</b><i>" + when(c) + "</i></div>" +
-      '<div class="what"><h3><a href="' + esc(safeUrl((c.links[0] || {}).url)) + '" target="_blank" rel="noopener">' + esc(c.title) + "</a></h3>" +
+      '<div class="what"><h3>' + title + "</h3>" +
       '<p class="where"><b>' + esc(c.venue || T.tba) + "</b>" + (extra.length ? " · " + extra.join(" · ") : "") + rangeEnd(c) + "</p>" +
       '<div class="tags">' + flags + genres + "</div></div>" +
       '<div class="go">' + links + "</div></li>";
@@ -427,8 +580,9 @@ footer a:hover { color: var(--spot); }
     var upcoming = big.filter(function (c) { return c.status !== "cancelled" && c.date >= today; })[0];
     var n = $("next");
     if (upcoming) {
+      var sell = (upcoming.links || []).filter(function (l) { return SELLERS[l.name] && safeUrl(l.url); })[0] || (upcoming.links || [])[0] || {};
       n.hidden = false;
-      n.href = safeUrl((upcoming.links[0] || {}).url);
+      n.href = safeUrl(sell.url) || "#";
       n.target = "_blank"; n.rel = "noopener";
       var d = parse(upcoming.date);
       var label = upcoming.date === today ? T.tonight : upcoming.date === tomorrow ? T.tomorrow : T.days[d.getDay()] + " " + d.getDate() + " " + T.short[d.getMonth()];
@@ -438,20 +592,92 @@ footer a:hover { color: var(--spot); }
 
   function paintFoot() {
     var foot = "";
-    if (status && status.sources) {
-      foot += "<p>" + T.sources + ": " + status.sources.map(function (s) {
-        return s.ok ? esc(s.name) + " " + s.count : '<span class="down">' + esc(s.name) + " " + T.down + "</span>";
-      }).join(" · ") + ".</p>";
-    }
     if (status && status.updated) foot += "<p>" + T.lastCheck + ": " + ago(status.updated) + ". " + (status.preview ? T.preview : T.auto) + "</p>";
     foot += "<p>" + T.note + "</p>";
-    if (CONTACT) foot += '<p>' + T.writeTo + ' <a href="mailto:' + esc(CONTACT) + '">' + esc(CONTACT) + "</a>.</p>";
-    if (GOATCOUNTER) foot += "<p>" + T.visits + ": <span id=\"hits\"></span></p>";
+    if (CONTACT) foot += "<p>" + T.writeTo + ' <a href="mailto:' + esc(CONTACT) + '">' + esc(CONTACT) + "</a>.</p>";
+    if (GOATCOUNTER) foot += "<p>" + T.visits + ': <span id="hits"></span></p>';
+    foot += '<p class="sign">EL LOCO PRODUCTIONS · <a href="' + GAME + '" target="_blank" rel="noopener">' + T.play + "</a></p>";
     $("foot").innerHTML = foot;
-    if (GOATCOUNTER && window.goatcounter && window.goatcounter.visit_count) {
-      try { window.goatcounter.visit_count({ append: "#hits", type: "html", no_branding: true }); } catch (e) {}
+    if (GOATCOUNTER) {
+      fetch(GOATCOUNTER.replace(/\/count$/, "") + "/counter/TOTAL.json", { cache: "no-cache" })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { var h = $("hits"); if (h) h.textContent = d.count; })
+        .catch(function () { var h = $("hits"); if (h) h.textContent = "–"; });
     }
   }
+
+  // ---- stelle -------------------------------------------------------------
+  var myVote = 0;
+  try { myVote = parseInt(localStorage.getItem("pragarock_vote") || "0", 10) || 0; } catch (e) {}
+
+  function paintStars(hover) {
+    var on = hover || myVote;
+    var box = $("stars"), out = "";
+    for (var i = 1; i <= 5; i++) {
+      out += '<button class="star' + (i <= on ? " on" : "") + '" type="button" data-v="' + i + '"' +
+        (myVote ? " disabled" : "") + ' aria-label="' + i + '/5">★</button>';
+    }
+    box.innerHTML = out;
+    if (!myVote) {
+      box.querySelectorAll(".star").forEach(function (b) {
+        b.addEventListener("mouseenter", function () { paintStars(+b.getAttribute("data-v")); });
+        b.addEventListener("click", function () { sendVote(+b.getAttribute("data-v")); });
+      });
+      box.addEventListener("mouseleave", function () { paintStars(0); }, { once: true });
+    }
+  }
+  function paintScore(d) {
+    if (d && d.n > 0) $("score").innerHTML = T.score((Math.round(d.avg * 10) / 10).toFixed(1), d.n) + (myVote ? " · " + T.rateThanks : "");
+    else $("score").textContent = myVote ? T.rateThanks : (API ? T.noScore : T.rateHint);
+  }
+  function loadScore() {
+    if (!API) { paintScore(null); return; }
+    fetch(API + "/stats", { cache: "no-cache" }).then(function (r) { return r.json(); }).then(paintScore).catch(function () { paintScore(null); });
+  }
+  function sendVote(v) {
+    myVote = v;
+    try { localStorage.setItem("pragarock_vote", String(v)); } catch (e) {}
+    paintStars(0);
+    if (!API) { paintScore(null); return; }
+    fetch(API + "/rate", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ stars: v }) })
+      .then(function (r) { return r.json(); }).then(paintScore).catch(function () { paintScore(null); });
+  }
+
+  // ---- messaggio ----------------------------------------------------------
+  function paintSay() {
+    $("rate-title").textContent = T.rateTitle;
+    $("say-title").textContent = T.sayTitle;
+    $("say-from").placeholder = T.sayFrom;
+    $("say-from").setAttribute("aria-label", T.sayFrom);
+    $("say-text").placeholder = T.sayText;
+    $("say-text").setAttribute("aria-label", T.sayText);
+    $("say-send").textContent = T.saySend;
+    var sel = $("say-subject"), keep = sel.selectedIndex;
+    sel.innerHTML = T.subjects.map(function (s, i) { return '<option value="' + i + '">' + esc(s) + "</option>"; }).join("");
+    sel.setAttribute("aria-label", T.sayTitle);
+    if (keep >= 0) sel.selectedIndex = keep;
+  }
+  $("say").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var said = $("said"), btn = $("say-send");
+    var body = {
+      subject: T.subjects[$("say-subject").selectedIndex] || "",
+      from: $("say-from").value.trim(),
+      text: $("say-text").value.trim(),
+      lang: state.lang
+    };
+    if (!body.text) return;
+    if (!API) { said.hidden = false; said.className = "said bad"; said.textContent = T.sayBad; return; }
+    btn.disabled = true; btn.textContent = T.saySending; said.hidden = true;
+    fetch(API + "/contact", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) })
+      .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(function () {
+        said.hidden = false; said.className = "said"; said.textContent = T.sayOk;
+        $("say-text").value = ""; $("say-from").value = "";
+      })
+      .catch(function () { said.hidden = false; said.className = "said bad"; said.textContent = T.sayBad; })
+      .then(function () { btn.disabled = false; btn.textContent = T.saySend; });
+  });
 
   // Tutto il testo fisso passa di qui: un giro solo a ogni cambio di lingua.
   function applyLang() {
@@ -472,6 +698,11 @@ footer a:hover { color: var(--spot); }
     document.querySelectorAll(".lang").forEach(function (b) {
       b.setAttribute("aria-pressed", b.getAttribute("data-l") === state.lang ? "true" : "false");
     });
+    $("go-rate").textContent = T.jumpRate;
+    $("go-say").textContent = T.jumpSay;
+    paintSay();
+    paintStars(0);
+    loadScore();
     if (all.length) { paintHeader(); paintFoot(); render(); }
   }
 
@@ -479,6 +710,7 @@ footer a:hover { color: var(--spot); }
     all = concerts.filter(function (c) { return (c.end || c.date) >= today && c.genres && c.genres.length; });
     status = st;
     baseline = (st && st.baseline) || today;  // quello che c'era al primo giro non e' "nuovo"
+    buildBands();
 
     var venues = {};
     all.forEach(function (c) { if (c.venue) venues[c.venue] = (venues[c.venue] || 0) + 1; });
@@ -527,6 +759,12 @@ footer a:hover { color: var(--spot); }
     this.setAttribute("aria-pressed", state.onlyNew ? "true" : "false");
     render();
   });
+  function jumpTo(id) {
+    var el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+  $("go-rate").addEventListener("click", function () { jumpTo("rate-title"); });
+  $("go-say").addEventListener("click", function () { jumpTo("say-title"); setTimeout(function () { $("say-text").focus(); }, 500); });
   $("q").addEventListener("input", function () { state.q = this.value.trim(); render(); });
   $("venue").addEventListener("change", function () { state.venue = this.value; remember(); render(); });
 
@@ -535,7 +773,6 @@ footer a:hover { color: var(--spot); }
     gc.async = true;
     gc.src = "//gc.zgo.at/count.js";
     gc.setAttribute("data-goatcounter", GOATCOUNTER);
-    gc.addEventListener("load", paintFoot);
     document.body.appendChild(gc);
   }
 
