@@ -86,13 +86,14 @@ h1 span { color: var(--spot); }
   background: var(--paper); border-block: 2px solid var(--ink);
 }
 .bar .wrap { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; padding-block: 10px; }
-.search, .venue {
+.venue {
   font: 500 16px/1 var(--body); color: var(--ink); background: var(--panel);
   border: 1px solid var(--line); border-radius: 0; height: 44px; padding: 0 12px; min-width: 0;
 }
-.search { flex: 1 1 200px; }
 .venue { flex: 0 1 190px; }
-.search:focus-visible, .venue:focus-visible, .chip:focus-visible, a:focus-visible, button:focus-visible, select:focus-visible, textarea:focus-visible, input:focus-visible { outline: 2px solid var(--spot); outline-offset: 2px; }
+/* La tendina dei generi c'e' solo su telefono: su schermo largo bastano i bottoni. */
+.genre { display: none; }
+.venue:focus-visible, .chip:focus-visible, a:focus-visible, button:focus-visible, select:focus-visible, textarea:focus-visible, input:focus-visible { outline: 2px solid var(--spot); outline-offset: 2px; }
 /* I generi riempiono tutta la riga, allineati alla barra di ricerca sopra. */
 .chips { display: flex; flex-wrap: wrap; gap: 6px; flex: 1 0 100%; }
 .chip { flex: 1 1 auto; }
@@ -232,11 +233,16 @@ footer p.sign {
   .where { font-size: 14px; }
   .go { grid-column: 2; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; gap: 2px 14px; text-align: left; padding-top: 7px; }
   .bar .wrap { padding-block: 8px; }
-  .venue { flex: 1 1 100%; }
+  /* Telefono: generi e locali in due tendine affiancate, i bottoni dei generi spariscono. Restano 3 righe. */
+  .genre { display: block; }
+  .genre, .venue { flex: 1 1 40%; order: 1; }
+  .chip[data-g] { display: none; }
+  .chips { flex: 0 0 auto; order: 2; }
+  .jump { order: 2; }
   .chips { gap: 5px; }
   .chip { height: 38px; padding: 0 11px; font-size: 15px; }
   .size { height: 46px; }
-  .search, .venue { height: 42px; }
+  .venue { height: 42px; }
   .count { display: none; }
   .lede { font-size: 17px; }
   .month { margin-top: 28px; }
@@ -266,7 +272,6 @@ footer p.sign {
       <button class="size" id="s-big" data-s="big" type="button" aria-pressed="true"><span id="t-big"></span><small id="n-big"></small></button>
       <button class="size" id="s-niche" data-s="niche" type="button" aria-pressed="false"><span id="t-niche"></span><small id="n-niche"></small></button>
     </div>
-    <input class="search" id="q" type="search">
     <div class="chips" role="group" id="chips">
       <button class="chip" data-g="" type="button" aria-pressed="true"></button>
       <button class="chip" data-g="hard" type="button" aria-pressed="false">Hard/Classic</button>
@@ -279,6 +284,7 @@ footer p.sign {
       <button class="chip" data-g="rock" type="button" aria-pressed="false">Rock</button>
       <button class="chip newonly" id="only-new" type="button" aria-pressed="false"></button>
     </div>
+    <select class="venue genre" id="genre"><option value=""></option></select>
     <select class="venue" id="venue"><option value=""></option></select>
     <div class="jump">
       <button type="button" id="go-rate"></button>
@@ -341,7 +347,7 @@ footer p.sign {
       loading: "Loading the gigs…",
       failed: "Cannot load the gigs. Reload the page in a few minutes.",
       noNew: function (d) { return "No new gigs in the last " + d + " days."; },
-      noMatch: "No gigs with these filters. Try clearing the search or choosing All.",
+      noMatch: "No gigs with these filters. Try choosing All.",
       sources: "Sources", down: "not responding",
       lastCheck: "Last check", atToday: "today at", atWord: "at",
       preview: "This is a preview: the data stays frozen at this check.",
@@ -378,7 +384,7 @@ footer p.sign {
       loading: "Načítám koncerty…",
       failed: "Koncerty se nepodařilo načíst. Zkuste stránku za pár minut znovu.",
       noNew: function (d) { return "Za posledních " + d + " dní žádné nové koncerty."; },
-      noMatch: "Žádné koncerty s těmito filtry. Zkuste zrušit hledání nebo zvolit Vše.",
+      noMatch: "Žádné koncerty s těmito filtry. Zkuste zvolit Vše.",
       sources: "Zdroje", down: "neodpovídá",
       lastCheck: "Poslední kontrola", atToday: "dnes v", atWord: "v",
       preview: "Toto je náhled: data zůstávají u této kontroly.",
@@ -415,7 +421,7 @@ footer p.sign {
       loading: "Carico i concerti…",
       failed: "Non riesco a caricare i concerti. Ricarica la pagina tra qualche minuto.",
       noNew: function (d) { return "Nessun concerto nuovo negli ultimi " + d + " giorni."; },
-      noMatch: "Nessun concerto con questi filtri. Prova a togliere la ricerca o a scegliere Tutti.",
+      noMatch: "Nessun concerto con questi filtri. Prova a scegliere Tutti.",
       sources: "Fonti", down: "non risponde",
       lastCheck: "Ultimo controllo", atToday: "oggi alle", atWord: "alle",
       preview: "Questa è un'anteprima: i dati restano fermi a questo controllo.",
@@ -442,7 +448,7 @@ footer p.sign {
   var LABEL = { hard: "Hard/Classic", stoner: "Stoner/Psych", prog: "Prog/Post", garage: "Garage/R'n'R", metal: "Metal", punk: "Punk/HC", alt: "Indie/Alt", rock: "Rock" };
   var NEW_DAYS = 7;
   var $ = function (id) { return document.getElementById(id); };
-  var state = { q: "", venue: "", onlyNew: false, size: "big", genre: "", lang: "en" };  // genre "" = tutti
+  var state = { venue: "", onlyNew: false, size: "big", genre: "", lang: "en" };  // genre "" = tutti
   var T = I18N.en;
 
   function remember() { try { localStorage.setItem("pragarock3", JSON.stringify({ genre: state.genre, venue: state.venue, size: state.size, lang: state.lang })); } catch (e) {} }
@@ -545,7 +551,6 @@ footer p.sign {
     if (state.genre && c.genres.indexOf(state.genre) < 0) return false;
     if (state.venue && c.venue !== state.venue) return false;
     if (state.onlyNew && !isNew(c)) return false;
-    if (state.q && (fold(c.title) + " " + fold(c.venue)).indexOf(fold(state.q)) < 0) return false;
     return true;
   }
 
@@ -699,10 +704,12 @@ footer p.sign {
     var md = $("meta-desc"); if (md) md.setAttribute("content", T.desc);
     $("t-big").textContent = T.big;
     $("t-niche").textContent = T.niche;
-    $("q").placeholder = T.search;
-    $("q").setAttribute("aria-label", T.search);
     $("only-new").textContent = T.onlyNew;
     document.querySelector('.chip[data-g=""]').textContent = T.all;
+    $("genre").innerHTML = '<option value="">' + esc(T.all) + "</option>" +
+      Object.keys(LABEL).map(function (g) { return '<option value="' + g + '">' + LABEL[g] + "</option>"; }).join("");
+    $("genre").setAttribute("aria-label", T.all);
+    $("genre").value = state.genre;
     $("venue").options[0].textContent = T.allVenues;
     $("venue").setAttribute("aria-label", T.allVenues);
     $("sizes").setAttribute("aria-label", T.big + " / " + T.niche);
@@ -743,7 +750,10 @@ footer p.sign {
   applyLang();
 
   var chips = document.querySelectorAll(".chip[data-g]");
-  function paintChips() { chips.forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-g") === state.genre ? "true" : "false"); }); }
+  function paintChips() {
+    chips.forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-g") === state.genre ? "true" : "false"); });
+    $("genre").value = state.genre;
+  }
   paintChips();
   document.querySelectorAll(".size").forEach(function (b) {
     b.setAttribute("aria-pressed", b.getAttribute("data-s") === state.size ? "true" : "false");
@@ -777,7 +787,7 @@ footer p.sign {
   }
   $("go-rate").addEventListener("click", function () { jumpTo("rate-title"); });
   $("go-say").addEventListener("click", function () { jumpTo("say-title"); setTimeout(function () { $("say-text").focus(); }, 500); });
-  $("q").addEventListener("input", function () { state.q = this.value.trim(); render(); });
+  $("genre").addEventListener("change", function () { state.genre = this.value; paintChips(); remember(); render(); });
   $("venue").addEventListener("change", function () { state.venue = this.value; remember(); render(); });
 
   if (GOATCOUNTER) {
