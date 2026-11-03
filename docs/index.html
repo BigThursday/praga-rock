@@ -623,7 +623,13 @@ footer p.sign {
     foot += '<p class="sign"><span>EL LOCO PRODUCTIONS</span><a href="' + GAME + '" target="_blank" rel="noopener"><img src="dotsandboxes.png" alt="Dots and Boxes"><span>' + T.play + "</span></a></p>";
     $("foot").innerHTML = foot;
     if (GOATCOUNTER) {
-      fetch(GOATCOUNTER.replace(/\/count$/, "") + "/counter/TOTAL.json", { cache: "no-cache" })
+      // GoatCounter tiene il totale in cache a lungo, e ignora i parametri che non conosce: "TOTAL.json" da solo
+      // e' rimasto fermo a 0 per ore. La cache distingue solo start/end, quindi li faccio cambiare ogni 10 minuti
+      // con date tutte prima dell'apertura del sito (start) e dopo oggi (end): il conteggio resta quello intero.
+      var now = new Date(), slot = Math.floor((now.getHours() * 60 + now.getMinutes()) / 10);
+      var from = new Date(Date.UTC(2025, 0, 1 + slot)).toISOString().slice(0, 10);
+      var to = new Date(now.getTime() + 2 * 86400000).toISOString().slice(0, 10);
+      fetch(GOATCOUNTER.replace(/\/count$/, "") + "/counter/TOTAL.json?start=" + from + "&end=" + to, { cache: "no-cache" })
         .then(function (r) { return r.json(); })
         .then(function (d) { var h = $("hits"); if (h) h.textContent = d.count; })
         .catch(function () { var h = $("hits"); if (h) h.textContent = "–"; });
