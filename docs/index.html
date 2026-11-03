@@ -629,21 +629,25 @@ footer p.sign {
   var myVote = 0;
   try { myVote = parseInt(localStorage.getItem("pragarock_vote") || "0", 10) || 0; } catch (e) {}
 
+  // Le stelle si creano una volta sola: ridisegnarle a ogni hover sostituiva il bottone sotto il dito
+  // e il click (o il tocco su telefono) finiva su un elemento che non c'era piu'.
   function paintStars(hover) {
-    var on = hover || myVote;
-    var box = $("stars"), out = "";
-    for (var i = 1; i <= 5; i++) {
-      out += '<button class="star' + (i <= on ? " on" : "") + '" type="button" data-v="' + i + '"' +
-        (myVote ? " disabled" : "") + ' aria-label="' + i + '/5">★</button>';
-    }
-    box.innerHTML = out;
-    if (!myVote) {
+    var box = $("stars");
+    if (!box.children.length) {
+      var out = "";
+      for (var i = 1; i <= 5; i++) out += '<button class="star" type="button" data-v="' + i + '" aria-label="' + i + '/5">★</button>';
+      box.innerHTML = out;
       box.querySelectorAll(".star").forEach(function (b) {
-        b.addEventListener("mouseenter", function () { paintStars(+b.getAttribute("data-v")); });
-        b.addEventListener("click", function () { sendVote(+b.getAttribute("data-v")); });
+        b.addEventListener("mouseenter", function () { if (!myVote) paintStars(+b.getAttribute("data-v")); });
+        b.addEventListener("click", function () { if (!myVote) sendVote(+b.getAttribute("data-v")); });
       });
-      box.addEventListener("mouseleave", function () { paintStars(0); }, { once: true });
+      box.addEventListener("mouseleave", function () { paintStars(0); });
     }
+    var on = hover || myVote;
+    box.querySelectorAll(".star").forEach(function (b) {
+      b.classList.toggle("on", +b.getAttribute("data-v") <= on);
+      b.disabled = !!myVote;
+    });
   }
   function paintScore(d) {
     if (d && d.n > 0) $("score").innerHTML = T.score((Math.round(d.avg * 10) / 10).toFixed(1), d.n) + (myVote ? " · " + T.rateThanks : "");
