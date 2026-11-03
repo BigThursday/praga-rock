@@ -189,6 +189,8 @@ form.say select, form.say input, form.say textarea {
   border: 1px solid var(--line); border-radius: 0; padding: 11px 12px; width: 100%;
 }
 form.say textarea { min-height: 110px; resize: vertical; }
+form.say select:invalid { color: var(--faint); }
+form.say select option { color: var(--ink); }
 form.say button {
   align-self: flex-start; cursor: pointer; border: 0; border-radius: 0;
   background: var(--ink); color: var(--paper); padding: 0 20px; height: 46px;
@@ -204,11 +206,14 @@ footer p { margin: 0 0 6px; max-width: 72ch; }
 footer .down { color: var(--bad); }
 footer a { text-underline-offset: 2px; }
 footer a:hover { color: var(--spot); }
-.sign {
-  margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line);
-  font: 600 13px/1.5 var(--tight); letter-spacing: .1em; text-transform: uppercase; color: var(--faint);
+footer p.sign {
+  max-width: none; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px;
+  font: 600 13px/1.3 var(--tight); letter-spacing: .1em; text-transform: uppercase; color: var(--faint);
 }
-.sign a { color: var(--soft); }
+.sign a { display: inline-flex; align-items: center; gap: 10px; color: var(--soft); text-decoration: none; white-space: nowrap; }
+.sign a img { width: 40px; height: 40px; border-radius: 9px; flex: none; }
+.sign a span { text-decoration: underline; text-underline-offset: 2px; }
 .sign a:hover { color: var(--spot); }
 #hits { font-variant-numeric: tabular-nums; }
 
@@ -341,11 +346,12 @@ footer a:hover { color: var(--spot); }
       auto: "The page updates itself every 3 hours.",
       note: "Headliners are bands with at least 20,000 fans on Deezer, or any gig in an arena (O2 arena, O2 universum, Forum Karlín, Fortuna, Tipsport). Everything else is Underground. Genres come from the sources and are sometimes wrong, and links go to whoever sells the ticket. Check the date and the price on the venue site before you buy.",
       visits: "Visits", writeTo: "Write to",
-      jumpRate: "Rate", jumpSay: "Write",
+      jumpRate: "Rate", jumpSay: "Contact us",
       rateTitle: "Rate this page", rateHint: "Tap a star",
       score: function (avg, n) { return "<b>" + avg + "</b> out of 5, " + n + (n === 1 ? " vote" : " votes"); },
       noScore: "No votes yet", rateThanks: "Thanks for the vote",
       sayTitle: "Write to us",
+      pick: "Choose a topic",
       subjects: ["Report a missing gig", "Something is wrong on the page", "Suggestion", "Contact EL LOCO", "Other"],
       sayFrom: "Your email, if you want an answer",
       sayText: "Your message",
@@ -377,11 +383,12 @@ footer a:hover { color: var(--spot); }
       auto: "Stránka se sama aktualizuje každé 3 hodiny.",
       note: "Headliners jsou kapely s nejméně 20 000 fanoušky na Deezeru nebo koncerty v aréně (O2 arena, O2 universum, Forum Karlín, Fortuna, Tipsport). Všechno ostatní je Underground. Žánry pocházejí ze zdrojů a občas se pletou, odkazy vedou na toho, kdo prodává vstupenky. Před nákupem si ověřte datum a cenu na webu klubu.",
       visits: "Návštěvy", writeTo: "Napište na",
-      jumpRate: "Hodnotit", jumpSay: "Napsat",
+      jumpRate: "Hodnotit", jumpSay: "Kontakt",
       rateTitle: "Ohodnoťte stránku", rateHint: "Klepněte na hvězdu",
       score: function (avg, n) { return "<b>" + avg + "</b> z 5, " + n + " " + (n === 1 ? "hlas" : (n >= 2 && n <= 4 ? "hlasy" : "hlasů")); },
       noScore: "Zatím žádné hlasy", rateThanks: "Díky za hlas",
       sayTitle: "Napište nám",
+      pick: "Vyberte téma",
       subjects: ["Chybějící koncert", "Něco na stránce nesedí", "Návrh", "Kontaktovat EL LOCO", "Jiné"],
       sayFrom: "Váš e-mail, pokud chcete odpověď",
       sayText: "Vaše zpráva",
@@ -413,11 +420,12 @@ footer a:hover { color: var(--spot); }
       auto: "La pagina si aggiorna da sola ogni 3 ore.",
       note: "Headliners sono le band con almeno 20.000 fan su Deezer, o i concerti in arena (O2 arena, O2 universum, Forum Karlín, Fortuna, Tipsport). Tutto il resto è Underground. Il genere arriva dalle fonti e a volte sbaglia, e i link portano a chi vende il biglietto. Prima di comprare controlla data e prezzo sul sito del locale.",
       visits: "Visite", writeTo: "Scrivi a",
-      jumpRate: "Vota", jumpSay: "Scrivi",
+      jumpRate: "Vota", jumpSay: "Contattaci",
       rateTitle: "Vota la pagina", rateHint: "Tocca una stella",
       score: function (avg, n) { return "<b>" + avg + "</b> su 5, " + n + (n === 1 ? " voto" : " voti"); },
       noScore: "Ancora nessun voto", rateThanks: "Grazie del voto",
       sayTitle: "Scrivici",
+      pick: "Seleziona un argomento",
       subjects: ["Segnala un concerto mancante", "Qualcosa non torna sulla pagina", "Suggerimento", "Contatta EL LOCO", "Altro"],
       sayFrom: "La tua email, se vuoi una risposta",
       sayText: "Il tuo messaggio",
@@ -596,7 +604,7 @@ footer a:hover { color: var(--spot); }
     foot += "<p>" + T.note + "</p>";
     if (CONTACT) foot += "<p>" + T.writeTo + ' <a href="mailto:' + esc(CONTACT) + '">' + esc(CONTACT) + "</a>.</p>";
     if (GOATCOUNTER) foot += "<p>" + T.visits + ': <span id="hits"></span></p>';
-    foot += '<p class="sign">EL LOCO PRODUCTIONS · <a href="' + GAME + '" target="_blank" rel="noopener">' + T.play + "</a></p>";
+    foot += '<p class="sign"><span>EL LOCO PRODUCTIONS</span><a href="' + GAME + '" target="_blank" rel="noopener"><img src="dotsandboxes.png" alt="Dots and Boxes"><span>' + T.play + "</span></a></p>";
     $("foot").innerHTML = foot;
     if (GOATCOUNTER) {
       fetch(GOATCOUNTER.replace(/\/count$/, "") + "/counter/TOTAL.json", { cache: "no-cache" })
@@ -653,7 +661,9 @@ footer a:hover { color: var(--spot); }
     $("say-text").setAttribute("aria-label", T.sayText);
     $("say-send").textContent = T.saySend;
     var sel = $("say-subject"), keep = sel.selectedIndex;
-    sel.innerHTML = T.subjects.map(function (s, i) { return '<option value="' + i + '">' + esc(s) + "</option>"; }).join("");
+    // Si parte da "Seleziona": con un argomento gia' scelto il form sembra fatto solo per quello.
+    sel.innerHTML = '<option value="" disabled selected>' + esc(T.pick) + "</option>" +
+      T.subjects.map(function (s, i) { return '<option value="' + i + '">' + esc(s) + "</option>"; }).join("");
     sel.setAttribute("aria-label", T.sayTitle);
     if (keep >= 0) sel.selectedIndex = keep;
   }
@@ -661,7 +671,7 @@ footer a:hover { color: var(--spot); }
     e.preventDefault();
     var said = $("said"), btn = $("say-send");
     var body = {
-      subject: T.subjects[$("say-subject").selectedIndex] || "",
+      subject: T.subjects[$("say-subject").value] || "",
       from: $("say-from").value.trim(),
       text: $("say-text").value.trim(),
       lang: state.lang
