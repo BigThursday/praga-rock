@@ -587,7 +587,7 @@
  },
  "health": {
   "festivaly": {
-   "fails": 5,
+   "fails": 6,
    "warned": false
   },
   "futurum": {

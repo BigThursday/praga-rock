@@ -2,7 +2,7 @@
  "baseline": "2026-11-02",
  "sources": [
   {
-   "count": 1785,
+   "count": 1772,
    "name": "GoOut",
    "ok": true
   },
@@ -12,12 +12,12 @@
    "ok": false
   },
   {
-   "count": 349,
+   "count": 353,
    "name": "Songkick",
    "ok": true
   },
   {
-   "count": 55,
+   "count": 54,
    "name": "Obscure Promotion",
    "ok": true
   },
@@ -32,7 +32,7 @@
    "ok": true
   },
   {
-   "count": 44,
+   "count": 43,
    "name": "Rock Café",
    "ok": true
   },
@@ -52,5 +52,5 @@
    "ok": true
   }
  ],
- "updated": "2026-11-02T22:42+01:00"
+ "updated": "2026-11-03T07:47+01:00"
 }
