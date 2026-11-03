@@ -93,7 +93,9 @@ h1 span { color: var(--spot); }
 .search { flex: 1 1 200px; }
 .venue { flex: 0 1 190px; }
 .search:focus-visible, .venue:focus-visible, .chip:focus-visible, a:focus-visible, button:focus-visible, select:focus-visible, textarea:focus-visible, input:focus-visible { outline: 2px solid var(--spot); outline-offset: 2px; }
-.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+/* I generi riempiono tutta la riga, allineati alla barra di ricerca sopra. */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; flex: 1 0 100%; }
+.chip { flex: 1 1 auto; }
 .chip {
   --c: var(--ink);
   font: 600 16px/1 var(--tight); letter-spacing: .03em; text-transform: uppercase;
@@ -123,7 +125,7 @@ h1 span { color: var(--spot); }
 .jump button {
   font: 600 16px/1 var(--tight); letter-spacing: .03em; text-transform: uppercase;
   height: 40px; padding: 0 13px; cursor: pointer; border-radius: 0;
-  background: transparent; color: var(--ink); border: 1px solid var(--soft);
+  background: transparent; color: var(--ink); border: 2px solid var(--ink);
 }
 .jump button:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .chip.newonly[aria-pressed="true"] { background: var(--mark); border-color: var(--mark); color: var(--mark-ink); }
