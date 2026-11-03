@@ -273,6 +273,16 @@
    "Techno"
   ]
  },
+ "antimatter": {
+  "at": "2026-11-03",
+  "fans": 13332,
+  "tags": [
+   "alternative rock",
+   "progressive rock",
+   "gothic rock",
+   "Rock"
+  ]
+ },
  "apocalypse dudes": {
   "at": "2026-11-02",
   "fans": 0,
@@ -3111,6 +3121,11 @@
    "Pop"
   ]
  },
+ "meshuggah the forty year anomaly w periphery and vildhjarta": {
+  "at": "2026-11-03",
+  "fans": 0,
+  "tags": []
+ },
  "mess": {
   "at": "2026-11-02",
   "fans": 515,
@@ -3862,6 +3877,11 @@
   "fans": 279,
   "tags": []
  },
+ "prague theater festival of the german language 2026": {
+  "at": "2026-11-03",
+  "fans": 0,
+  "tags": []
+ },
  "prazsky vyber": {
   "at": "2026-11-02",
   "fans": 789,
@@ -4330,6 +4350,15 @@
   "fans": 235,
   "tags": [
    "metalcore",
+   "Metal"
+  ]
+ },
+ "sfregio": {
+  "at": "2026-11-03",
+  "fans": 258,
+  "tags": [
+   "heavy metal",
+   "hard rock",
    "Metal"
   ]
  },

@@ -2,7 +2,7 @@
  "baseline": "2026-11-02",
  "sources": [
   {
-   "count": 1772,
+   "count": 1835,
    "name": "GoOut",
    "ok": true
   },
@@ -12,12 +12,12 @@
    "ok": false
   },
   {
-   "count": 353,
+   "count": 350,
    "name": "Songkick",
    "ok": true
   },
   {
-   "count": 54,
+   "count": 56,
    "name": "Obscure Promotion",
    "ok": true
   },
@@ -27,12 +27,12 @@
    "ok": true
   },
   {
-   "count": 69,
+   "count": 70,
    "name": "Lucerna Music Bar",
    "ok": true
   },
   {
-   "count": 43,
+   "count": 44,
    "name": "Rock Café",
    "ok": true
   },
@@ -52,5 +52,5 @@
    "ok": true
   }
  ],
- "updated": "2026-11-03T07:47+01:00"
+ "updated": "2026-11-03T18:02+01:00"
 }
