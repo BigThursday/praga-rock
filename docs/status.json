@@ -2,7 +2,7 @@
  "baseline": "2026-11-02",
  "sources": [
   {
-   "count": 1816,
+   "count": 1859,
    "name": "GoOut",
    "ok": true
   },
@@ -37,9 +37,9 @@
    "ok": true
   },
   {
-   "count": 40,
+   "count": 0,
    "name": "Klub 007",
-   "ok": true
+   "ok": false
   },
   {
    "count": 11,
@@ -47,10 +47,10 @@
    "ok": true
   },
   {
-   "count": 43,
+   "count": 141,
    "name": "kdykam",
-   "ok": false
+   "ok": true
   }
  ],
- "updated": "2026-11-04T07:22+01:00"
+ "updated": "2026-11-04T18:14+01:00"
 }
