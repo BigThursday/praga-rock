@@ -2,7 +2,7 @@
  "baseline": "2026-11-02",
  "sources": [
   {
-   "count": 1841,
+   "count": 1857,
    "name": "GoOut",
    "ok": true
   },
@@ -12,12 +12,12 @@
    "ok": false
   },
   {
-   "count": 353,
+   "count": 356,
    "name": "Songkick",
    "ok": true
   },
   {
-   "count": 56,
+   "count": 57,
    "name": "Obscure Promotion",
    "ok": true
   },
@@ -37,9 +37,9 @@
    "ok": true
   },
   {
-   "count": 40,
+   "count": 0,
    "name": "Klub 007",
-   "ok": true
+   "ok": false
   },
   {
    "count": 11,
@@ -52,5 +52,5 @@
    "ok": true
   }
  ],
- "updated": "2026-11-05T07:46+01:00"
+ "updated": "2026-11-05T18:24+01:00"
 }

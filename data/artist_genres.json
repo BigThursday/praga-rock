@@ -954,6 +954,16 @@
    "Pop"
   ]
  },
+ "colour haze": {
+  "at": "2026-11-05",
+  "fans": 12244,
+  "tags": [
+   "stoner rock",
+   "psychedelic rock",
+   "jam band",
+   "Psychedelic"
+  ]
+ },
  "comastatic": {
   "at": "2026-11-02",
   "fans": 258,
@@ -1927,6 +1937,11 @@
    "Metal"
   ]
  },
+ "hamu hudebni a tanecni fakulta amu": {
+  "at": "2026-11-05",
+  "fans": 0,
+  "tags": []
+ },
  "hand grenade": {
   "at": "2026-11-02",
   "fans": 181,
@@ -2432,6 +2447,16 @@
    "Pop"
   ]
  },
+ "jokers": {
+  "at": "2026-11-05",
+  "fans": 284,
+  "tags": [
+   "blues rock",
+   "jam band",
+   "heavy psych",
+   "Bengali"
+  ]
+ },
  "jordan rakei": {
   "at": "2026-11-02",
   "fans": 19022,
@@ -2875,6 +2900,11 @@
    "post-metal",
    "Metal"
   ]
+ },
+ "loutcore 2026": {
+  "at": "2026-11-05",
+  "fans": 0,
+  "tags": []
  },
  "lubos pospisil": {
   "at": "2026-11-02",
@@ -3962,6 +3992,11 @@
   "tags": [
    "Rock"
   ]
+ },
+ "prison religion": {
+  "at": "2026-11-05",
+  "fans": 114,
+  "tags": []
  },
  "protomartyr": {
   "at": "2026-11-02",
@@ -5398,6 +5433,13 @@
    "Hip-Hop/Rap"
   ]
  },
+ "too sweet": {
+  "at": "2026-11-05",
+  "fans": 0,
+  "tags": [
+   "R&B/Soul"
+  ]
+ },
  "tophouse": {
   "at": "2026-11-02",
   "fans": 1405,
@@ -5587,11 +5629,23 @@
    "Pop"
   ]
  },
+ "vecna nadeje 2027": {
+  "at": "2026-11-05",
+  "fans": 0,
+  "tags": []
+ },
  "verkauf musique": {
   "at": "2026-11-02",
   "fans": 4,
   "tags": [
    "Punk"
+  ]
+ },
+ "veronika vitova": {
+  "at": "2026-11-05",
+  "fans": 2,
+  "tags": [
+   "Indie Pop"
   ]
  },
  "vesna": {
