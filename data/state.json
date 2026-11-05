@@ -608,7 +608,7 @@
  },
  "health": {
   "festivaly": {
-   "fails": 13,
+   "fails": 14,
    "warned": true
   },
   "futurum": {
@@ -624,7 +624,7 @@
    "warned": false
   },
   "klub007": {
-   "fails": 1,
+   "fails": 2,
    "warned": false
   },
   "lucerna": {
@@ -4754,6 +4754,10 @@
   },
   "songkick:43501542": {
    "date": "2027-01-26",
+   "first": "2026-11-02"
+  },
+  "songkick:43502275": {
+   "date": "2027-03-06",
    "first": "2026-11-02"
   }
  }
