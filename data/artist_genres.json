@@ -128,6 +128,11 @@
    "Alternative"
   ]
  },
+ "alice bauer q": {
+  "at": "2026-11-06",
+  "fans": 0,
+  "tags": []
+ },
  "alkehol": {
   "at": "2026-11-02",
   "fans": 2288,
@@ -442,6 +447,13 @@
    "Pop"
   ]
  },
+ "bara zmekova": {
+  "at": "2026-11-06",
+  "fans": 68,
+  "tags": [
+   "Pop"
+  ]
+ },
  "barbarsky coch vanocni v praze": {
   "at": "2026-11-02",
   "fans": 0,
@@ -467,6 +479,13 @@
   "fans": 195,
   "tags": [
    "Singer/Songwriter"
+  ]
+ },
+ "ben poole": {
+  "at": "2026-11-06",
+  "fans": 1108,
+  "tags": [
+   "Blues"
   ]
  },
  "beneath the vaults": {
@@ -1481,6 +1500,13 @@
    "metal",
    "female fronted",
    "Metal"
+  ]
+ },
+ "epoque quartet": {
+  "at": "2026-11-06",
+  "fans": 62,
+  "tags": [
+   "Classical"
   ]
  },
  "epydemye": {
@@ -2527,6 +2553,13 @@
    "Pop"
   ]
  },
+ "kamila csenge": {
+  "at": "2026-11-06",
+  "fans": 0,
+  "tags": [
+   "Fusion"
+  ]
+ },
  "kanonenfieber": {
   "at": "2026-11-02",
   "fans": 10684,
@@ -3218,6 +3251,11 @@
    "konstanz",
    "Alternative"
   ]
+ },
+ "metalshop tour vol 7 2027": {
+  "at": "2026-11-06",
+  "fans": 0,
+  "tags": []
  },
  "michael krasny": {
   "at": "2026-11-02",
@@ -4262,6 +4300,13 @@
    "Hip-Hop/Rap"
   ]
  },
+ "romes": {
+  "at": "2026-11-06",
+  "fans": 1238,
+  "tags": [
+   "Alternative"
+  ]
+ },
  "ronan keating": {
   "at": "2026-11-02",
   "fans": 82170,
@@ -4606,6 +4651,13 @@
    "Rock"
   ]
  },
+ "slum": {
+  "at": "2026-11-06",
+  "fans": 22,
+  "tags": [
+   "Hip-Hop/Rap"
+  ]
+ },
  "smag pa dig selv": {
   "at": "2026-11-02",
   "fans": 221,
@@ -4743,6 +4795,13 @@
   "fans": 8,
   "tags": [
    "Jazz"
+  ]
+ },
+ "steven s": {
+  "at": "2026-11-06",
+  "fans": 0,
+  "tags": [
+   "Electronic"
   ]
  },
  "sto zvirat": {
@@ -5792,6 +5851,13 @@
    "rock",
    "spain",
    "Rock"
+  ]
+ },
+ "what the funk": {
+  "at": "2026-11-06",
+  "fans": 981,
+  "tags": [
+   "Dance"
   ]
  },
  "white hat": {
