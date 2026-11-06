@@ -608,7 +608,7 @@
  },
  "health": {
   "festivaly": {
-   "fails": 14,
+   "fails": 15,
    "warned": true
   },
   "futurum": {
@@ -624,7 +624,7 @@
    "warned": false
   },
   "klub007": {
-   "fails": 2,
+   "fails": 0,
    "warned": false
   },
   "lucerna": {
@@ -632,7 +632,7 @@
    "warned": false
   },
   "modravopice": {
-   "fails": 0,
+   "fails": 1,
    "warned": false
   },
   "obscure": {
