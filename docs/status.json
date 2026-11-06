@@ -2,7 +2,7 @@
  "baseline": "2026-11-02",
  "sources": [
   {
-   "count": 1857,
+   "count": 1838,
    "name": "GoOut",
    "ok": true
   },
@@ -12,22 +12,22 @@
    "ok": false
   },
   {
-   "count": 352,
+   "count": 344,
    "name": "Songkick",
    "ok": true
   },
   {
-   "count": 57,
+   "count": 56,
    "name": "Obscure Promotion",
    "ok": true
   },
   {
-   "count": 38,
+   "count": 37,
    "name": "Futurum",
    "ok": true
   },
   {
-   "count": 68,
+   "count": 67,
    "name": "Lucerna Music Bar",
    "ok": true
   },
@@ -42,15 +42,15 @@
    "ok": false
   },
   {
-   "count": 12,
+   "count": 11,
    "name": "Modrá Vopice",
    "ok": true
   },
   {
-   "count": 135,
+   "count": 131,
    "name": "kdykam",
    "ok": true
   }
  ],
- "updated": "2026-11-06T17:45+01:00"
+ "updated": "2026-11-07T00:08+01:00"
 }
