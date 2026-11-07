@@ -2,7 +2,7 @@
  "baseline": "2026-11-02",
  "sources": [
   {
-   "count": 1838,
+   "count": 1839,
    "name": "GoOut",
    "ok": true
   },
@@ -12,7 +12,7 @@
    "ok": false
   },
   {
-   "count": 348,
+   "count": 350,
    "name": "Songkick",
    "ok": true
   },
@@ -37,9 +37,9 @@
    "ok": true
   },
   {
-   "count": 39,
+   "count": 0,
    "name": "Klub 007",
-   "ok": true
+   "ok": false
   },
   {
    "count": 11,
@@ -52,5 +52,5 @@
    "ok": true
   }
  ],
- "updated": "2026-11-07T06:58+01:00"
+ "updated": "2026-11-07T13:59+01:00"
 }

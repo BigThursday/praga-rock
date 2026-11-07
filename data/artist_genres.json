@@ -423,6 +423,14 @@
    "Metal"
   ]
  },
+ "avralize": {
+  "at": "2026-11-07",
+  "fans": 1747,
+  "tags": [
+   "metalcore",
+   "Metal"
+  ]
+ },
  "baby lasagna": {
   "at": "2026-11-02",
   "fans": 5663,
@@ -1088,6 +1096,13 @@
    "stoner rock",
    "grunge",
    "space rock",
+   "Rock"
+  ]
+ },
+ "daisychain": {
+  "at": "2026-11-07",
+  "fans": 59,
+  "tags": [
    "Rock"
   ]
  },
