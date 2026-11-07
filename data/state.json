@@ -617,7 +617,7 @@
  },
  "health": {
   "festivaly": {
-   "fails": 19,
+   "fails": 20,
    "warned": true
   },
   "futurum": {
@@ -633,7 +633,7 @@
    "warned": false
   },
   "klub007": {
-   "fails": 1,
+   "fails": 0,
    "warned": false
   },
   "lucerna": {
