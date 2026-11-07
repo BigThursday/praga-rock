@@ -615,7 +615,7 @@
  },
  "health": {
   "festivaly": {
-   "fails": 17,
+   "fails": 18,
    "warned": true
   },
   "futurum": {
@@ -631,7 +631,7 @@
    "warned": false
   },
   "klub007": {
-   "fails": 2,
+   "fails": 0,
    "warned": false
   },
   "lucerna": {
@@ -3430,6 +3430,10 @@
   },
   "klub007:3963-2026-12-06": {
    "date": "2026-12-06",
+   "first": "2026-11-05"
+  },
+  "klub007:3965-2027-05-14": {
+   "date": "2027-05-14",
    "first": "2026-11-05"
   },
   "lucerna:acid-row-15-let": {

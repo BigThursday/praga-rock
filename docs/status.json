@@ -12,7 +12,7 @@
    "ok": false
   },
   {
-   "count": 344,
+   "count": 348,
    "name": "Songkick",
    "ok": true
   },
@@ -37,9 +37,9 @@
    "ok": true
   },
   {
-   "count": 0,
+   "count": 39,
    "name": "Klub 007",
-   "ok": false
+   "ok": true
   },
   {
    "count": 11,
@@ -52,5 +52,5 @@
    "ok": true
   }
  ],
- "updated": "2026-11-07T00:08+01:00"
+ "updated": "2026-11-07T06:58+01:00"
 }
