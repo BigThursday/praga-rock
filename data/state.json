@@ -615,13 +615,14 @@
   "2027-11-26|horkyze slize": "2026-11-02",
   "2027-12-03|avralize": "2026-11-07",
   "2027-12-08|kanonenfieber": "2026-11-02",
+  "2027-12-11|dymytry": "2026-11-08",
   "2027-12-11|team": "2026-11-02",
   "2027-12-12|till lindemann": "2026-11-02",
   "2028-02-28|radecek": "2026-11-02"
  },
  "health": {
   "festivaly": {
-   "fails": 23,
+   "fails": 24,
    "warned": true
   },
   "futurum": {
@@ -637,7 +638,7 @@
    "warned": false
   },
   "klub007": {
-   "fails": 1,
+   "fails": 0,
    "warned": false
   },
   "lucerna": {
@@ -2217,6 +2218,10 @@
   "goout:9582687": {
    "date": "2026-12-02",
    "first": "2026-11-02"
+  },
+  "goout:9582911": {
+   "date": "2027-12-11",
+   "first": "2026-11-08"
   },
   "goout:9582917": {
    "date": "2027-08-18",
