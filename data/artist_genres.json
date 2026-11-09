@@ -886,6 +886,11 @@
   "fans": 0,
   "tags": []
  },
+ "cesky kytarovy orchestr": {
+  "at": "2026-11-09",
+  "fans": 0,
+  "tags": []
+ },
  "chameleons": {
   "at": "2026-11-02",
   "fans": 60,
@@ -1026,6 +1031,16 @@
  "concert of loboda": {
   "at": "2026-11-02",
   "tags": []
+ },
+ "cory henry": {
+  "at": "2026-11-09",
+  "fans": 29147,
+  "tags": [
+   "jazz",
+   "funk",
+   "jazz fusion",
+   "Funk"
+  ]
  },
  "coubey": {
   "at": "2026-11-02",
@@ -4174,6 +4189,11 @@
   "fans": 0,
   "tags": []
  },
+ "rage against the machine revival": {
+  "at": "2026-11-09",
+  "fans": 0,
+  "tags": []
+ },
  "rajtaraj": {
   "at": "2026-11-02",
   "fans": 39,
@@ -6027,6 +6047,15 @@
   "fans": 310,
   "tags": [
    "Jazz"
+  ]
+ },
+ "zavis": {
+  "at": "2026-11-09",
+  "fans": 522,
+  "tags": [
+   "czech",
+   "folk",
+   "Hip-Hop/Rap"
   ]
  },
  "ze sklepa ven": {
