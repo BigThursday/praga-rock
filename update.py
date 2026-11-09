@@ -1025,6 +1025,90 @@ def write_preview(path, data, status):
     Path(path).write_text(template.replace("<!--DATA-->", f"<script>window.__DATA__={payload}</script>"), encoding="utf-8", newline="\n")
 
 
+# ---------------------------------------------------------------- google
+
+SITE = "https://praguerock.cz/"
+MONTHS_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+DAYS_EN = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+
+
+def start_stamp(day, hhmm):
+    """Data ISO con ora e fuso di Praga se l'ora c'e', altrimenti solo la data."""
+    m = re.match(r"^(\d{1,2}):(\d{2})", hhmm or "")
+    if not m:
+        return day
+    d = date.fromisoformat(day)
+    return datetime(d.year, d.month, d.day, int(m[1]), int(m[2]), tzinfo=PRAGUE).isoformat(timespec="minutes")
+
+
+def event_ld(c):
+    """Un concerto come MusicEvent di schema.org: Google lo puo' mostrare come scheda evento."""
+    ev = {
+        "@type": "MusicEvent",
+        "name": c["title"],
+        "startDate": start_stamp(c["date"], c["time"]),
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventCancelled" if c["status"] == "cancelled" else "https://schema.org/EventScheduled",
+        "location": {
+            "@type": "Place",
+            "name": c["venue"] or "Prague",
+            "address": {"@type": "PostalAddress", "addressLocality": "Prague", "addressCountry": "CZ"},
+        },
+    }
+    if c["end"]:
+        ev["endDate"] = c["end"]
+    url = next((l["url"] for l in c["links"] if l["url"].startswith("http")), "")
+    if url:
+        offer = {"@type": "Offer", "url": url}
+        price = re.search(r"\d[\d\s]*", c["price"] or "")
+        if price:
+            offer["price"] = int(re.sub(r"\s", "", price[0]))
+            offer["priceCurrency"] = "CZK"
+        offer["availability"] = "https://schema.org/SoldOut" if c["status"] == "soldout" else "https://schema.org/InStock"
+        ev["offers"] = offer
+    return ev
+
+
+def static_list(data):
+    """La lista in HTML semplice, in inglese. Il JavaScript la sostituisce appena parte:
+    chi visita vede la pagina di sempre, chi legge l'HTML grezzo (Google) trova i concerti."""
+    out, month = [], ""
+    for c in data:
+        k = c["date"][:7]
+        if k != month:
+            if month:
+                out.append("</ol>")
+            y, m = k.split("-")
+            out.append(f'<div class="month"><h2>{MONTHS_EN[int(m) - 1]} {y}</h2></div><ol class="gigs">')
+            month = k
+        d = date.fromisoformat(c["date"])
+        out.append(
+            f'<li class="gig"><div class="day"><b>{d.day:02d}</b><i>{DAYS_EN[d.weekday()]}</i></div>'
+            f'<div class="what"><h3>{html.escape(c["title"])}</h3><p class="where"><b>{html.escape(c["venue"] or "TBA")}</b></p></div></li>'
+        )
+    if month:
+        out.append("</ol>")
+    return "\n".join(out)
+
+
+def write_seo(data, now):
+    """Riempie in index.html i due spazi tra i marcatori e rifa' la sitemap. Se i marcatori mancano non tocca nulla."""
+    page = DOCS / "index.html"
+    text = page.read_text(encoding="utf-8")
+    ld = json.dumps({"@context": "https://schema.org", "@graph": [event_ld(c) for c in data]}, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+    blocks = {
+        "JSONLD": f'<script type="application/ld+json">{ld}</script>',
+        "LIST": static_list(data),
+    }
+    for name, body in blocks.items():
+        text = re.sub(rf"<!--{name}-->.*?<!--/{name}-->", lambda _: f"<!--{name}-->{body}<!--/{name}-->", text, count=1, flags=re.S)
+    page.write_text(text, encoding="utf-8", newline="\n")
+    (DOCS / "sitemap.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        f"  <url><loc>{SITE}</loc><lastmod>{now.date().isoformat()}</lastmod><changefreq>daily</changefreq></url>\n</urlset>\n",
+        encoding="utf-8", newline="\n")
+
+
 # ---------------------------------------------------------------- giro
 
 
@@ -1116,6 +1200,7 @@ def main():
         for c in new[:30]:
             log("  NUOVO:", pretty_date(c), "|", c["title"], "|", c["venue"], "|", c["buckets"])
         save_concerts(published)
+        write_seo(published, now)
         save_json(STATUS_FILE, status)
         return
 
@@ -1172,6 +1257,7 @@ def main():
 
     status["baseline"] = state.get("baseline", today_iso)
     save_concerts(published)
+    write_seo(published, now)
     save_json(STATUS_FILE, status)
     save_json(STATE_FILE, state)
     if failure:  # il giro su GitHub risulta fallito e arriva la mail: e' l'unico canale se il bot e' morto
