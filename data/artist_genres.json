@@ -1611,6 +1611,16 @@
    "Metal"
   ]
  },
+ "fall out boy": {
+  "at": "2026-11-10",
+  "fans": 2620782,
+  "tags": [
+   "pop punk",
+   "alternative rock",
+   "pop rock",
+   "Alternative"
+  ]
+ },
  "fan club": {
   "at": "2026-11-02",
   "fans": 796,
@@ -3698,6 +3708,11 @@
    "Trance"
   ]
  },
+ "nirvana revival prague": {
+  "at": "2026-11-10",
+  "fans": 0,
+  "tags": []
+ },
  "no cigar": {
   "at": "2026-11-02",
   "fans": 266,
@@ -3900,6 +3915,16 @@
   "fans": 0,
   "tags": []
  },
+ "ozzy osbourne": {
+  "at": "2026-11-10",
+  "fans": 2613592,
+  "tags": [
+   "heavy metal",
+   "hard rock",
+   "british",
+   "Metal"
+  ]
+ },
  "pagan siege tour": {
   "at": "2026-11-02",
   "fans": 0,
@@ -4058,6 +4083,11 @@
    "Alternative"
   ]
  },
+ "polish film festival prague": {
+  "at": "2026-11-10",
+  "fans": 0,
+  "tags": []
+ },
  "polyphia": {
   "at": "2026-11-02",
   "fans": 75220,
@@ -4162,6 +4192,13 @@
   "at": "2026-11-05",
   "fans": 114,
   "tags": []
+ },
+ "professor": {
+  "at": "2026-11-10",
+  "fans": 17755,
+  "tags": [
+   "Hip-Hop/Rap"
+  ]
  },
  "protomartyr": {
   "at": "2026-11-02",
@@ -4504,6 +4541,11 @@
   "tags": [
    "Metal"
   ]
+ },
+ "sabot us": {
+  "at": "2026-11-10",
+  "fans": 0,
+  "tags": []
  },
  "sace6": {
   "at": "2026-11-02",
@@ -5777,6 +5819,11 @@
  },
  "uliana del rei": {
   "at": "2026-11-02",
+  "fans": 0,
+  "tags": []
+ },
+ "uliana del rey": {
+  "at": "2026-11-10",
   "fans": 0,
   "tags": []
  },
