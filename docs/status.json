@@ -2,7 +2,7 @@
  "baseline": "2026-11-02",
  "sources": [
   {
-   "count": 1793,
+   "count": 1803,
    "name": "GoOut",
    "ok": true
   },
@@ -27,7 +27,7 @@
    "ok": true
   },
   {
-   "count": 65,
+   "count": 66,
    "name": "Lucerna Music Bar",
    "ok": true
   },
@@ -37,20 +37,20 @@
    "ok": true
   },
   {
-   "count": 0,
+   "count": 37,
    "name": "Klub 007",
-   "ok": false
+   "ok": true
   },
   {
-   "count": 11,
+   "count": 12,
    "name": "Modrá Vopice",
    "ok": true
   },
   {
-   "count": 144,
+   "count": 166,
    "name": "kdykam",
    "ok": true
   }
  ],
- "updated": "2026-11-10T04:34+01:00"
+ "updated": "2026-11-10T15:53+01:00"
 }
