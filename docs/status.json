@@ -2,7 +2,7 @@
  "baseline": "2026-11-02",
  "sources": [
   {
-   "count": 1803,
+   "count": 1811,
    "name": "GoOut",
    "ok": true
   },
@@ -12,7 +12,7 @@
    "ok": false
   },
   {
-   "count": 348,
+   "count": 349,
    "name": "Songkick",
    "ok": true
   },
@@ -22,12 +22,12 @@
    "ok": true
   },
   {
-   "count": 37,
+   "count": 38,
    "name": "Futurum",
    "ok": true
   },
   {
-   "count": 66,
+   "count": 65,
    "name": "Lucerna Music Bar",
    "ok": true
   },
@@ -37,9 +37,9 @@
    "ok": true
   },
   {
-   "count": 37,
+   "count": 0,
    "name": "Klub 007",
-   "ok": true
+   "ok": false
   },
   {
    "count": 12,
@@ -47,10 +47,10 @@
    "ok": true
   },
   {
-   "count": 166,
+   "count": 164,
    "name": "kdykam",
    "ok": true
   }
  ],
- "updated": "2026-11-10T15:53+01:00"
+ "updated": "2026-11-10T22:17+01:00"
 }

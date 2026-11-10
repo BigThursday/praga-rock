@@ -651,7 +651,7 @@
  },
  "health": {
   "festivaly": {
-   "fails": 28,
+   "fails": 29,
    "warned": true
   },
   "futurum": {
@@ -667,7 +667,7 @@
    "warned": false
   },
   "klub007": {
-   "fails": 0,
+   "fails": 1,
    "warned": false
   },
   "lucerna": {
@@ -910,6 +910,10 @@
   },
   "futurum:post-11505": {
    "date": "2027-01-18",
+   "first": "2026-11-02"
+  },
+  "futurum:post-11523": {
+   "date": "2026-12-11",
    "first": "2026-11-02"
   },
   "goout:9352266": {
@@ -5134,6 +5138,10 @@
   },
   "songkick:43507206": {
    "date": "2027-05-17",
+   "first": "2026-11-10"
+  },
+  "songkick:43509388": {
+   "date": "2027-04-09",
    "first": "2026-11-10"
   }
  }
