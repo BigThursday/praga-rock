@@ -1049,6 +1049,16 @@
   "at": "2026-11-02",
   "tags": []
  },
+ "container": {
+  "at": "2026-11-11",
+  "fans": 497,
+  "tags": [
+   "electronic",
+   "minimal",
+   "techno",
+   "Electronic"
+  ]
+ },
  "cory henry": {
   "at": "2026-11-09",
   "fans": 29147,
@@ -2628,6 +2638,13 @@
   "fans": 196,
   "tags": [
    "Indie Pop"
+  ]
+ },
+ "jules": {
+  "at": "2026-11-11",
+  "fans": 1193,
+  "tags": [
+   "Children's Music"
   ]
  },
  "kabat": {
@@ -4240,6 +4257,11 @@
    "Rock"
   ]
  },
+ "press play film fest": {
+  "at": "2026-11-11",
+  "fans": 0,
+  "tags": []
+ },
  "prison religion": {
   "at": "2026-11-05",
   "fans": 114,
@@ -4421,6 +4443,16 @@
   "at": "2026-11-02",
   "fans": 0,
   "tags": []
+ },
+ "revocation": {
+  "at": "2026-11-11",
+  "fans": 16682,
+  "tags": [
+   "death metal",
+   "technical death metal",
+   "technical thrash metal",
+   "Metal"
+  ]
  },
  "rezn": {
   "at": "2026-11-02",
@@ -4756,6 +4788,11 @@
  },
  "shadobeni": {
   "at": "2026-11-02",
+  "fans": 0,
+  "tags": []
+ },
+ "shakespearovska velkomse loutkova": {
+  "at": "2026-11-11",
   "fans": 0,
   "tags": []
  },
