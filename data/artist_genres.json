@@ -2823,6 +2823,11 @@
    "Hip-Hop/Rap"
   ]
  },
+ "kolama dolu": {
+  "at": "2026-11-12",
+  "fans": 0,
+  "tags": []
+ },
  "korn": {
   "at": "2026-11-02",
   "fans": 90,
@@ -3597,6 +3602,13 @@
   "fans": 27,
   "tags": [
    "Blues"
+  ]
+ },
+ "mrklm": {
+  "at": "2026-11-12",
+  "fans": 0,
+  "tags": [
+   "Indie Rock"
   ]
  },
  "mucha": {
@@ -4706,6 +4718,11 @@
    "Hard Rock"
   ]
  },
+ "sbp4": {
+  "at": "2026-11-12",
+  "fans": 0,
+  "tags": []
+ },
  "scorpions": {
   "at": "2026-11-02",
   "fans": 3689224,
@@ -5042,6 +5059,13 @@
    "indie rock",
    "indie",
    "Rock"
+  ]
+ },
+ "spirit of smokie": {
+  "at": "2026-11-12",
+  "fans": 16,
+  "tags": [
+   "Pop"
   ]
  },
  "spite": {
@@ -6129,6 +6153,13 @@
    "czech",
    "punk",
    "punk rock",
+   "Rock"
+  ]
+ },
+ "vyshel pokurit": {
+  "at": "2026-11-12",
+  "fans": 2442,
+  "tags": [
    "Rock"
   ]
  },
