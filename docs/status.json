@@ -2,7 +2,7 @@
  "baseline": "2026-11-02",
  "sources": [
   {
-   "count": 1797,
+   "count": 1810,
    "name": "GoOut",
    "ok": true
   },
@@ -12,7 +12,7 @@
    "ok": false
   },
   {
-   "count": 333,
+   "count": 341,
    "name": "Songkick",
    "ok": true
   },
@@ -27,7 +27,7 @@
    "ok": true
   },
   {
-   "count": 67,
+   "count": 68,
    "name": "Lucerna Music Bar",
    "ok": true
   },
@@ -42,15 +42,15 @@
    "ok": false
   },
   {
-   "count": 11,
+   "count": 12,
    "name": "Modrá Vopice",
    "ok": true
   },
   {
-   "count": 170,
+   "count": 173,
    "name": "kdykam",
    "ok": true
   }
  ],
- "updated": "2026-11-12T01:43+01:00"
+ "updated": "2026-11-12T12:08+01:00"
 }

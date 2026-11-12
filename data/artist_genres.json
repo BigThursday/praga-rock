@@ -595,6 +595,13 @@
    "Pop/Rock"
   ]
  },
+ "birdpen": {
+  "at": "2026-11-12",
+  "fans": 4961,
+  "tags": [
+   "Alternative"
+  ]
+ },
  "black holes": {
   "at": "2026-11-02",
   "fans": 169,
@@ -1384,6 +1391,16 @@
   "at": "2026-11-02",
   "fans": 61,
   "tags": []
+ },
+ "dominic miller": {
+  "at": "2026-11-12",
+  "fans": 7491,
+  "tags": [
+   "rock",
+   "classical",
+   "pop",
+   "Jazz"
+  ]
  },
  "dorota nvotova": {
   "at": "2026-11-02",
@@ -2389,6 +2406,11 @@
    "neoclassical metal",
    "Rock"
   ]
+ },
+ "international rock night at zizkovsiska": {
+  "at": "2026-11-12",
+  "fans": 0,
+  "tags": []
  },
  "itchy": {
   "at": "2026-11-02",
@@ -4157,6 +4179,11 @@
   "fans": 0,
   "tags": []
  },
+ "pohodova parbicka": {
+  "at": "2026-11-12",
+  "fans": 0,
+  "tags": []
+ },
  "poletime": {
   "at": "2026-11-02",
   "fans": 1556,
@@ -5168,6 +5195,13 @@
    "american",
    "metalcore",
    "Metal"
+  ]
+ },
+ "superstar": {
+  "at": "2026-11-12",
+  "fans": 751,
+  "tags": [
+   "Hip-Hop/Rap"
   ]
  },
  "superstar superfinale": {
@@ -6372,6 +6406,14 @@
    "electronic",
    "indie rock",
    "Indie Pop"
+  ]
+ },
+ "zive kvety": {
+  "at": "2026-11-12",
+  "fans": 544,
+  "tags": [
+   "rock",
+   "Alternative"
   ]
  },
  "zrni": {
