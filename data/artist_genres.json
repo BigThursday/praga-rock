@@ -438,6 +438,15 @@
    "Metal"
   ]
  },
+ "azarath": {
+  "at": "2026-11-13",
+  "fans": 2521,
+  "tags": [
+   "death metal",
+   "black metal",
+   "Death Metal/Black Metal"
+  ]
+ },
  "baby bugs": {
   "at": "2026-11-11",
   "fans": 4297,
@@ -515,6 +524,11 @@
  },
  "beneath the vaults": {
   "at": "2026-11-02",
+  "fans": 0,
+  "tags": []
+ },
+ "benefit concert for the animal shelter in chynov at nad viktorkou": {
+  "at": "2026-11-13",
   "fans": 0,
   "tags": []
  },
@@ -673,6 +687,16 @@
    "nu metal",
    "rock",
    "alternative rock",
+   "Rock"
+  ]
+ },
+ "blitz union": {
+  "at": "2026-11-13",
+  "fans": 903,
+  "tags": [
+   "rock",
+   "industrial",
+   "industrial rock",
    "Rock"
   ]
  },
@@ -3895,6 +3919,13 @@
    "Hip-Hop/Rap"
   ]
  },
+ "nonsen": {
+  "at": "2026-11-13",
+  "fans": 3,
+  "tags": [
+   "Dance"
+  ]
+ },
  "nothing but thieves": {
   "at": "2026-11-02",
   "fans": 242375,
@@ -4965,6 +4996,13 @@
    "j-rock",
    "alternative metal",
    "Rock"
+  ]
+ },
+ "sima": {
+  "at": "2026-11-13",
+  "fans": 12129,
+  "tags": [
+   "Hip-Hop/Rap"
   ]
  },
  "simon bilina": {
@@ -6397,6 +6435,13 @@
    "Hip-Hop/Rap"
   ]
  },
+ "yelling orangutans": {
+  "at": "2026-11-13",
+  "fans": 1,
+  "tags": [
+   "Rock"
+  ]
+ },
  "yolk": {
   "at": "2026-11-02",
   "fans": 419,
@@ -6472,6 +6517,13 @@
  "zrni": {
   "at": "2026-11-02",
   "fans": 2636,
+  "tags": [
+   "Alternative"
+  ]
+ },
+ "zuby nehty": {
+  "at": "2026-11-13",
+  "fans": 1283,
   "tags": [
    "Alternative"
   ]
