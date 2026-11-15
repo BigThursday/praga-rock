@@ -2225,6 +2225,13 @@
    "Pop"
   ]
  },
+ "hello marcel": {
+  "at": "2026-11-15",
+  "fans": 31,
+  "tags": [
+   "Dance"
+  ]
+ },
  "helmutova strikacka": {
   "at": "2026-11-02",
   "fans": 39,
@@ -3305,6 +3312,13 @@
   "at": "2026-11-02",
   "fans": 0,
   "tags": []
+ },
+ "manon meurt": {
+  "at": "2026-11-15",
+  "fans": 153,
+  "tags": [
+   "Alternative"
+  ]
  },
  "manowar": {
   "at": "2026-11-02",

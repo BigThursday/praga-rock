@@ -2,7 +2,7 @@
  "baseline": "2026-11-02",
  "sources": [
   {
-   "count": 1765,
+   "count": 1767,
    "name": "GoOut",
    "ok": true
   },
@@ -12,7 +12,7 @@
    "ok": false
   },
   {
-   "count": 330,
+   "count": 331,
    "name": "Songkick",
    "ok": true
   },
@@ -42,9 +42,9 @@
    "ok": true
   },
   {
-   "count": 0,
+   "count": 11,
    "name": "Modrá Vopice",
-   "ok": false
+   "ok": true
   },
   {
    "count": 205,
@@ -52,5 +52,5 @@
    "ok": true
   }
  ],
- "updated": "2026-11-15T07:31+01:00"
+ "updated": "2026-11-15T17:21+01:00"
 }
