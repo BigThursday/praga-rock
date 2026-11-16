@@ -384,6 +384,13 @@
   "fans": 0,
   "tags": []
  },
+ "asta hiroki": {
+  "at": "2026-11-16",
+  "fans": 978,
+  "tags": [
+   "Electronic"
+  ]
+ },
  "astro zombies": {
   "at": "2026-11-02",
   "fans": 979,
@@ -1784,6 +1791,11 @@
    "Metal"
   ]
  },
+ "filtr": {
+  "at": "2026-11-16",
+  "fans": 0,
+  "tags": []
+ },
  "fimiguerrero": {
   "at": "2026-11-02",
   "fans": 4821,
@@ -2675,6 +2687,13 @@
   "at": "2026-11-12",
   "fans": 0,
   "tags": []
+ },
+ "jiri imlauf": {
+  "at": "2026-11-16",
+  "fans": 1,
+  "tags": [
+   "Alternative"
+  ]
  },
  "jiri schmitzer": {
   "at": "2026-11-02",
@@ -4120,6 +4139,11 @@
    "Alternative"
   ]
  },
+ "orfanik orchestra": {
+  "at": "2026-11-16",
+  "fans": 0,
+  "tags": []
+ },
  "osees": {
   "at": "2026-11-02",
   "fans": 6665,
@@ -4510,6 +4534,16 @@
    "Punk"
   ]
  },
+ "pussy riot": {
+  "at": "2026-11-16",
+  "fans": 19721,
+  "tags": [
+   "punk",
+   "riot grrrl",
+   "russian",
+   "Alternative"
+  ]
+ },
  "puvodni bures": {
   "at": "2026-11-02",
   "fans": 28,
@@ -4757,6 +4791,13 @@
    "irish",
    "ballad",
    "Pop"
+  ]
+ },
+ "roztrhlej dedac": {
+  "at": "2026-11-16",
+  "fans": 2,
+  "tags": [
+   "Punk"
   ]
  },
  "ruby haunt": {
@@ -5306,6 +5347,14 @@
   "at": "2026-11-02",
   "fans": 34,
   "tags": [
+   "Rock"
+  ]
+ },
+ "storm orchestra": {
+  "at": "2026-11-16",
+  "fans": 1827,
+  "tags": [
+   "metal",
    "Rock"
   ]
  },
@@ -6191,6 +6240,16 @@
    "Dance"
   ]
  },
+ "underoath": {
+  "at": "2026-11-16",
+  "fans": 97826,
+  "tags": [
+   "metalcore",
+   "christian metal",
+   "melodic metalcore",
+   "Hard Rock"
+  ]
+ },
  "united islands 2027": {
   "at": "2026-11-02",
   "fans": 0,
@@ -6351,6 +6410,11 @@
   "tags": [
    "Pop"
   ]
+ },
+ "vodni plocha hraje navarovou": {
+  "at": "2026-11-16",
+  "fans": 0,
+  "tags": []
  },
  "voila": {
   "at": "2026-11-02",
