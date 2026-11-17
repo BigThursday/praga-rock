@@ -2,7 +2,7 @@
  "baseline": "2026-11-02",
  "sources": [
   {
-   "count": 1764,
+   "count": 1744,
    "name": "GoOut",
    "ok": true
   },
@@ -12,7 +12,7 @@
    "ok": false
   },
   {
-   "count": 326,
+   "count": 325,
    "name": "Songkick",
    "ok": true
   },
@@ -27,30 +27,30 @@
    "ok": true
   },
   {
-   "count": 65,
+   "count": 64,
    "name": "Lucerna Music Bar",
    "ok": true
   },
   {
-   "count": 39,
+   "count": 38,
    "name": "Rock Café",
    "ok": true
   },
   {
-   "count": 36,
+   "count": 35,
    "name": "Klub 007",
    "ok": true
   },
   {
-   "count": 11,
+   "count": 10,
    "name": "Modrá Vopice",
    "ok": true
   },
   {
-   "count": 199,
+   "count": 197,
    "name": "kdykam",
    "ok": true
   }
  ],
- "updated": "2026-11-16T20:36+01:00"
+ "updated": "2026-11-17T04:54+01:00"
 }
