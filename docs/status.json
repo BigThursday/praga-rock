@@ -2,7 +2,7 @@
  "baseline": "2026-11-02",
  "sources": [
   {
-   "count": 1742,
+   "count": 1746,
    "name": "GoOut",
    "ok": true
   },
@@ -12,7 +12,7 @@
    "ok": false
   },
   {
-   "count": 328,
+   "count": 330,
    "name": "Songkick",
    "ok": true
   },
@@ -32,14 +32,14 @@
    "ok": true
   },
   {
-   "count": 33,
+   "count": 35,
    "name": "Rock Café",
    "ok": true
   },
   {
-   "count": 0,
+   "count": 34,
    "name": "Klub 007",
-   "ok": false
+   "ok": true
   },
   {
    "count": 12,
@@ -47,10 +47,10 @@
    "ok": true
   },
   {
-   "count": 190,
+   "count": 186,
    "name": "kdykam",
    "ok": true
   }
  ],
- "updated": "2026-11-19T12:39+01:00"
+ "updated": "2026-11-19T21:36+01:00"
 }
