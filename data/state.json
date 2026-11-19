@@ -573,6 +573,7 @@
   "2027-02-13|iglu": "2026-11-09",
   "2027-02-13|severals": "2026-11-02",
   "2027-02-14|dirty honey": "2026-11-02",
+  "2027-02-15|ghinzu": "2026-11-19",
   "2027-02-15|the legendary pink dots": "2026-11-02",
   "2027-02-16|bullet for my valentine": "2026-11-02",
   "2027-02-16|elder": "2026-11-02",
@@ -794,7 +795,7 @@
  },
  "health": {
   "festivaly": {
-   "fails": 51,
+   "fails": 52,
    "warned": true
   },
   "futurum": {
@@ -822,7 +823,7 @@
    "warned": false
   },
   "obscure": {
-   "fails": 1,
+   "fails": 2,
    "warned": false
   },
   "rockcafe": {
@@ -5917,6 +5918,10 @@
   "songkick:43519434": {
    "date": "2026-11-27",
    "first": "2026-11-16"
+  },
+  "songkick:43525468": {
+   "date": "2027-02-15",
+   "first": "2026-11-19"
   }
  }
 }
