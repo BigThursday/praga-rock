@@ -1553,6 +1553,11 @@
    "Hard Rock"
   ]
  },
+ "disabled 30 let": {
+  "at": "2026-11-19",
+  "fans": 0,
+  "tags": []
+ },
  "divadelni recital marta s prague philharmonia": {
   "at": "2026-11-02",
   "tags": []
@@ -4852,6 +4857,11 @@
    "Metal"
   ]
  },
+ "prague coffee festival 2027": {
+  "at": "2026-11-19",
+  "fans": 0,
+  "tags": []
+ },
  "prague gala": {
   "at": "2026-11-02",
   "fans": 0,
@@ -5050,6 +5060,13 @@
   "fans": 46,
   "tags": [
    "Pop"
+  ]
+ },
+ "red mic": {
+  "at": "2026-11-19",
+  "fans": 0,
+  "tags": [
+   "Hip-Hop/Rap"
   ]
  },
  "red torch": {
@@ -6428,6 +6445,13 @@
    "Dance"
   ]
  },
+ "the wilderness": {
+  "at": "2026-11-19",
+  "fans": 219,
+  "tags": [
+   "Rock"
+  ]
+ },
  "the woolverstones": {
   "at": "2026-11-14",
   "fans": 10,
@@ -6953,6 +6977,13 @@
    "punk",
    "punk rock",
    "Pop"
+  ]
+ },
+ "vladimir javorsky": {
+  "at": "2026-11-19",
+  "fans": 26,
+  "tags": [
+   "Spoken Word"
   ]
  },
  "vlasta horvath": {
