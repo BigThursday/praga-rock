@@ -1560,6 +1560,7 @@
  },
  "divadelni recital marta s prague philharmonia": {
   "at": "2026-11-02",
+  "fans": 0,
   "tags": []
  },
  "divo institute": {
@@ -1651,6 +1652,13 @@
    "rock",
    "pop",
    "Indie Rock"
+  ]
+ },
+ "duir": {
+  "at": "2026-11-20",
+  "fans": 179,
+  "tags": [
+   "Death Metal/Black Metal"
   ]
  },
  "dukla vozovna": {
@@ -2281,6 +2289,11 @@
  },
  "grim party prague edition ii": {
   "at": "2026-11-02",
+  "fans": 0,
+  "tags": []
+ },
+ "guns n roses tribute": {
+  "at": "2026-11-20",
   "fans": 0,
   "tags": []
  },
@@ -5000,6 +5013,16 @@
   "at": "2026-11-17",
   "fans": 0,
   "tags": []
+ },
+ "purple disco machine": {
+  "at": "2026-11-20",
+  "fans": 167001,
+  "tags": [
+   "dance",
+   "house",
+   "disco",
+   "Dance"
+  ]
  },
  "pussy riot": {
   "at": "2026-11-16",
