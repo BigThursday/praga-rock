@@ -733,6 +733,7 @@
   "2027-04-24|rodrigo y gabriela": "2026-11-02",
   "2027-04-25|crooks": "2026-11-02",
   "2027-04-25|lynch mob": "2026-11-02",
+  "2027-04-28|nouvelle vague": "2026-11-20",
   "2027-04-29|bombino": "2026-11-02",
   "2027-04-29|greg howe": "2026-11-02",
   "2027-04-30|blitz union": "2026-11-13",
@@ -807,7 +808,7 @@
  },
  "health": {
   "festivaly": {
-   "fails": 56,
+   "fails": 57,
    "warned": true
   },
   "futurum": {
@@ -835,7 +836,7 @@
    "warned": false
   },
   "obscure": {
-   "fails": 6,
+   "fails": 7,
    "warned": false
   },
   "rockcafe": {
@@ -3035,6 +3036,10 @@
   "goout:9617106": {
    "date": "2026-12-21",
    "first": "2026-11-02"
+  },
+  "goout:9617151": {
+   "date": "2027-04-28",
+   "first": "2026-11-20"
   },
   "goout:9617157": {
    "date": "2027-04-21",
