@@ -551,7 +551,7 @@ NOT_ROCK_NIGHT = re.compile(r"\b(reggae|dub|dj|jazz|stand ?up|divadlo|workshop|p
                             r"video party|generation party|dance party|retro party|korzo narodni)\b")
 # Concerti "rock" che rock non sono: quartetti d'archi a lume di candela, tributi in chiesa, festival jazz.
 NOT_A_GIG_PLACE = re.compile(r"\b(kostel\w*|church|chapel|kaple|synagog\w*|bazilika|basilica|klaster\w*|monastery|convent|rudolfinum|planetarium|planetarij)\b")
-NOT_A_GIG_TITLE = re.compile(r"\b(jazz|jazzfest|candlelight|gospely?|hodina zpivani|pro deti)\b")
+NOT_A_GIG_TITLE = re.compile(r"\b(jazz|jazzfest|candlelight|gospely?|hodina zpivani|pro deti|radio kiss)\b")
 # "Retro Dance Party" fuori, "Rock Party" e "Metal Disco" dentro.
 PARTY_TITLE = re.compile(r"\b(party|parties|disco|diskoteka|dance)\b")
 ROCK_TITLE = re.compile(r"\b(rock\w*|metal\w*|punk\w*)\b")
