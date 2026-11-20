@@ -708,6 +708,7 @@
   "2027-04-12|pneu": "2026-11-02",
   "2027-04-13|dressed like boys": "2026-11-02",
   "2027-04-14|10 let": "2026-11-02",
+  "2027-04-14|onii": "2026-11-20",
   "2027-04-15|timudej": "2026-11-17",
   "2027-04-15|tragedis": "2026-11-02",
   "2027-04-16|glazed curtains": "2026-11-02",
@@ -808,7 +809,7 @@
  },
  "health": {
   "festivaly": {
-   "fails": 57,
+   "fails": 58,
    "warned": true
   },
   "futurum": {
@@ -824,7 +825,7 @@
    "warned": false
   },
   "klub007": {
-   "fails": 0,
+   "fails": 1,
    "warned": false
   },
   "lucerna": {
@@ -832,12 +833,12 @@
    "warned": false
   },
   "modravopice": {
-   "fails": 0,
+   "fails": 1,
    "warned": false
   },
   "obscure": {
-   "fails": 7,
-   "warned": false
+   "fails": 8,
+   "warned": true
   },
   "rockcafe": {
    "fails": 0,
@@ -1104,6 +1105,14 @@
   "futurum:post-11548": {
    "date": "2026-12-13",
    "first": "2026-11-12"
+  },
+  "futurum:post-11569": {
+   "date": "2027-03-10",
+   "first": "2026-11-20"
+  },
+  "futurum:post-11573": {
+   "date": "2027-04-14",
+   "first": "2026-11-20"
   },
   "goout:9352266": {
    "date": "2027-03-23",
@@ -3151,6 +3160,10 @@
   },
   "goout:9621253": {
    "date": "2026-12-15",
+   "first": "2026-11-20"
+  },
+  "goout:9621649": {
+   "date": "2027-04-14",
    "first": "2026-11-20"
   },
   "kdykam:101592": {
