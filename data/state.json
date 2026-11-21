@@ -814,7 +814,7 @@
  },
  "health": {
   "festivaly": {
-   "fails": 60,
+   "fails": 61,
    "warned": true
   },
   "futurum": {
@@ -842,7 +842,7 @@
    "warned": false
   },
   "obscure": {
-   "fails": 10,
+   "fails": 11,
    "warned": true
   },
   "rockcafe": {
@@ -3851,9 +3851,21 @@
    "date": "2027-01-22",
    "first": "2026-11-21"
   },
+  "kdykam:139104": {
+   "date": "2026-12-01",
+   "first": "2026-11-02"
+  },
   "kdykam:139106": {
    "date": "2026-12-01",
    "first": "2026-11-21"
+  },
+  "kdykam:139124": {
+   "date": "2026-12-04",
+   "first": "2026-11-16"
+  },
+  "kdykam:139184": {
+   "date": "2027-03-10",
+   "first": "2026-11-20"
   },
   "kdykam:15946": {
    "date": "2026-11-21",
