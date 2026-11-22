@@ -12,7 +12,7 @@
    "ok": false
   },
   {
-   "count": 291,
+   "count": 312,
    "name": "Songkick",
    "ok": true
   },
@@ -37,9 +37,9 @@
    "ok": true
   },
   {
-   "count": 34,
+   "count": 0,
    "name": "Klub 007",
-   "ok": true
+   "ok": false
   },
   {
    "count": 10,
@@ -47,10 +47,10 @@
    "ok": true
   },
   {
-   "count": 175,
+   "count": 177,
    "name": "kdykam",
    "ok": true
   }
  ],
- "updated": "2026-11-22T02:18+01:00"
+ "updated": "2026-11-22T12:24+01:00"
 }

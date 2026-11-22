@@ -204,6 +204,14 @@
    "Alternative"
   ]
  },
+ "allie sherlock": {
+  "at": "2026-11-22",
+  "fans": 12294,
+  "tags": [
+   "pop",
+   "Pop"
+  ]
+ },
  "allt": {
   "at": "2026-11-02",
   "fans": 3282,
@@ -5253,6 +5261,11 @@
  },
  "rock christmas 2026 at barce": {
   "at": "2026-11-17",
+  "fans": 0,
+  "tags": []
+ },
+ "rock christmas at barca 2026": {
+  "at": "2026-11-22",
   "fans": 0,
   "tags": []
  },
