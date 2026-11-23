@@ -818,7 +818,7 @@
  },
  "health": {
   "festivaly": {
-   "fails": 64,
+   "fails": 65,
    "warned": true
   },
   "futurum": {
@@ -834,7 +834,7 @@
    "warned": false
   },
   "klub007": {
-   "fails": 2,
+   "fails": 0,
    "warned": false
   },
   "lucerna": {
@@ -846,7 +846,7 @@
    "warned": false
   },
   "obscure": {
-   "fails": 14,
+   "fails": 15,
    "warned": true
   },
   "rockcafe": {
