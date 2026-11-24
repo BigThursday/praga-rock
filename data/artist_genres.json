@@ -501,6 +501,13 @@
    "Rock"
   ]
  },
+ "atari terror": {
+  "at": "2026-11-24",
+  "fans": 586,
+  "tags": [
+   "Rock"
+  ]
+ },
  "atomic fruit": {
   "at": "2026-11-02",
   "fans": 88,
@@ -1314,6 +1321,13 @@
   "tags": [
    "pop rock",
    "Pop"
+  ]
+ },
+ "crossczech": {
+  "at": "2026-11-24",
+  "fans": 7,
+  "tags": [
+   "Punk"
   ]
  },
  "cult of luna": {
@@ -3049,6 +3063,19 @@
    "Pop"
   ]
  },
+ "john paris band": {
+  "at": "2026-11-24",
+  "fans": 0,
+  "tags": []
+ },
+ "joker out": {
+  "at": "2026-11-24",
+  "fans": 4037,
+  "tags": [
+   "eurovision 2023 artists",
+   "Rock"
+  ]
+ },
  "jokers": {
   "at": "2026-11-05",
   "fans": 284,
@@ -3406,6 +3433,13 @@
    "alternative metal",
    "female fronted",
    "Hard Rock"
+  ]
+ },
+ "lakeside x": {
+  "at": "2026-11-24",
+  "fans": 284,
+  "tags": [
+   "Electronic"
   ]
  },
  "lakome barky": {
@@ -7122,6 +7156,13 @@
    "Alternative"
   ]
  },
+ "v t marvin": {
+  "at": "2026-11-24",
+  "fans": 16,
+  "tags": [
+   "Punk"
+  ]
+ },
  "vaclav noid barta": {
   "at": "2026-11-02",
   "fans": 704,
@@ -7162,6 +7203,13 @@
   "at": "2026-11-05",
   "fans": 0,
   "tags": []
+ },
+ "veni": {
+  "at": "2026-11-24",
+  "fans": 35,
+  "tags": [
+   "Hip-Hop/Rap"
+  ]
  },
  "venjent": {
   "at": "2026-11-17",
@@ -7412,6 +7460,16 @@
    "indie rock",
    "indie",
    "Alternative"
+  ]
+ },
+ "wilco": {
+  "at": "2026-11-24",
+  "fans": 92626,
+  "tags": [
+   "alternative rock",
+   "folk rock",
+   "rock",
+   "Rock"
   ]
  },
  "wilkinson": {
