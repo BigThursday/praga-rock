@@ -1186,18 +1186,12 @@ footer p.sign {
     if (status && status.updated) foot += "<p>" + T.lastCheck + ": " + ago(status.updated) + ". " + (status.preview ? T.preview : T.auto) + "</p>";
     foot += "<p>" + T.note + "</p>";
     if (CONTACT) foot += "<p>" + T.writeTo + ' <a href="mailto:' + esc(CONTACT) + '">' + esc(CONTACT) + "</a>.</p>";
-    if (GOATCOUNTER) foot += "<p>" + T.visits + ': <span id="hits"></span></p>';
+    if (visits) foot += "<p>" + T.visits + ': <span id="hits"></span></p>';
     foot += '<p class="sign"><span>EL LOCO PRODUCTIONS</span><a href="' + GAME + '" target="_blank" rel="noopener"><img src="dotsandboxes.png" alt="Dots and Boxes"><span>' + T.play + "</span></a></p>";
     $("foot").innerHTML = foot;
-    if (GOATCOUNTER) {
-      // GoatCounter tiene il totale in cache a lungo, e ignora i parametri che non conosce: "TOTAL.json" da solo
-      // e' rimasto fermo a 0 per ore. La cache distingue solo start/end, quindi li faccio cambiare ogni 10 minuti
-      // con date tutte prima dell'apertura del sito (start) e dopo oggi (end): il conteggio resta quello intero.
-      var now = new Date(), slot = Math.floor((now.getHours() * 60 + now.getMinutes()) / 10);
-      var from = new Date(Date.UTC(2025, 0, 1 + slot)).toISOString().slice(0, 10);
-      var to = new Date(now.getTime() + 2 * 86400000).toISOString().slice(0, 10);
-      fetch(GOATCOUNTER.replace(/\/count$/, "") + "/counter/TOTAL.json?start=" + from + "&end=" + to, { cache: "no-cache" })
-        .then(function (r) { return r.json(); })
+    if (visits) {
+      // Il numero viene dal Worker sul nostro account: goatcounter.com e' bloccato da Brave e dagli ad-blocker.
+      visits
         .then(function (d) { var h = $("hits"); if (h) h.textContent = d.count; })
         .catch(function () { var h = $("hits"); if (h) h.textContent = "–"; });
     }
@@ -1389,6 +1383,9 @@ footer p.sign {
     gc.setAttribute("data-goatcounter", GOATCOUNTER);
     document.body.appendChild(gc);
   }
+  // Il contatore mostrato nella pagina: la prima volta conta la visita, le altre legge solo il totale.
+  var visits = API ? fetch(API + (seen ? "/visits" : "/visit"), { method: seen ? "GET" : "POST", cache: "no-store" })
+    .then(function (r) { if (!r.ok) throw 0; return r.json(); }) : null;
 
   if (window.__DATA__) { start(window.__DATA__.concerts, window.__DATA__.status); return; }
   Promise.all([

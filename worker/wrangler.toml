@@ -1,0 +1,13 @@
+name = "praguerock-api"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+# Il totale dei voti e i limiti per IP. L'id arriva da:
+#   npx wrangler kv namespace create VOTES
+[[kv_namespaces]]
+binding = "VOTES"
+id = "188c473b479641919d5a1a7ae6050b1e"
+
+# TG_TOKEN e TG_CHAT non stanno qui: sono segreti, si caricano con
+#   npx wrangler secret put TG_TOKEN
+#   npx wrangler secret put TG_CHAT
