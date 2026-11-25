@@ -127,10 +127,9 @@ export default {
       }
       if (!(stars >= 1 && stars <= 5)) return json({ error: "stars 1-5" }, origin, 400);
 
+      // Un voto per browser, per sempre: lo blocca la pagina (localStorage). Niente blocco per IP:
+      // chi divide la connessione (ufficio, operatore mobile) non verrebbe mai contato.
       const total = await readTotal(env);
-      // Chi ha gia' votato oggi riceve il punteggio corrente senza che il suo voto conti due volte.
-      if (await tooOften(env, "vote", ip, DAY)) return json(score(total), origin);
-
       const next = { sum: total.sum + stars, n: total.n + 1 };
       await env.VOTES.put(VOTE_KEY, JSON.stringify(next));
       return json(score(next), origin);
