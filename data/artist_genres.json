@@ -1367,6 +1367,11 @@
    "Death Metal/Black Metal"
   ]
  },
+ "daarina duo": {
+  "at": "2026-11-25",
+  "fans": 0,
+  "tags": []
+ },
  "daily thompson": {
   "at": "2026-11-02",
   "fans": 535,
@@ -3166,6 +3171,13 @@
    "Alternative"
   ]
  },
+ "kalle": {
+  "at": "2026-11-25",
+  "fans": 18,
+  "tags": [
+   "Hip-Hop/Rap"
+  ]
+ },
  "kamil strihavka": {
   "at": "2026-11-02",
   "fans": 186,
@@ -3491,6 +3503,16 @@
    "indie rock",
    "britpop",
    "Rock"
+  ]
+ },
+ "lebanon hanover": {
+  "at": "2026-11-25",
+  "fans": 47604,
+  "tags": [
+   "minimal wave",
+   "dark wave",
+   "post-punk",
+   "Alternative"
   ]
  },
  "led zeppelin revival": {
@@ -3881,6 +3903,11 @@
   "fans": 0,
   "tags": []
  },
+ "marina loma": {
+  "at": "2026-11-25",
+  "fans": 0,
+  "tags": []
+ },
  "marta bila": {
   "at": "2026-11-02",
   "fans": 0,
@@ -4233,6 +4260,13 @@
    "Alternative"
   ]
  },
+ "mose": {
+  "at": "2026-11-25",
+  "fans": 9258,
+  "tags": [
+   "Electronic"
+  ]
+ },
  "moster": {
   "at": "2026-11-02",
   "fans": 288,
@@ -4358,6 +4392,16 @@
   "at": "2026-11-02",
   "fans": 0,
   "tags": []
+ },
+ "nazareth": {
+  "at": "2026-11-25",
+  "fans": 222588,
+  "tags": [
+   "hard rock",
+   "rock",
+   "classic rock",
+   "Rock"
+  ]
  },
  "nedivoc": {
   "at": "2026-11-02",
@@ -5120,6 +5164,11 @@
   "fans": 0,
   "tags": []
  },
+ "presunuto": {
+  "at": "2026-11-25",
+  "fans": 0,
+  "tags": []
+ },
  "prison religion": {
   "at": "2026-11-05",
   "fans": 114,
@@ -5256,6 +5305,16 @@
   "at": "2026-11-02",
   "fans": 0,
   "tags": []
+ },
+ "quicksand": {
+  "at": "2026-11-25",
+  "fans": 6594,
+  "tags": [
+   "alternative rock",
+   "alternative metal",
+   "post-hardcore",
+   "Hard Rock"
+  ]
  },
  "radio kiss millennium explosion": {
   "at": "2026-11-02",
@@ -5862,6 +5921,14 @@
   "fans": 3,
   "tags": [
    "Pop"
+  ]
+ },
+ "sinizter": {
+  "at": "2026-11-25",
+  "fans": 2669,
+  "tags": [
+   "phonk",
+   "Hip-Hop/Rap"
   ]
  },
  "ska rock evening": {
@@ -6923,6 +6990,11 @@
   "fans": 0,
   "tags": []
  },
+ "tomsbilly": {
+  "at": "2026-11-25",
+  "fans": 0,
+  "tags": []
+ },
  "tonic walter": {
   "at": "2026-11-17",
   "fans": 1641,
@@ -7195,6 +7267,11 @@
   "fans": 0,
   "tags": []
  },
+ "vanocni sen s klasikou": {
+  "at": "2026-11-25",
+  "fans": 0,
+  "tags": []
+ },
  "vanocni skaparada": {
   "at": "2026-11-02",
   "fans": 0,
@@ -7330,6 +7407,11 @@
   "tags": [
    "Pop"
   ]
+ },
+ "vocal night by prague music club": {
+  "at": "2026-11-25",
+  "fans": 0,
+  "tags": []
  },
  "vodni plocha hraje navarovou": {
   "at": "2026-11-16",
