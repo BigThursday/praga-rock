@@ -376,6 +376,16 @@
    "Punk"
   ]
  },
+ "anthrax": {
+  "at": "2026-11-26",
+  "fans": 509513,
+  "tags": [
+   "thrash metal",
+   "heavy metal",
+   "groove metal",
+   "Metal"
+  ]
+ },
  "anthro": {
   "at": "2026-11-02",
   "fans": 54,
@@ -1149,6 +1159,16 @@
    "pop",
    "electronic",
    "jazz",
+   "Alternative"
+  ]
+ },
+ "chase atlantic": {
+  "at": "2026-11-26",
+  "fans": 604579,
+  "tags": [
+   "pop rap",
+   "electropop",
+   "alternative pop",
    "Alternative"
   ]
  },
