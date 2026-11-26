@@ -969,6 +969,16 @@
    "Rock"
   ]
  },
+ "breathe": {
+  "at": "2026-11-26",
+  "fans": 1362,
+  "tags": [
+   "adult contemporary",
+   "sophisti-pop",
+   "pop rock",
+   "Electronic"
+  ]
+ },
  "brujeria": {
   "at": "2026-11-02",
   "fans": 38150,
@@ -1791,6 +1801,13 @@
    "Metal"
   ]
  },
+ "dvorak": {
+  "at": "2026-11-26",
+  "fans": 5074,
+  "tags": [
+   "Classical"
+  ]
+ },
  "dymytry": {
   "at": "2026-11-08",
   "fans": 3325,
@@ -1810,6 +1827,11 @@
    "hard rock",
    "Rock"
   ]
+ },
+ "earthball": {
+  "at": "2026-11-26",
+  "fans": 0,
+  "tags": []
  },
  "eddie 9v": {
   "at": "2026-11-02",
@@ -3005,6 +3027,11 @@
    "Pop"
   ]
  },
+ "japanese new music festival": {
+  "at": "2026-11-26",
+  "fans": 0,
+  "tags": []
+ },
  "jared james nichols": {
   "at": "2026-11-02",
   "fans": 4514,
@@ -3046,6 +3073,13 @@
    "rock",
    "punk",
    "Alternative"
+  ]
+ },
+ "jay austin": {
+  "at": "2026-11-26",
+  "fans": 7,
+  "tags": [
+   "Country"
   ]
  },
  "jegr": {
@@ -7746,6 +7780,13 @@
   "tags": [
    "rock",
    "Alternative"
+  ]
+ },
+ "zluty pes": {
+  "at": "2026-11-26",
+  "fans": 179,
+  "tags": [
+   "Rock"
   ]
  },
  "zrni": {
