@@ -858,7 +858,7 @@
  },
  "health": {
   "festivaly": {
-   "fails": 73,
+   "fails": 74,
    "warned": true
   },
   "futurum": {
@@ -886,7 +886,7 @@
    "warned": false
   },
   "obscure": {
-   "fails": 23,
+   "fails": 24,
    "warned": true
   },
   "rockcafe": {
@@ -5410,6 +5410,10 @@
   "rockcafe:30506": {
    "date": "2027-04-08",
    "first": "2026-11-26"
+  },
+  "rockcafe:30509": {
+   "date": "2027-04-18",
+   "first": "2026-11-18"
   },
   "songkick:1322703": {
    "date": "2027-02-27",
