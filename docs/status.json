@@ -2,7 +2,7 @@
  "baseline": "2026-11-02",
  "sources": [
   {
-   "count": 1646,
+   "count": 1655,
    "name": "GoOut",
    "ok": true
   },
@@ -12,7 +12,7 @@
    "ok": false
   },
   {
-   "count": 307,
+   "count": 312,
    "name": "Songkick",
    "ok": true
   },
@@ -47,10 +47,10 @@
    "ok": true
   },
   {
-   "count": 168,
+   "count": 171,
    "name": "kdykam",
    "ok": true
   }
  ],
- "updated": "2026-11-27T02:43+01:00"
+ "updated": "2026-11-27T13:19+01:00"
 }
