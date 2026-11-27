@@ -492,6 +492,16 @@
    "Pop"
   ]
  },
+ "arxx": {
+  "at": "2026-11-27",
+  "fans": 1053,
+  "tags": [
+   "rock",
+   "alternative rock",
+   "uk",
+   "Alternative"
+  ]
+ },
  "asta hiroki": {
   "at": "2026-11-16",
   "fans": 978,
@@ -2109,6 +2119,11 @@
    "Metal"
   ]
  },
+ "filmovy vecer medii": {
+  "at": "2026-11-27",
+  "fans": 0,
+  "tags": []
+ },
  "filtr": {
   "at": "2026-11-16",
   "fans": 0,
@@ -3446,6 +3461,11 @@
    "Dance"
   ]
  },
+ "krasotkin": {
+  "at": "2026-11-27",
+  "fans": 3,
+  "tags": []
+ },
  "krausberry": {
   "at": "2026-11-02",
   "fans": 339,
@@ -4224,6 +4244,13 @@
   "fans": 558,
   "tags": [
    "Pop"
+  ]
+ },
+ "miles": {
+  "at": "2026-11-27",
+  "fans": 8994,
+  "tags": [
+   "R&B/Soul"
   ]
  },
  "milos meier": {
@@ -5027,6 +5054,13 @@
    "Pop"
   ]
  },
+ "petr samsuk": {
+  "at": "2026-11-27",
+  "fans": 0,
+  "tags": [
+   "Soundtrack"
+  ]
+ },
  "petr spacek": {
   "at": "2026-11-17",
   "fans": 0,
@@ -5242,6 +5276,11 @@
  },
  "projev se": {
   "at": "2026-11-18",
+  "fans": 0,
+  "tags": []
+ },
+ "prong open air praha": {
+  "at": "2026-11-27",
   "fans": 0,
   "tags": []
  },
@@ -6023,6 +6062,11 @@
   "tags": [
    "Rock"
   ]
+ },
+ "skull bash fest": {
+  "at": "2026-11-27",
+  "fans": 0,
+  "tags": []
  },
  "skwor": {
   "at": "2026-11-02",
@@ -7336,6 +7380,11 @@
   "fans": 0,
   "tags": []
  },
+ "vanocni ladeni": {
+  "at": "2026-11-27",
+  "fans": 0,
+  "tags": []
+ },
  "vanocni sen s klasikou": {
   "at": "2026-11-25",
   "fans": 0,
@@ -7656,6 +7705,16 @@
    "alternative rock",
    "indie rock",
    "Alternative"
+  ]
+ },
+ "winterfylleth": {
+  "at": "2026-11-27",
+  "fans": 3853,
+  "tags": [
+   "black metal",
+   "atmospheric black metal",
+   "melodic black metal",
+   "Metal"
   ]
  },
  "witch club satan": {
