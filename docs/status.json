@@ -2,7 +2,7 @@
  "baseline": "2026-11-02",
  "sources": [
   {
-   "count": 1636,
+   "count": 1635,
    "name": "GoOut",
    "ok": true
   },
@@ -47,10 +47,10 @@
    "ok": true
   },
   {
-   "count": 161,
+   "count": 167,
    "name": "kdykam",
    "ok": true
   }
  ],
- "updated": "2026-11-28T00:27+01:00"
+ "updated": "2026-11-28T08:48+01:00"
 }
